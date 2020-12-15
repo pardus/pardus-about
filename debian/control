@@ -13,4 +13,4 @@ Depends: ${misc:Depends},
          python3 (>=3.5),
          python3-gi
 Description: About Pardus
- Get info about your Pardus computer.
+ Get info about your Pardus system.

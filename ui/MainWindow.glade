@@ -8,6 +8,7 @@
     <property name="resizable">False</property>
     <property name="default_width">550</property>
     <property name="default_height">300</property>
+    <property name="icon">../icon.svg</property>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -26,7 +27,21 @@
             <property name="can_focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
+            <property name="margin_bottom">7</property>
             <property name="spacing">21</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">../pardus-logo.svg</property>
+                <property name="pixel_size">150</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
@@ -354,19 +369,6 @@
                     <property name="position">9</property>
                   </packing>
                 </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="pixel_size">150</property>
-                <property name="icon_name">pardus-sari</property>
               </object>
               <packing>
                 <property name="expand">False</property>
