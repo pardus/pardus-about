@@ -8,7 +8,7 @@
     <property name="type_hint">dialog</property>
     <property name="buttons">ok</property>
     <property name="text" translatable="yes">Your system report has been exported to the desktop.</property>
-    <property name="secondary_text" translatable="yes">~/pardus_system_report.tar.gz</property>
+    <property name="secondary_text">~/pardus_system_report.tar.gz</property>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
@@ -37,7 +37,7 @@
   </object>
   <object class="GtkApplicationWindow" id="window">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">About</property>
+    <property name="title" translatable="yes">About this computer</property>
     <property name="resizable">False</property>
     <property name="default_width">600</property>
     <property name="default_height">300</property>
@@ -90,7 +90,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Pardus</property>
+                        <property name="label">Pardus</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                           <attribute name="size" value="24000"/>
@@ -108,7 +108,7 @@
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
                         <property name="margin_left">3</property>
-                        <property name="label" translatable="yes">19.4</property>
+                        <property name="label">19.4</property>
                         <attributes>
                           <attribute name="size" value="24000"/>
                         </attributes>
@@ -132,7 +132,7 @@
                     <property name="can_focus">False</property>
                     <property name="opacity">0.70196078431372544</property>
                     <property name="halign">start</property>
-                    <property name="label" translatable="yes">ondokuz</property>
+                    <property name="label">ondokuz</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -161,7 +161,7 @@
                     <property name="halign">start</property>
                     <property name="margin_top">3</property>
                     <property name="margin_bottom">3</property>
-                    <property name="label" translatable="yes">ef@mi</property>
+                    <property name="label">ef@mi</property>
                     <property name="use_markup">True</property>
                   </object>
                   <packing>
@@ -181,7 +181,7 @@
                         <property name="halign">start</property>
                         <property name="margin_top">3</property>
                         <property name="margin_bottom">3</property>
-                        <property name="label" translatable="yes">&lt;b&gt;Kernel:&lt;/b&gt;</property>
+                        <property name="label">&lt;b&gt;Kernel:&lt;/b&gt;</property>
                         <property name="use_markup">True</property>
                       </object>
                       <packing>
@@ -421,7 +421,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="opacity">0.5</property>
-            <property name="label" translatable="yes">©TÜBİTAK ULAKBİM | 2021</property>
+            <property name="label">©TÜBİTAK ULAKBİM | 2021</property>
             <attributes>
               <attribute name="size" value="10000"/>
             </attributes>
