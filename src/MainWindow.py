@@ -49,6 +49,9 @@ class MainWindow:
         self.window.get_application().quit()
     
     def defineComponents(self):
+        self.dialog_report_exported = self.builder.get_object("dialog_report_exported")
+        self.dialog_report_failed = self.builder.get_object("dialog_report_failed")
+
         self.lbl_distro = self.builder.get_object("lbl_distro")
         self.lbl_distro_version = self.builder.get_object("lbl_distro_version")
         self.lbl_distro_codename = self.builder.get_object("lbl_distro_codename")
@@ -61,7 +64,7 @@ class MainWindow:
         self.lbl_ram = self.builder.get_object("lbl_ram")
 
     def readSystemInfo(self):
-        output = subprocess.check_output(["./get_system_info.sh"]).decode("utf-8")
+        output = subprocess.check_output([os.path.dirname(os.path.abspath(__file__)) + "/get_system_info.sh"]).decode("utf-8")
         lines = output.splitlines()
         
         self.lbl_distro.set_label(lines[0])
@@ -81,4 +84,11 @@ class MainWindow:
 
     # Signals:
     def on_btn_export_report_clicked(self, btn):
-        print("export")
+        subprocess.call([os.path.dirname(os.path.abspath(__file__)) + "/dump_system_info.sh"]) # First call this
+        subprocess.call(["pkexec", os.path.dirname(os.path.abspath(__file__)) + "/dump_logs.sh"]) # And then this
+        
+        subprocess.call([os.path.dirname(os.path.abspath(__file__)) + "/copy_to_home.sh"]) # Lastly copy_to_home
+
+        self.dialog_report_exported.run()
+        self.dialog_report_exported.hide()
+        
