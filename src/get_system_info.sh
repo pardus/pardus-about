@@ -9,7 +9,12 @@ arch="$(uname -m)";
 
 cpu_model="$(awk -F':' '/^model name/ {split($2, A, "@"); print A[1]; exit}' /proc/cpuinfo | xargs)";
 cpu_count="$(grep -c '^processor' /proc/cpuinfo)";
-cpu_max_hz="$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq)";
+
+cpu_max_hz_file="/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq"
+cpu_max_hz="0"
+if [ -f $cpu_max_hz_file ]; then
+    cpu_max_hz="$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq)";
+fi
 
 gpu="$(glxinfo | grep "OpenGL renderer string" | cut -d ':' -f2 | xargs)";
 

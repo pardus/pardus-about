@@ -71,8 +71,11 @@ class MainWindow:
         self.lbl_user_host.set_label(lines[3])
         self.lbl_kernel.set_label(lines[4])
         self.lbl_desktop.set_label(lines[5])
-        ghz = "{:.2f}".format(float(lines[7])/1000000)
-        self.lbl_cpu.set_label(lines[6] + " (" + ghz  + "GHz)")
+        if lines[7] == "0":
+            self.lbl_cpu.set_label(lines[6])
+        else:
+            ghz = "{:.2f}".format(float(lines[7])/1000000)
+            self.lbl_cpu.set_label(lines[6] + " (" + ghz  + "GHz)")
         self.lbl_gpu.set_label(lines[8])
         self.lbl_ram.set_label(lines[9] + "GB")
 
