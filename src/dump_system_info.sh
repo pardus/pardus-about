@@ -27,7 +27,7 @@ systeminfo="$DIR/systeminfo.txt";
 touch $systeminfo;
 
 echo "$distro $distro_version ($distro_codename)" >> $systeminfo;
-echo "$USER:$HOSTNAME" >> $systeminfo;
+echo "$USER@$HOSTNAME" >> $systeminfo;
 echo "Kernel: $kernel" >> $systeminfo;
 echo "Desktop: $XDG_CURRENT_DESKTOP" >> $systeminfo;
 echo "CPU: $cpu_model x$cpu_count" >> $systeminfo;
