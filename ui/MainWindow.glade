@@ -8,7 +8,7 @@
     <property name="type_hint">dialog</property>
     <property name="buttons">ok</property>
     <property name="text" translatable="yes">Your system report has been exported to the desktop.</property>
-    <property name="secondary_text">~/pardus_system_report.tar.gz</property>
+    <property name="secondary_text" translatable="yes">~/Desktop/pardus_system_report.tar.gz</property>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>
