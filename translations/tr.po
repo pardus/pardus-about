@@ -23,6 +23,10 @@ msgstr ""
 msgid "Your system report has been exported to the desktop."
 msgstr "Sistem raporunuz masaüstüne eklenmiştir."
 
+#: MainWindow.glade:11
+msgid "~/Desktop/pardus_system_report.tar.gz"
+msgstr "~/Masaüstü/pardus_sistem_raporu.tar.gz"
+
 #: MainWindow.glade:40
 msgid "About this computer"
 msgstr "Bu bilgisayar hakkında"
