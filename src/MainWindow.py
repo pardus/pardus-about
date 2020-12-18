@@ -84,11 +84,20 @@ class MainWindow:
 
     # Signals:
     def on_btn_export_report_clicked(self, btn):
-        subprocess.call([os.path.dirname(os.path.abspath(__file__)) + "/dump_system_info.sh"]) # First call this
-        subprocess.call(["pkexec", os.path.dirname(os.path.abspath(__file__)) + "/dump_logs.sh"]) # And then this
-        
-        subprocess.call([os.path.dirname(os.path.abspath(__file__)) + "/copy_to_home.sh"]) # Lastly copy_to_home
+        ret1 = subprocess.call([os.path.dirname(os.path.abspath(__file__)) + "/dump_system_info.sh"]) # First call this
+        if ret1 == 0:
+            ret2 = subprocess.call(["pkexec", os.path.dirname(os.path.abspath(__file__)) + "/dump_logs.sh"]) # And then this
 
-        self.dialog_report_exported.run()
-        self.dialog_report_exported.hide()
+            if ret2 == 0:
+                ret3 = subprocess.call([os.path.dirname(os.path.abspath(__file__)) + "/copy_to_desktop.sh"]) # Lastly copy_to_home
+                
+                if ret3 == 0:
+                    self.dialog_report_exported.run()
+                    self.dialog_report_exported.hide()
+                else:
+                    print("Error while copying to Desktop.")
+            else:
+                print("Error while dumping logs.")
+        else:
+            print("Error while dumping system info.")
         
