@@ -2,8 +2,8 @@
 DIR="/tmp/pardus_system_report"
 
 # === LOGS ===
-dmesg > $DIR/dmesg.txt;
-journalctl -q -n 1000 > $DIR/journalctl.txt;
+dmesg > $DIR/dmesg;
+journalctl -q -n 1000 > $DIR/journalctl;
 
 cp /var/log/auth.log $DIR/auth.log;
 cp /var/log/boot.log $DIR/boot.log;
@@ -14,5 +14,9 @@ cp /var/log/syslog $DIR/syslog;
 cp /var/log/user.log $DIR/user.log;
 
 # === ZIP FOLDER ===
-tar -czf /tmp/pardus_system_report.tar.gz -C $DIR .
+ZIPNAME="pardus_system_report.tar.gz";
+if [ $LANG=="tr_TR.UTF-8" ]; then
+    ZIPNAME="pardus_sistem_raporu.tar.gz";
+fi
+tar -czf /tmp/$ZIPNAME -C $DIR .
 rm -rf $DIR

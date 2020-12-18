@@ -1,5 +1,8 @@
 #!/bin/bash
 DIR="/tmp/pardus_system_report"
+if [ -d "$DIR" ]; then
+    rm -rf $DIR;
+fi
 mkdir $DIR
 
 # === SYSTEM INFO ===
@@ -23,7 +26,7 @@ gpu="$(glxinfo | grep "OpenGL renderer string" | cut -d ':' -f2 | xargs)";
 
 ram="$(free --giga | awk 'NR==2{print $2}')";
 
-systeminfo="$DIR/systeminfo.txt";
+systeminfo="$DIR/systeminfo";
 touch $systeminfo;
 
 echo "$distro $distro_version ($distro_codename)" >> $systeminfo;
