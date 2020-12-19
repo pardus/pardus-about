@@ -15,7 +15,7 @@ cp /var/log/user.log $DIR/user.log;
 
 # === ZIP FOLDER ===
 ZIPNAME="pardus_system_report.tar.gz";
-if [ $LANG=="tr_TR.UTF-8" ]; then
+if [ $LANG == "tr_TR.UTF-8" ]; then
     ZIPNAME="pardus_sistem_raporu.tar.gz";
 fi
 tar -czf /tmp/$ZIPNAME -C $DIR .
