@@ -9,6 +9,6 @@ Exec=pardus-about
 Icon=/usr/share/pardus/pardus-about/icon.svg
 Terminal=false
 Type=Application
-Categories=System;
+Categories=Settings;
 StartupNotify=true
 Keywords=about
