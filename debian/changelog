@@ -1,9 +1,29 @@
 pardus-about (0.1.0) unstable; urgency=medium
 
-  * Initial commit. 
+  [ Emin Fedar ]
+  * Initial commit.
   * Getting system info works.
   * Basic UI.
   * Little UI & mesa-utils dependency added.
   * Setup.py & .desktop added.
+  * Cpu hertz Virtual Box fix.
+  * Added dump_logs.sh, dump_system_info.sh, copy_to_home.sh
+  * Exporting works. Dialog added to UI.
+  * setup.py update
+  * Added translations.
+  * typo system user info
+  * Added pardus-about Updated setup.py Added policy Updated scripts.
+  * Added subprocess return code control.
+  * Translation: report file name added.
+  * Translation mo.
+  * Update UI
+  * Scripts $LANG control fix.
+  * update ui
 
- -- Emin Fedar <emin.fedar@pardus.org.tr>  Fri, 15 Dec 2020 20:10:04 +0300
+  [ Fatih Altun ]
+  * Update application icon
+  * Update app category in desktop file
+  * Add icon to dialog_report_exported
+  * Update icon name in desktop file
+
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Tue, 22 Dec 2020 11:57:05 +0300
