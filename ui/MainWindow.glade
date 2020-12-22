@@ -5,6 +5,7 @@
   <object class="GtkMessageDialog" id="dialog_report_exported">
     <property name="can_focus">False</property>
     <property name="modal">True</property>
+    <property name="icon_name">dialog-information</property>
     <property name="type_hint">dialog</property>
     <property name="buttons">ok</property>
     <property name="text" translatable="yes">Your system report has been exported to the desktop.</property>
