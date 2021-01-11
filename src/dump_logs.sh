@@ -17,6 +17,7 @@ cp /var/log/user.log $DIR/user.log;
 
 cp /etc/hosts $DIR/hosts;
 cp /etc/apt/sources.list $DIR/sources.list;
+cp -R /etc/apt/sources.list.d/ $DIR/;
 apt list > $DIR/apt\ list;
 
 # === ZIP FOLDER ===
