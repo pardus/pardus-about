@@ -6,4 +6,4 @@ if [ $LANG == "tr_TR.UTF-8" ]; then
 fi
 
 desktop=$(xdg-user-dir DESKTOP);
-mv /tmp/$ZIPNAME $desktop
+cp /tmp/$ZIPNAME $desktop

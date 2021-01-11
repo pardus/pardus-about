@@ -29,10 +29,23 @@ ram="$(free --giga | awk 'NR==2{print $2}')";
 systeminfo="$DIR/systeminfo";
 touch $systeminfo;
 
+# DE version
+DE=$XDG_CURRENT_DESKTOP;
+DE_VER="";
+if [[ $DE == "GNOME" ]]; then
+    VER=($(gnome-control-center --version))
+    VER=${VER[1]}
+    DE_VER=$VER;
+elif [[ $DE == "XFCE" ]]; then
+    VER=($(xfce4-panel --version))
+    VER=${VER[1]}
+    DE_VER=$VER;
+fi
+
 echo "$distro $distro_version ($distro_codename)" >> $systeminfo;
 echo "$USER@$HOSTNAME" >> $systeminfo;
 echo "Kernel: $kernel" >> $systeminfo;
-echo "Desktop: $XDG_CURRENT_DESKTOP" >> $systeminfo;
+echo "Desktop: $DE $DE_VER" >> $systeminfo;
 echo "CPU: $cpu_model x$cpu_count" >> $systeminfo;
 echo "GPU: $gpu" >> $systeminfo;
 echo "RAM: $ram GB" >> $systeminfo;

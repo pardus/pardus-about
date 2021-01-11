@@ -20,12 +20,25 @@ gpu="$(glxinfo | grep "OpenGL renderer string" | cut -d ':' -f2 | xargs)";
 
 ram="$(free --giga | awk 'NR==2{print $2}')";
 
+# DE version
+DE=$XDG_CURRENT_DESKTOP;
+DE_VER="";
+if [[ $DE == "GNOME" ]]; then
+    VER=($(gnome-control-center --version))
+    VER=${VER[1]}
+    DE_VER=$VER;
+elif [[ $DE == "XFCE" ]]; then
+    VER=($(xfce4-panel --version))
+    VER=${VER[1]}
+    DE_VER=$VER;
+fi
+
 echo $distro;
 echo $distro_version;
 echo $distro_codename;
 echo "$USER@$HOSTNAME";
 echo $kernel;
-echo $XDG_CURRENT_DESKTOP;
+echo "$DE $DE_VER";
 echo "$cpu_model x$cpu_count";
 echo $cpu_max_hz;
 echo $gpu;
