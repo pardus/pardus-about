@@ -15,6 +15,10 @@ cp /var/log/kern.log $DIR/kern.log;
 cp /var/log/syslog $DIR/syslog;
 cp /var/log/user.log $DIR/user.log;
 
+cp /etc/hosts $DIR/hosts;
+cp /etc/apt/sources.list $DIR/sources.list;
+apt list > $DIR/apt\ list;
+
 # === ZIP FOLDER ===
 ZIPNAME="pardus_system_report.tar.gz";
 if [ $LANG == "tr_TR.UTF-8" ]; then
