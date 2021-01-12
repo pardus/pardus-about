@@ -29,7 +29,7 @@ if [[ $DE == "GNOME" ]]; then
     DE_VER=$VER;
 elif [[ $DE == "XFCE" ]]; then
     VER=($(xfce4-panel --version))
-    VER=${VER[1]}
+    VER=${VER[3]::-1}
     DE_VER=$VER;
 fi
 
