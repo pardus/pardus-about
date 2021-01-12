@@ -5,7 +5,7 @@ DIR="/tmp/pardus_system_report"
 dmesg > $DIR/dmesg;
 journalctl -q -n 1000 > $DIR/journalctl;
 lspci -vvv > $DIR/lspci;
-lsusb -v > $DIR/lsusb;
+lsusb > $DIR/lsusb;
 
 cp /var/log/auth.log $DIR/auth.log;
 cp /var/log/boot.log $DIR/boot.log;

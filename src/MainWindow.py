@@ -50,7 +50,7 @@ class MainWindow:
     
     def defineComponents(self):
         self.dialog_report_exported = self.builder.get_object("dialog_report_exported")
-        self.dialog_report_failed = self.builder.get_object("dialog_report_failed")
+        self.dialog_gathering_logs = self.builder.get_object("dialog_gathering_logs")
 
         self.lbl_distro = self.builder.get_object("lbl_distro")
         self.lbl_distro_version = self.builder.get_object("lbl_distro_version")
@@ -84,20 +84,31 @@ class MainWindow:
 
     # Signals:
     def on_btn_export_report_clicked(self, btn):
-        ret1 = subprocess.call([os.path.dirname(os.path.abspath(__file__)) + "/dump_system_info.sh"]) # First call this
-        if ret1 == 0:
-            ret2 = subprocess.call(["pkexec", os.path.dirname(os.path.abspath(__file__)) + "/dump_logs.sh"]) # And then this
+        self.dialog_gathering_logs.show_all()
+        currentPath = os.path.dirname(os.path.abspath(__file__))
 
-            if ret2 == 0:
-                ret3 = subprocess.call([os.path.dirname(os.path.abspath(__file__)) + "/copy_to_desktop.sh"]) # Lastly copy_to_home
-                
-                if ret3 == 0:
-                    self.dialog_report_exported.run()
-                    self.dialog_report_exported.hide()
-                else:
-                    print("Error while copying to Desktop.")
-            else:
-                print("Error while dumping logs.")
-        else:
-            print("Error while dumping system info.")
+        self.finishedProcesses = 0
+
+        def onFinished(source, condition):
+            self.dialog_gathering_logs.hide()
+            self.dialog_report_exported.run()
+            self.dialog_report_exported.hide()
+
+        def onLogsDumped(source, condition):
+            pid3, _, _, _ = GLib.spawn_async([currentPath + "/copy_to_desktop.sh"],
+                                    flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
+            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid3, onFinished)
+        
+        def onSystemInfoDumped(source, condition):
+            pid2, _, _, _ = GLib.spawn_async(["pkexec", currentPath + "/dump_logs.sh"],
+                                    flags=GLib.SPAWN_SEARCH_PATH | GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
+            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid2, onLogsDumped)
+
+        pid1, _, _, _ = GLib.spawn_async([currentPath + "/dump_system_info.sh"],
+                                    flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
+        GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid1, onSystemInfoDumped)
+
+        
+
+        
         
