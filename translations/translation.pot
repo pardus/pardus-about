@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-18 21:21+0300\n"
+"POT-Creation-Date: 2021-01-12 20:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: MainWindow.glade:10
+#: MainWindow.glade:7 MainWindow.glade:26
+msgid "Gathering System Logs..."
+msgstr ""
+
+#: MainWindow.glade:61
 msgid "Your system report has been exported to the desktop."
 msgstr ""
 
-#: MainWindow.glade:11
+#: MainWindow.glade:62
 msgid "~/Desktop/pardus_system_report.tar.gz"
 msgstr ""
 
-#: MainWindow.glade:40
+#: MainWindow.glade:91
 msgid "About this computer"
 msgstr ""
 
-#: MainWindow.glade:390
+#: MainWindow.glade:438
 msgid "Export System Report..."
 msgstr ""

@@ -19,6 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Gtranslator 3.38.0\n"
 
+#: MainWindow.glade:7 MainWindow.glade:26
+msgid "Gathering System Logs..."
+msgstr "Sistem Logları Toplanıyor..."
+
 #: MainWindow.glade:10
 msgid "Your system report has been exported to the desktop."
 msgstr "Sistem raporunuz masaüstüne eklenmiştir."
