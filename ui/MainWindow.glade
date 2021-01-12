@@ -9,7 +9,7 @@
     <property name="modal">True</property>
     <property name="default_width">350</property>
     <property name="default_height">100</property>
-    <property name="icon_name">../icon.svg</property>
+    <property name="icon_name">dialog-information</property>
     <property name="deletable">False</property>
     <child>
       <object class="GtkBox">
