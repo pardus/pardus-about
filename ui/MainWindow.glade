@@ -7,6 +7,7 @@
     <property name="title" translatable="yes">Gathering system logs...</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
+    <property name="window_position">center</property>
     <property name="default_width">350</property>
     <property name="default_height">100</property>
     <property name="icon_name">dialog-information</property>
