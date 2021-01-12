@@ -1,3 +1,23 @@
+pardus-about (0.2.0) unstable; urgency=medium
+
+  * UI Update
+  * lspci & lsusb added.
+  * hosts & sources.list & apt list added
+  * DE version added.
+  * sources.list.d/ folder added
+  * DE Versions updated.
+  * fix xfce version
+  * Added gathering logs screen, lsusb removed -v
+  * Updated translations
+  * Icon changed
+  * Little fix.
+  * UI Fixes
+  * Centered dialog
+  * UI Centered dialogs
+  * UI Center fix again.
+
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Tue, 12 Jan 2021 21:55:01 +0300
+
 pardus-about (0.1.0) unstable; urgency=medium
 
   [ Emin Fedar ]
