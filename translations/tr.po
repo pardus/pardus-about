@@ -20,8 +20,8 @@ msgstr ""
 "X-Generator: Gtranslator 3.38.0\n"
 
 #: MainWindow.glade:7 MainWindow.glade:26
-msgid "Gathering System Logs..."
-msgstr "Sistem Logları Toplanıyor..."
+msgid "Gathering system logs..."
+msgstr "Sistem logları toplanıyor..."
 
 #: MainWindow.glade:10
 msgid "Your system report has been exported to the desktop."

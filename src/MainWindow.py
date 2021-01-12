@@ -95,6 +95,9 @@ class MainWindow:
             self.dialog_report_exported.hide()
 
         def onLogsDumped(source, condition):
+            if condition != 0:
+                self.dialog_gathering_logs.hide()
+                return
             pid3, _, _, _ = GLib.spawn_async([currentPath + "/copy_to_desktop.sh"],
                                     flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
             GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid3, onFinished)

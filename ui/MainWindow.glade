@@ -4,11 +4,12 @@
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkWindow" id="dialog_gathering_logs">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Gathering System Logs...</property>
+    <property name="title" translatable="yes">Gathering system logs...</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="default_width">350</property>
     <property name="default_height">100</property>
+    <property name="icon_name">../icon.svg</property>
     <property name="deletable">False</property>
     <child>
       <object class="GtkBox">
@@ -23,7 +24,7 @@
             <property name="halign">center</property>
             <property name="valign">center</property>
             <property name="margin_bottom">10</property>
-            <property name="label" translatable="yes">Gathering System Logs...</property>
+            <property name="label" translatable="yes">Gathering system logs...</property>
             <attributes>
               <attribute name="size" value="14000"/>
             </attributes>
