@@ -24,8 +24,8 @@ ram="$(free --giga | awk 'NR==2{print $2}')";
 DE=$XDG_CURRENT_DESKTOP;
 DE_VER="";
 if [[ $DE == "GNOME" ]]; then
-    VER=($(gnome-control-center --version))
-    VER=${VER[1]}
+    VER=($(gnome-shell --version))
+    VER=${VER[2]}
     DE_VER=$VER;
 elif [[ $DE == "XFCE" ]]; then
     VER=($(xfce4-panel --version))
