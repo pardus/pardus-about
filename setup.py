@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 from setuptools import setup, find_packages
+from shutil import copyfile
+
+copyfile("icon.svg", "pardus-about.svg")
 
 data_files = [
     ("/usr/share/applications/", ["tr.org.pardus.about.desktop"]),
@@ -8,7 +11,8 @@ data_files = [
     ("/usr/share/pardus/pardus-about/src", ["src/main.py", "src/MainWindow.py", "src/dump_system_info.sh", "src/get_system_info.sh", "src/copy_to_desktop.sh", "src/dump_logs.sh"]),
     ("/usr/share/pardus/pardus-about/ui", ["ui/MainWindow.glade"]),
     ("/usr/share/polkit-1/actions", ["tr.org.pardus.pkexec.pardus-about.policy"]),
-    ("/usr/bin/", ["pardus-about"])
+    ("/usr/bin/", ["pardus-about"]),
+    ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-about.svg"])
 ]
 
 setup(
