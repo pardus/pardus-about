@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkApplicationWindow" id="window">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">About this computer</property>
+    <property name="can-focus">False</property>
     <property name="resizable">False</property>
-    <property name="window_position">center</property>
-    <property name="default_width">400</property>
-    <property name="default_height">300</property>
+    <property name="window-position">center</property>
+    <property name="default-width">400</property>
+    <property name="default-height">300</property>
     <property name="icon">../icon.svg</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_left">25</property>
-        <property name="margin_right">40</property>
-        <property name="margin_top">20</property>
+        <property name="can-focus">False</property>
+        <property name="margin-start">40</property>
+        <property name="margin-end">40</property>
+        <property name="margin-top">20</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">15</property>
-                <property name="margin_right">25</property>
+                <property name="can-focus">False</property>
+                <property name="margin-end">40</property>
                 <property name="pixbuf">../pardus-logo.svg</property>
-                <property name="pixel_size">150</property>
+                <property name="pixel-size">150</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -42,18 +40,17 @@
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can-focus">False</property>
                 <property name="valign">center</property>
-                <property name="margin_left">15</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <child>
                       <object class="GtkLabel" id="lbl_distro">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
                         <property name="label">Pardus</property>
                         <attributes>
@@ -70,9 +67,9 @@
                     <child>
                       <object class="GtkLabel" id="lbl_distro_version">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_left">3</property>
+                        <property name="margin-start">5</property>
                         <property name="label">19.4</property>
                         <attributes>
                           <attribute name="size" value="24000"/>
@@ -94,8 +91,8 @@
                 <child>
                   <object class="GtkLabel" id="lbl_distro_codename">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="opacity">0.70196078431372544</property>
+                    <property name="can-focus">False</property>
+                    <property name="opacity">0.7019607843137254</property>
                     <property name="halign">start</property>
                     <property name="label">ondokuz</property>
                   </object>
@@ -108,9 +105,9 @@
                 <child>
                   <object class="GtkSeparator">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_top">3</property>
-                    <property name="margin_bottom">3</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">3</property>
+                    <property name="margin-bottom">3</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -121,13 +118,13 @@
                 <child>
                   <object class="GtkLabel" id="lbl_user_host">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="opacity">0.80000000000000004</property>
+                    <property name="can-focus">False</property>
+                    <property name="opacity">0.80</property>
                     <property name="halign">start</property>
-                    <property name="margin_top">3</property>
-                    <property name="margin_bottom">3</property>
+                    <property name="margin-top">3</property>
+                    <property name="margin-bottom">3</property>
                     <property name="label">ef@mi</property>
-                    <property name="use_markup">True</property>
+                    <property name="use-markup">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -138,16 +135,16 @@
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;Kernel:&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="use-markup">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -158,11 +155,11 @@
                     <child>
                       <object class="GtkLabel" id="lbl_kernel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_left">3</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-start">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">5.9.0-4-amd64</property>
                       </object>
                       <packing>
@@ -181,16 +178,16 @@
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;Desktop:&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="use-markup">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -201,11 +198,11 @@
                     <child>
                       <object class="GtkLabel" id="lbl_desktop">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_left">3</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-start">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">GNOME</property>
                       </object>
                       <packing>
@@ -224,16 +221,16 @@
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;CPU:&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="use-markup">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -244,11 +241,11 @@
                     <child>
                       <object class="GtkLabel" id="lbl_cpu">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_left">3</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-start">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">Intel(R) Core(TM) i7-10510U CPU</property>
                       </object>
                       <packing>
@@ -267,16 +264,16 @@
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;GPU:&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="use-markup">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -287,11 +284,11 @@
                     <child>
                       <object class="GtkLabel" id="lbl_gpu">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_left">3</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-start">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">Mesa Intel(R) UHD Graphics (CML GT2)</property>
                       </object>
                       <packing>
@@ -310,16 +307,16 @@
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can-focus">False</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;RAM:&lt;/b&gt;</property>
-                        <property name="use_markup">True</property>
+                        <property name="use-markup">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -330,11 +327,11 @@
                     <child>
                       <object class="GtkLabel" id="lbl_ram">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_left">3</property>
-                        <property name="margin_top">3</property>
-                        <property name="margin_bottom">3</property>
+                        <property name="margin-start">3</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
                         <property name="label">8GB</property>
                       </object>
                       <packing>
@@ -354,11 +351,11 @@
                   <object class="GtkButton" id="btn_export_report">
                     <property name="label" translatable="yes">Export System Report...</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
                     <property name="halign">start</property>
                     <property name="valign">center</property>
-                    <property name="margin_top">14</property>
+                    <property name="margin-top">14</property>
                     <signal name="clicked" handler="on_btn_export_report_clicked" swapped="no"/>
                   </object>
                   <packing>
@@ -384,10 +381,10 @@
         <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="opacity">0.5</property>
-            <property name="margin_top">18</property>
-            <property name="margin_bottom">7</property>
+            <property name="margin-top">18</property>
+            <property name="margin-bottom">7</property>
             <property name="label">©TÜBİTAK ULAKBİM | 2021</property>
             <attributes>
               <attribute name="size" value="10000"/>
@@ -396,40 +393,48 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="pack_type">end</property>
+            <property name="pack-type">end</property>
             <property name="position">2</property>
           </packing>
         </child>
       </object>
     </child>
     <child type="titlebar">
-      <placeholder/>
+      <object class="GtkHeaderBar">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="title" translatable="yes">About this computer</property>
+        <property name="show-close-button">True</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
     </child>
   </object>
   <object class="GtkWindow" id="dialog_gathering_logs">
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="title" translatable="yes">Gathering system logs...</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="default_width">350</property>
-    <property name="default_height">100</property>
-    <property name="icon_name">dialog-information</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="default-width">350</property>
+    <property name="default-height">100</property>
+    <property name="icon-name">dialog-information</property>
     <property name="deletable">False</property>
-    <property name="transient_for">window</property>
+    <property name="transient-for">window</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="valign">center</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="margin_bottom">10</property>
+            <property name="margin-bottom">10</property>
             <property name="label" translatable="yes">Gathering system logs...</property>
             <attributes>
               <attribute name="size" value="14000"/>
@@ -444,7 +449,7 @@
         <child>
           <object class="GtkSpinner">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="active">True</property>
           </object>
           <packing>
@@ -455,30 +460,27 @@
         </child>
       </object>
     </child>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
   </object>
   <object class="GtkMessageDialog" id="dialog_report_exported">
-    <property name="can_focus">False</property>
+    <property name="can-focus">False</property>
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="icon_name">dialog-information</property>
-    <property name="type_hint">dialog</property>
-    <property name="transient_for">window</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="icon-name">dialog-information</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">window</property>
     <property name="buttons">ok</property>
     <property name="text" translatable="yes">Your system report has been exported to the desktop.</property>
-    <property name="secondary_text" translatable="yes">~/Desktop/pardus_system_report.tar.gz</property>
+    <property name="secondary-text" translatable="yes">~/Desktop/pardus_system_report.tar.gz</property>
     <child internal-child="vbox">
       <object class="GtkBox">
-        <property name="can_focus">False</property>
+        <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
+            <property name="can-focus">False</property>
             <property name="homogeneous">True</property>
-            <property name="layout_style">end</property>
+            <property name="layout-style">end</property>
             <child>
               <placeholder/>
             </child>
