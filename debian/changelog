@@ -1,3 +1,10 @@
+pardus-about (0.2.3) unstable; urgency=medium
+
+  [ Emin Fedar ]
+  * Added gir1.2-gtk-3.0 dependency
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 02 Aug 2021 17:09:00 +0300
+
 pardus-about (0.2.2) unstable; urgency=medium
 
   [ Emin Fedar ]
