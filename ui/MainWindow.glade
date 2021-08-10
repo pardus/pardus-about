@@ -3,33 +3,69 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkApplicationWindow" id="window">
+    <property name="width-request">580</property>
     <property name="can-focus">False</property>
     <property name="resizable">False</property>
     <property name="window-position">center</property>
-    <property name="default-width">400</property>
-    <property name="default-height">300</property>
+    <property name="default-width">580</property>
     <property name="icon">../icon.svg</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="margin-start">40</property>
-        <property name="margin-end">40</property>
-        <property name="margin-top">20</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="halign">center</property>
             <property name="valign">center</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkImage">
+              <object class="GtkFixed">
+                <property name="height-request">200</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-end">40</property>
-                <property name="pixbuf">../pardus-logo.svg</property>
-                <property name="pixel-size">150</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="width-request">100</property>
+                    <property name="height-request">80</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">../bluebackground.png</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="width-request">178</property>
+                    <property name="height-request">178</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="receives-default">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">center</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-left">15</property>
+                        <property name="margin-right">15</property>
+                        <property name="margin-start">15</property>
+                        <property name="margin-end">15</property>
+                        <property name="margin-top">15</property>
+                        <property name="margin-bottom">15</property>
+                        <property name="pixel-size">120</property>
+                        <property name="icon-name">emblem-pardus-symbolic</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="circular"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="x">201</property>
+                    <property name="y">60</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -41,7 +77,8 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="valign">center</property>
+                <property name="margin-start">40</property>
+                <property name="margin-end">40</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkBox">
@@ -70,7 +107,7 @@
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
                         <property name="margin-start">5</property>
-                        <property name="label">19.4</property>
+                        <property name="label">21.0</property>
                         <attributes>
                           <attribute name="size" value="24000"/>
                         </attributes>
@@ -94,7 +131,7 @@
                     <property name="can-focus">False</property>
                     <property name="opacity">0.7019607843137254</property>
                     <property name="halign">start</property>
-                    <property name="label">ondokuz</property>
+                    <property name="label">yirmibir</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -123,7 +160,7 @@
                     <property name="halign">start</property>
                     <property name="margin-top">3</property>
                     <property name="margin-bottom">3</property>
-                    <property name="label">ef@mi</property>
+                    <property name="label">pardus@pc</property>
                     <property name="use-markup">True</property>
                   </object>
                   <packing>
