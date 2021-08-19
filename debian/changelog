@@ -1,3 +1,13 @@
+pardus-about (0.3.0) unstable; urgency=medium
+
+  [ Emin Fedar ]
+  * Updated UI
+
+  [ Fatih Altun ]
+  * Change yirmibir codename as Dolunay statically
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 20 Aug 2021 01:03:59 +0300
+
 pardus-about (0.2.3) unstable; urgency=medium
 
   [ Emin Fedar ]
