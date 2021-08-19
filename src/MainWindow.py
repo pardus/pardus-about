@@ -69,6 +69,8 @@ class MainWindow:
         
         self.lbl_distro.set_label(lines[0])
         self.lbl_distro_version.set_label(lines[1])
+        if lines[2] == "yirmibir":
+            lines[2] =  "Dolunay"
         self.lbl_distro_codename.set_label(lines[2])
 
         self.lbl_user_host.set_label(lines[3])
