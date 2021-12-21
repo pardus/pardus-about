@@ -162,6 +162,9 @@
                     <property name="margin-bottom">3</property>
                     <property name="label">pardus@pc</property>
                     <property name="use-markup">True</property>
+                    <property name="wrap">True</property>
+                    <property name="wrap-mode">char</property>
+                    <property name="max-width-chars">60</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -178,6 +181,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="valign">start</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;Kernel:&lt;/b&gt;</property>
@@ -194,10 +198,14 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="valign">start</property>
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
                         <property name="label">5.9.0-4-amd64</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">char</property>
+                        <property name="max-width-chars">50</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -221,6 +229,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="valign">start</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;Desktop:&lt;/b&gt;</property>
@@ -237,10 +246,13 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="valign">start</property>
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
                         <property name="label">GNOME</property>
+                        <property name="wrap">True</property>
+                        <property name="max-width-chars">50</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -264,6 +276,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="valign">start</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;CPU:&lt;/b&gt;</property>
@@ -280,10 +293,13 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="valign">start</property>
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
                         <property name="label">Intel(R) Core(TM) i7-10510U CPU</property>
+                        <property name="wrap">True</property>
+                        <property name="max-width-chars">50</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -307,6 +323,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="valign">start</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;GPU:&lt;/b&gt;</property>
@@ -326,7 +343,9 @@
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
-                        <property name="label">Mesa Intel(R) UHD Graphics (CML GT2)</property>
+                        <property name="label">Mesa Intel(R) UHD Graphics (CML GT2) Mesa Intel(R) UHD Graphics (CML GT2) Mesa Intel(R) UHD Graphics (CML GT2)</property>
+                        <property name="wrap">True</property>
+                        <property name="max-width-chars">50</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -350,6 +369,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="valign">start</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
                         <property name="label">&lt;b&gt;RAM:&lt;/b&gt;</property>
@@ -366,10 +386,12 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="valign">start</property>
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
                         <property name="label">8GB</property>
+                        <property name="max-width-chars">50</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
