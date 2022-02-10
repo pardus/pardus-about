@@ -1,3 +1,14 @@
+pardus-about (0.3.1) unstable; urgency=medium
+
+  [ Emin Fedar ]
+  * fixed: Wrong physical RAM size.
+  * f,
+  * fixed: Long GPU Name not wrapping
+  * Added secret flag
+  * Animated flag added
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 10 Feb 2022 18:31:26 +0300
+
 pardus-about (0.3.0) unstable; urgency=medium
 
   [ Emin Fedar ]
