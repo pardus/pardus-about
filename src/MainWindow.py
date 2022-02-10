@@ -2,7 +2,7 @@ import os, subprocess, time
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk, Gdk
+from gi.repository import GLib, Gio, Gtk, Gdk, GdkPixbuf
 
 import locale
 from locale import gettext as tr
@@ -36,8 +36,7 @@ class MainWindow:
         self.window.connect("destroy", self.onDestroy)
         self.defineComponents()
 
-        self.click_count = 0
-        self.last_click_timestamp = 0
+        self.addTurkishFlag()
 
         self.readSystemInfo()
         
@@ -67,6 +66,22 @@ class MainWindow:
         self.lbl_ram = self.builder.get_object("lbl_ram")
 
         self.bayrak = self.builder.get_object("bayrak")
+        self.img_bayrak = self.builder.get_object("img_bayrak")
+    
+    def addTurkishFlag(self):
+        self.click_count = 0
+        self.last_click_timestamp = 0
+        
+        pixbuf = GdkPixbuf.PixbufAnimation.new_from_file("./bayrak.gif")
+
+        def waving_flag(it):
+            # it is iterator
+            self.img_bayrak.props.pixbuf = it.get_pixbuf()
+            it.advance()
+
+            GLib.timeout_add(it.get_delay_time(), waving_flag, it)
+        
+        GLib.timeout_add(0, waving_flag, pixbuf.get_iter())
 
     def readSystemInfo(self):
         output = subprocess.check_output([os.path.dirname(os.path.abspath(__file__)) + "/get_system_info.sh"]).decode("utf-8")
