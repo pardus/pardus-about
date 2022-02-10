@@ -1,8 +1,8 @@
-import os, subprocess
+import os, subprocess, time
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk
+from gi.repository import GLib, Gio, Gtk, Gdk
 
 import locale
 from locale import gettext as tr
@@ -36,6 +36,9 @@ class MainWindow:
         self.window.connect("destroy", self.onDestroy)
         self.defineComponents()
 
+        self.click_count = 0
+        self.last_click_timestamp = 0
+
         self.readSystemInfo()
         
         # Set application:
@@ -62,6 +65,8 @@ class MainWindow:
         self.lbl_cpu = self.builder.get_object("lbl_cpu")
         self.lbl_gpu = self.builder.get_object("lbl_gpu")
         self.lbl_ram = self.builder.get_object("lbl_ram")
+
+        self.bayrak = self.builder.get_object("bayrak")
 
     def readSystemInfo(self):
         output = subprocess.check_output([os.path.dirname(os.path.abspath(__file__)) + "/get_system_info.sh"]).decode("utf-8")
@@ -112,8 +117,21 @@ class MainWindow:
         pid1, _, _, _ = GLib.spawn_async([currentPath + "/dump_system_info.sh"],
                                     flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid1, onSystemInfoDumped)
+    
+    def on_btn_pardus_logo_button_press_event(self, btn, event):
+        timestamp = lambda: int(round(time.time() * 1000)) # milliseconds
 
-        
+        if event.type == Gdk.EventType._2BUTTON_PRESS:
 
+            if timestamp() - self.last_click_timestamp < 800:
+                self.click_count += 1
+            else:
+                self.click_count = 1
+            
+            self.last_click_timestamp = timestamp()
         
-        
+        if self.click_count >= 2:
+            self.click_count = 0
+
+            self.bayrak.popup()
+    
