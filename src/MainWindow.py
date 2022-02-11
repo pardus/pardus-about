@@ -72,7 +72,7 @@ class MainWindow:
         self.click_count = 0
         self.last_click_timestamp = 0
         
-        pixbuf = GdkPixbuf.PixbufAnimation.new_from_file("./bayrak.gif")
+        pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../bayrak.gif")
 
         def waving_flag(it):
             # it is iterator
