@@ -1,3 +1,10 @@
+pardus-about (0.3.2) unstable; urgency=medium
+
+  [ Emin Fedar ]
+  * bayrak.gif added to setup.py
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 11 Feb 2022 14:07:20 +0300
+
 pardus-about (0.3.1) unstable; urgency=medium
 
   [ Emin Fedar ]
