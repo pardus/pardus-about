@@ -1,3 +1,9 @@
+pardus-about (0.3.3) unstable; urgency=medium
+
+  * Fix bayrak.gif file path
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 11 Feb 2022 15:27:21 +0300
+
 pardus-about (0.3.2) unstable; urgency=medium
 
   [ Emin Fedar ]
