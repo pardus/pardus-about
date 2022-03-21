@@ -1,0 +1,40 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pardus-about\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-12 20:07+0300\n"
+"PO-Revision-Date: 2022-03-21 16:18+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: Português <hugokarvalho@gotmail.com>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: MainWindow.glade:7 MainWindow.glade:26
+msgid "Gathering system logs..."
+msgstr "A recolher registos do sistema..."
+
+#: MainWindow.glade:61
+msgid "Your system report has been exported to the desktop."
+msgstr "O relatório do sistema foi exportado para o ambiente de trabalho."
+
+#: MainWindow.glade:62
+msgid "~/Desktop/pardus_system_report.tar.gz"
+msgstr "~/Desktop/pardus_system_report.tar.gz"
+
+#: MainWindow.glade:91
+msgid "About this computer"
+msgstr "Acerca deste computador"
+
+#: MainWindow.glade:438
+msgid "Export System Report..."
+msgstr "Exportar relatório do sistema..."
