@@ -7,6 +7,7 @@ copyfile("icon.svg", "pardus-about.svg")
 data_files = [
     ("/usr/share/applications/", ["tr.org.pardus.about.desktop"]),
     ("/usr/share/locale/tr/LC_MESSAGES/", ["translations/tr/LC_MESSAGES/pardus-about.mo"]),
+    ("/usr/share/locale/pt/LC_MESSAGES/", ["translations/pt/LC_MESSAGES/pardus-about.mo"]),
     ("/usr/share/pardus/pardus-about/", ["icon.svg", "bluebackground.png", "bayrak.gif"]),
     ("/usr/share/pardus/pardus-about/src", ["src/main.py", "src/MainWindow.py", "src/dump_system_info.sh", "src/get_system_info.sh", "src/copy_to_desktop.sh", "src/dump_logs.sh"]),
     ("/usr/share/pardus/pardus-about/ui", ["ui/MainWindow.glade"]),
