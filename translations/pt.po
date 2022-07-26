@@ -29,7 +29,7 @@ msgstr "O relatório do sistema foi exportado para o ambiente de trabalho."
 
 #: MainWindow.glade:62
 msgid "~/Desktop/pardus_system_report.tar.gz"
-msgstr "~/Desktop/pardus_system_report.tar.gz"
+msgstr "~/Transferências/pardus_system_report.tar.gz"
 
 #: MainWindow.glade:91
 msgid "About this computer"
