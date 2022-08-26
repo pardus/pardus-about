@@ -39,6 +39,8 @@ class MainWindow:
         self.addTurkishFlag()
 
         GLib.idle_add(self.readSystemInfo)
+
+        self.get_ram_size()
         
         # Set application:
         self.application = application
@@ -102,7 +104,56 @@ class MainWindow:
             ghz = "{:.2f}".format(float(lines[7])/1000000)
             self.lbl_cpu.set_label(lines[6] + " (" + ghz  + "GHz)")
         self.lbl_gpu.set_label(lines[8])
-        self.lbl_ram.set_label(lines[9] + "GB")
+
+        total_physical_ram, total_ram = self.get_ram_size()
+        self.lbl_ram.set_label(self.beauty_size(total_ram))
+
+    def beauty_size(self, size):
+        if type(size) is int:
+            size = size / 1024
+            if size > 1048576:
+                size = "{:.1f} GiB".format(float(size / 1048576))
+            elif size > 1024:
+                size = "{:.1f} MiB".format(float(size / 1024))
+            else:
+                size = "{:.1f} KiB".format(float(size))
+            return size
+        return "size not found"
+
+    def get_ram_size(self):
+        total_ram = 0
+        total_physical_ram = 0
+
+        # physical ram size
+        try:
+            with open("/sys/devices/system/memory/block_size_bytes") as bsbyte:
+                block_size = int(bsbyte.read().strip(), 16)
+            total_online_mem = 0
+            total_offline_mem = 0
+            m_files = os.listdir("/sys/devices/system/memory/")
+            for file in m_files:
+                if os.path.isdir("/sys/devices/system/memory/" + file) and file.startswith("memory"):
+                    with open("/sys/devices/system/memory/" + file + "/online") as online:
+                        memory_on_off = online.read().strip()
+                    if memory_on_off == "1":
+                        total_online_mem = total_online_mem + block_size
+                    if memory_on_off == "0":
+                        total_offline_mem = total_offline_mem + block_size
+            total_physical_ram = (total_online_mem + total_offline_mem)
+        except Exception as e:
+            print("Exception on /sys/devices/system/memory/block_size_bytes : {}".format(e))
+
+        # total ram size
+        try:
+            with open("/proc/meminfo") as meminfo:
+                meminfo_lines = meminfo.read().split("\n")
+            for line in meminfo_lines:
+                if "MemTotal:" in line:
+                    total_ram = int(line.split()[1]) * 1024
+        except Exception as e:
+            print("Exception on /proc/meminfo : {}".format(e))
+
+        return total_physical_ram, total_ram
 
     # Signals:
     def on_btn_export_report_clicked(self, btn):
