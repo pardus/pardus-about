@@ -1,11 +1,15 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: pardus-about
-Source: https://www.pardus.org.tr
+Source: https://github.com/pardus/pardus-about
 
 
 
 Files: *
 Copyright: 2020 Emin Fedar <emin.fedar@pardus.org.tr>
+License: GPL-3.0+
+
+Files: *
+Copyright: 2022 Fatih Altun <fatih.altun@pardus.org.tr>
 License: GPL-3.0+
 
 License: GPL-3.0+

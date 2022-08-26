@@ -40,8 +40,6 @@ class MainWindow:
 
         GLib.idle_add(self.readSystemInfo)
 
-        self.get_ram_size()
-        
         # Set application:
         self.application = application
 
