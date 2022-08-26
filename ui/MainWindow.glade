@@ -203,7 +203,7 @@
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
-                        <property name="label">5.9.0-4-amd64</property>
+                        <property name="label">Unknown</property>
                         <property name="wrap">True</property>
                         <property name="wrap-mode">char</property>
                         <property name="max-width-chars">50</property>
@@ -251,7 +251,7 @@
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
-                        <property name="label">GNOME</property>
+                        <property name="label">Unknown</property>
                         <property name="wrap">True</property>
                         <property name="max-width-chars">50</property>
                       </object>
@@ -298,7 +298,7 @@
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
-                        <property name="label">Intel(R) Core(TM) i7-10510U CPU</property>
+                        <property name="label">Unknown</property>
                         <property name="wrap">True</property>
                         <property name="max-width-chars">50</property>
                       </object>
@@ -344,7 +344,7 @@
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
-                        <property name="label">Mesa Intel(R) UHD Graphics (CML GT2) Mesa Intel(R) UHD Graphics (CML GT2) Mesa Intel(R) UHD Graphics (CML GT2)</property>
+                        <property name="label">Unknown</property>
                         <property name="wrap">True</property>
                         <property name="max-width-chars">50</property>
                       </object>
@@ -391,7 +391,7 @@
                         <property name="margin-start">3</property>
                         <property name="margin-top">3</property>
                         <property name="margin-bottom">3</property>
-                        <property name="label">8GB</property>
+                        <property name="label">Unknown</property>
                         <property name="max-width-chars">50</property>
                       </object>
                       <packing>

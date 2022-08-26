@@ -38,7 +38,7 @@ class MainWindow:
 
         self.addTurkishFlag()
 
-        self.readSystemInfo()
+        GLib.idle_add(self.readSystemInfo)
         
         # Set application:
         self.application = application
@@ -67,7 +67,7 @@ class MainWindow:
 
         self.bayrak = self.builder.get_object("bayrak")
         self.img_bayrak = self.builder.get_object("img_bayrak")
-    
+
     def addTurkishFlag(self):
         self.click_count = 0
         self.last_click_timestamp = 0
