@@ -1,9 +1,12 @@
 [Desktop Entry]
 Name=About Pardus
+Name[pt]=Acerca do Pardus
 Name[tr]=Pardus Hakkında
 GenericName=About
+GenericName[pt]=Acerca
 GenericName[tr]=Hakkında
 Comment=Get info about your Pardus system.
+Comment[pt]=Saiba mais acerca do seu sistema Pardus.
 Comment[tr]=Pardus sisteminiz hakkında bilgi edinin.
 Exec=pardus-about
 Icon=pardus-about
