@@ -64,6 +64,7 @@ class MainWindow:
         self.lbl_cpu = self.builder.get_object("lbl_cpu")
         self.lbl_gpu = self.builder.get_object("lbl_gpu")
         self.lbl_ram = self.builder.get_object("lbl_ram")
+        self.lbl_ram_phy = self.builder.get_object("lbl_ram_phy")
 
         self.bayrak = self.builder.get_object("bayrak")
         self.img_bayrak = self.builder.get_object("img_bayrak")
@@ -105,6 +106,7 @@ class MainWindow:
 
         total_physical_ram, total_ram = self.get_ram_size()
         self.lbl_ram.set_label(self.beauty_size(total_ram))
+        self.lbl_ram_phy.set_markup("<small>( {}:  {} )</small>".format(tr("Physical RAM"), self.beauty_size(total_physical_ram)))
 
     def beauty_size(self, size):
         if type(size) is int:
