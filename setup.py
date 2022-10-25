@@ -11,6 +11,7 @@ data_files = [
     ("/usr/share/pardus/pardus-about/", ["icon.svg", "bluebackground.png", "bayrak.gif"]),
     ("/usr/share/pardus/pardus-about/src", ["src/main.py", "src/MainWindow.py", "src/dump_system_info.sh", "src/get_system_info.sh", "src/copy_to_desktop.sh", "src/dump_logs.sh"]),
     ("/usr/share/pardus/pardus-about/ui", ["ui/MainWindow.glade"]),
+    ("/usr/share/pardus/pardus-about/data", ["data/pci.ids"]),
     ("/usr/share/polkit-1/actions", ["tr.org.pardus.pkexec.pardus-about.policy"]),
     ("/usr/bin/", ["pardus-about"]),
     ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-about.svg"])
