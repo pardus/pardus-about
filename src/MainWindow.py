@@ -88,10 +88,21 @@ class MainWindow:
 
         self.box_extra_gpu = self.builder.get_object("box_extra_gpu")
 
-        # self.stack_main = self.builder.get_object("stack_main")
+        self.popover_menu = self.builder.get_object("popover_menu")
+
+        self.dialog_about = self.builder.get_object("dialog_about")
+        self.dialog_about.set_program_name(_("Pardus About"))
 
         self.bayrak = self.builder.get_object("bayrak")
         self.img_bayrak = self.builder.get_object("img_bayrak")
+
+        # Set version
+        # If not getted from __version__ file then accept version in MainWindow.glade file
+        try:
+            version = open(os.path.dirname(os.path.abspath(__file__)) + "/__version__").readline()
+            self.dialog_about.set_version(version)
+        except:
+            pass
 
     def addTurkishFlag(self):
         self.click_count = 0
@@ -291,7 +302,13 @@ class MainWindow:
         return self.get_local_ip(), self.get_ip()
 
     # Signals:
-    def on_btn_export_report_clicked(self, btn):
+    def on_menu_aboutapp_clicked(self, button):
+        self.popover_menu.popdown()
+        self.dialog_about.run()
+        self.dialog_about.hide()
+
+    def on_menu_btn_export_clicked(self, btn):
+        self.popover_menu.popdown()
         self.dialog_gathering_logs.show_all()
         currentPath = os.path.dirname(os.path.abspath(__file__))
 
