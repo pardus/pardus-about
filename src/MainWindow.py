@@ -106,11 +106,13 @@ class MainWindow:
         self.lbl_user_host.set_label(lines[3])
         self.lbl_kernel.set_label(lines[4])
         self.lbl_desktop.set_label(lines[5])
-        if lines[7] == "0":
-            self.lbl_cpu.set_label(lines[6])
-        else:
-            ghz = "{:.2f}".format(float(lines[7])/1000000)
-            self.lbl_cpu.set_label(lines[6] + " (" + ghz  + "GHz)")
+        # if lines[7] == "0":
+        #     self.lbl_cpu.set_label(lines[6])
+        # else:
+        #     ghz = "{:.2f}".format(float(lines[7])/1000000)
+        #     self.lbl_cpu.set_label(lines[6] + " (" + ghz  + "GHz)")
+
+        self.lbl_cpu.set_label("{}".format(self.get_cpu()))
 
         total_physical_ram, total_ram = self.get_ram_size()
         self.lbl_ram.set_label(self.beauty_size(total_ram))
@@ -199,6 +201,24 @@ class MainWindow:
 
         self.GPU = GPU()
         return self.GPU.get_gpu()
+
+    def get_cpu(self):
+
+        file = self.readfile("/proc/cpuinfo")
+        name = ""
+        for line in file.splitlines():
+            if line.startswith("model name"):
+                name = line.split(":")[1].strip()
+                break
+        return name
+
+    def readfile(self, filename):
+        if not os.path.exists(filename):
+            return ""
+        file = open(filename, "r")
+        data = file.read()
+        file.close()
+        return data
 
     # Signals:
     def on_btn_export_report_clicked(self, btn):
