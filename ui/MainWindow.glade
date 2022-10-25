@@ -8,7 +8,7 @@
     <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="default-width">580</property>
-    <property name="icon">../icon.svg</property>
+    <property name="icon">../pardus-about.svg</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>

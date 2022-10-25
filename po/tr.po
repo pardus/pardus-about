@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 00:44+0300\n"
+"POT-Creation-Date: 2022-10-25 10:39+0300\n"
 "PO-Revision-Date: 2020-12-17 00:45+0300\n"
 "Last-Translator: Emin fedar <emin.fedar@pardus.org.tr>\n"
 "Language-Team: Turkish <gelistirici@pardus.org.tr>\n"
@@ -19,22 +19,26 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Gtranslator 3.38.0\n"
 
-#: MainWindow.glade:7 MainWindow.glade:26
-msgid "Gathering system logs..."
-msgstr "Sistem logları toplanıyor..."
+#: ui/MainWindow.glade:449
+msgid "( Physcial RAM: .. GB )"
+msgstr ""
 
-#: MainWindow.glade:10
-msgid "Your system report has been exported to the desktop."
-msgstr "Sistem raporunuz masaüstüne eklenmiştir."
+#: ui/MainWindow.glade:480
+msgid "Export System Report..."
+msgstr "Sistem Raporu Çıkart..."
 
-#: MainWindow.glade:11
-msgid "~/Desktop/pardus_system_report.tar.gz"
-msgstr "~/Masaüstü/pardus_sistem_raporu.tar.gz"
-
-#: MainWindow.glade:40
+#: ui/MainWindow.glade:540
 msgid "About this computer"
 msgstr "Bu bilgisayar hakkında"
 
-#: MainWindow.glade:390
-msgid "Export System Report..."
-msgstr "Sistem Raporu Çıkart..."
+#: ui/MainWindow.glade:565 ui/MainWindow.glade:587
+msgid "Gathering system logs..."
+msgstr "Sistem logları toplanıyor..."
+
+#: ui/MainWindow.glade:621
+msgid "Your system report has been exported to the desktop."
+msgstr "Sistem raporunuz masaüstüne eklenmiştir."
+
+#: ui/MainWindow.glade:622
+msgid "~/Desktop/pardus_system_report.tar.gz"
+msgstr "~/Masaüstü/pardus_sistem_raporu.tar.gz"
