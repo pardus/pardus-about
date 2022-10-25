@@ -172,9 +172,9 @@ class MainWindow:
         lan = ""
         for lip in local:
             if lip[1] != "lo":
-                lan += "{}: {} | ".format(lip[1], lip[0])
+                lan += "{}<small> ({}) </small> | ".format(lip[0], lip[1])
         lan = lan.rstrip("| ")
-        self.lbl_ip_local.set_label("{}".format(lan))
+        self.lbl_ip_local.set_markup("{}".format(lan))
 
     def beauty_size(self, size):
         if type(size) is int:
