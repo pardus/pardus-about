@@ -16,7 +16,7 @@ if [ -f $cpu_max_hz_file ]; then
     cpu_max_hz="$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq)";
 fi
 
-gpu="$(glxinfo | grep "OpenGL renderer string" | cut -d ':' -f2 | xargs)";
+#gpu="$(glxinfo | grep "OpenGL renderer string" | cut -d ':' -f2 | xargs)";
 
 #totalmem=0; for mem in /sys/devices/system/memory/memory*; do [[ "$(cat ${mem}/online)" == "1" ]] && totalmem=$((totalmem+$((0x$(cat /sys/devices/system/memory/block_size_bytes))))); done
 #ram=$((totalmem/1024**3))
@@ -42,5 +42,5 @@ echo $kernel;
 echo "$DE $DE_VER";
 echo "$cpu_model x$cpu_count";
 echo $cpu_max_hz;
-echo $gpu;
+#echo $gpu;
 #echo $ram;

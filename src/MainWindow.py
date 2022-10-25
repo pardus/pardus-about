@@ -7,15 +7,17 @@ from gi.repository import GLib, Gio, Gtk, Gdk, GdkPixbuf
 import locale
 from locale import gettext as tr
 
+from GPU import GPU
+
 # Translation Constants:
 APPNAME = "pardus-about"
 TRANSLATIONS_PATH = "/usr/share/locale"
-SYSTEM_LANGUAGE = os.environ.get("LANG")
+# SYSTEM_LANGUAGE = os.environ.get("LANG")
 
 # Translation functions:
 locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME)
-locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
+# locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
 
 class MainWindow:
     def __init__(self, application):
@@ -36,6 +38,8 @@ class MainWindow:
         self.window.connect("destroy", self.onDestroy)
         self.defineComponents()
 
+        # self.stack_main.set_visible_child_name("loading")
+
         self.addTurkishFlag()
 
         GLib.idle_add(self.readSystemInfo)
@@ -45,7 +49,7 @@ class MainWindow:
 
         # Show Screen:
         self.window.show_all()
-    
+
     # Window methods:
     def onDestroy(self, action):
         self.window.get_application().quit()
@@ -63,8 +67,13 @@ class MainWindow:
         self.lbl_desktop = self.builder.get_object("lbl_desktop")
         self.lbl_cpu = self.builder.get_object("lbl_cpu")
         self.lbl_gpu = self.builder.get_object("lbl_gpu")
+        self.lbl_title_gpu = self.builder.get_object("lbl_title_gpu")
         self.lbl_ram = self.builder.get_object("lbl_ram")
         self.lbl_ram_phy = self.builder.get_object("lbl_ram_phy")
+
+        self.box_extra_gpu = self.builder.get_object("box_extra_gpu")
+
+        self.stack_main = self.builder.get_object("stack_main")
 
         self.bayrak = self.builder.get_object("bayrak")
         self.img_bayrak = self.builder.get_object("img_bayrak")
@@ -102,11 +111,42 @@ class MainWindow:
         else:
             ghz = "{:.2f}".format(float(lines[7])/1000000)
             self.lbl_cpu.set_label(lines[6] + " (" + ghz  + "GHz)")
-        self.lbl_gpu.set_label(lines[8])
 
         total_physical_ram, total_ram = self.get_ram_size()
         self.lbl_ram.set_label(self.beauty_size(total_ram))
         self.lbl_ram_phy.set_markup("<small>( {}:  {} )</small>".format(tr("Physical RAM"), self.beauty_size(total_physical_ram)))
+
+        default_gpu, extra_gpu, glx_gpu, all_gpu = self.get_gpu()
+
+        print(default_gpu)
+        print(extra_gpu)
+        print(glx_gpu)
+        print(all_gpu)
+
+        self.lbl_gpu.set_markup("{} <small>( {} )</small>".format(default_gpu[0]["name"], default_gpu[0]["driver"]))
+
+        if extra_gpu:
+            self.lbl_title_gpu.set_markup("<b>GPU 1:</b>")
+            GLib.idle_add(self.box_extra_gpu.set_visible, True)
+            count = 2
+            for extra in extra_gpu:
+                box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 5)
+                gputitle = Gtk.Label.new()
+                gputitle.set_markup("<b>GPU {}:</b>".format(count))
+                count += 1
+                gpulabel = Gtk.Label.new()
+                gpulabel.set_markup("{} <small>( {} )</small>".format(extra["name"], extra["driver"]))
+
+                box.pack_start(gputitle, False, True, 0)
+                box.pack_start(gpulabel, False, True, 0)
+
+                self.box_extra_gpu.pack_start(box, False, True, 0)
+
+            self.box_extra_gpu.show_all()
+        else:
+            GLib.idle_add(self.box_extra_gpu.set_visible, False)
+
+        GLib.idle_add(self.stack_main.set_visible_child_name, "main")
 
     def beauty_size(self, size):
         if type(size) is int:
@@ -154,6 +194,11 @@ class MainWindow:
             print("Exception on /proc/meminfo : {}".format(e))
 
         return total_physical_ram, total_ram
+
+    def get_gpu(self):
+
+        self.GPU = GPU()
+        return self.GPU.get_gpu()
 
     # Signals:
     def on_btn_export_report_clicked(self, btn):
