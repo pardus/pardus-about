@@ -75,25 +75,43 @@
               </packing>
             </child>
             <child>
-              <object class="GtkStack" id="stack_main">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="transition-duration">250</property>
-                <property name="transition-type">crossfade</property>
+                <property name="margin-start">34</property>
+                <property name="margin-end">34</property>
+                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <property name="homogeneous">True</property>
+                    <property name="spacing">5</property>
                     <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <object class="GtkSpinner">
+                      <object class="GtkLabel" id="lbl_distro">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="active">True</property>
+                        <property name="halign">start</property>
+                        <property name="label">Pardus</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                          <attribute name="size" value="24000"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="lbl_distro_version">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label">21.0</property>
+                        <attributes>
+                          <attribute name="size" value="24000"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -101,36 +119,78 @@
                         <property name="position">1</property>
                       </packing>
                     </child>
-                    <child>
-                      <placeholder/>
-                    </child>
                   </object>
                   <packing>
-                    <property name="name">loading</property>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkLabel" id="lbl_distro_codename">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="margin-start">34</property>
-                    <property name="margin-end">34</property>
+                    <property name="opacity">0.7019607843137254</property>
+                    <property name="halign">start</property>
+                    <property name="label">yirmibir</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">5</property>
+                    <property name="margin-bottom">5</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="lbl_user_host">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="opacity">0.80</property>
+                    <property name="halign">start</property>
+                    <property name="margin-bottom">5</property>
+                    <property name="label">pardus@pc</property>
+                    <property name="use-markup">True</property>
+                    <property name="wrap">True</property>
+                    <property name="wrap-mode">char</property>
+                    <property name="max-width-chars">60</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="box_specs">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
                     <property name="orientation">vertical</property>
+                    <property name="spacing">8</property>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="spacing">5</property>
                         <child>
-                          <object class="GtkLabel" id="lbl_distro">
+                          <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
-                            <property name="label">Pardus</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                              <attribute name="size" value="24000"/>
-                            </attributes>
+                            <property name="valign">start</property>
+                            <property name="label">&lt;b&gt;Kernel:&lt;/b&gt;</property>
+                            <property name="use-markup">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -139,14 +199,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="lbl_distro_version">
+                          <object class="GtkLabel" id="lbl_kernel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
-                            <property name="label">21.0</property>
-                            <attributes>
-                              <attribute name="size" value="24000"/>
-                            </attributes>
+                            <property name="valign">start</property>
+                            <property name="label">Unknown</property>
+                            <property name="wrap">True</property>
+                            <property name="wrap-mode">char</property>
+                            <property name="max-width-chars">55</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -162,12 +223,41 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="lbl_distro_codename">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="opacity">0.7019607843137254</property>
-                        <property name="halign">start</property>
-                        <property name="label">yirmibir</property>
+                        <property name="spacing">5</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label">&lt;b&gt;Desktop:&lt;/b&gt;</property>
+                            <property name="use-markup">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="lbl_desktop">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label">Unknown</property>
+                            <property name="wrap">True</property>
+                            <property name="max-width-chars">55</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -176,11 +266,41 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkSeparator">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="margin-top">5</property>
-                        <property name="margin-bottom">5</property>
+                        <property name="spacing">5</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label">&lt;b&gt;CPU:&lt;/b&gt;</property>
+                            <property name="use-markup">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="lbl_cpu">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label">Unknown</property>
+                            <property name="wrap">True</property>
+                            <property name="max-width-chars">55</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -189,17 +309,40 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="lbl_user_host">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="opacity">0.80</property>
-                        <property name="halign">start</property>
-                        <property name="margin-bottom">5</property>
-                        <property name="label">pardus@pc</property>
-                        <property name="use-markup">True</property>
-                        <property name="wrap">True</property>
-                        <property name="wrap-mode">char</property>
-                        <property name="max-width-chars">60</property>
+                        <property name="spacing">5</property>
+                        <child>
+                          <object class="GtkLabel" id="lbl_title_gpu">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label">&lt;b&gt;GPU:&lt;/b&gt;</property>
+                            <property name="use-markup">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="lbl_gpu">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="label">Unknown</property>
+                            <property name="wrap">True</property>
+                            <property name="max-width-chars">55</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -208,48 +351,34 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="box_specs">
+                      <object class="GtkBox" id="box_extra_gpu">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="orientation">vertical</property>
-                        <property name="spacing">8</property>
+                        <property name="spacing">5</property>
                         <child>
-                          <object class="GtkBox">
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="spacing">5</property>
+                        <child>
+                          <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="valign">start</property>
-                                <property name="label">&lt;b&gt;Kernel:&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="lbl_kernel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="valign">start</property>
-                                <property name="label">Unknown</property>
-                                <property name="wrap">True</property>
-                                <property name="wrap-mode">char</property>
-                                <property name="max-width-chars">55</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label">&lt;b&gt;RAM:&lt;/b&gt;</property>
+                            <property name="use-markup">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -261,15 +390,16 @@
                           <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="spacing">5</property>
+                            <property name="spacing">8</property>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="lbl_ram">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="halign">start</property>
                                 <property name="valign">start</property>
-                                <property name="label">&lt;b&gt;Desktop:&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
+                                <property name="label">Unknown</property>
+                                <property name="wrap">True</property>
+                                <property name="max-width-chars">55</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -278,12 +408,10 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="lbl_desktop">
+                              <object class="GtkLabel" id="lbl_ram_phy">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="valign">start</property>
-                                <property name="label">Unknown</property>
+                                <property name="label">( Physcial RAM: .. GB )</property>
                                 <property name="wrap">True</property>
                                 <property name="max-width-chars">55</property>
                               </object>
@@ -300,100 +428,41 @@
                             <property name="position">1</property>
                           </packing>
                         </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="spacing">5</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="valign">start</property>
-                                <property name="label">&lt;b&gt;CPU:&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="lbl_cpu">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="valign">start</property>
-                                <property name="label">Unknown</property>
-                                <property name="wrap">True</property>
-                                <property name="max-width-chars">55</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label">&lt;b&gt;Public IP:&lt;/b&gt;</property>
+                            <property name="use-markup">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">2</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkLabel" id="lbl_ip_public">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <object class="GtkLabel" id="lbl_title_gpu">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="valign">start</property>
-                                <property name="label">&lt;b&gt;GPU:&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="lbl_gpu">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label">Unknown</property>
-                                <property name="wrap">True</property>
-                                <property name="max-width-chars">55</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkBox" id="box_extra_gpu">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <placeholder/>
-                            </child>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="wrap">True</property>
+                            <property name="max-width-chars">55</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -401,103 +470,77 @@
                             <property name="position">4</property>
                           </packing>
                         </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">6</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="spacing">5</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="valign">start</property>
-                                <property name="label">&lt;b&gt;RAM:&lt;/b&gt;</property>
-                                <property name="use-markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="spacing">8</property>
-                                <child>
-                                  <object class="GtkLabel" id="lbl_ram">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">start</property>
-                                    <property name="label">Unknown</property>
-                                    <property name="wrap">True</property>
-                                    <property name="max-width-chars">55</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="lbl_ram_phy">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
-                                    <property name="label" translatable="yes">( Physcial RAM: .. GB )</property>
-                                    <property name="wrap">True</property>
-                                    <property name="max-width-chars">55</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label">&lt;b&gt;Local IP:&lt;/b&gt;</property>
+                            <property name="use-markup">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">5</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="lbl_ip_local">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="wrap">True</property>
+                            <property name="max-width-chars">55</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">4</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">4</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="btn_export_report">
-                        <property name="label" translatable="yes">Export System Report...</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="halign">start</property>
-                        <property name="valign">center</property>
-                        <property name="margin-top">13</property>
-                        <signal name="clicked" handler="on_btn_export_report_clicked" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">9</property>
+                        <property name="position">7</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
-                    <property name="name">main</property>
-                    <property name="position">1</property>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_export_report">
+                    <property name="label" translatable="yes">Export System Report...</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="halign">start</property>
+                    <property name="valign">center</property>
+                    <property name="margin-top">13</property>
+                    <signal name="clicked" handler="on_btn_export_report_clicked" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">9</property>
                   </packing>
                 </child>
               </object>

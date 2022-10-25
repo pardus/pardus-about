@@ -5,7 +5,12 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gio, Gtk, Gdk, GdkPixbuf
 
 import locale
-from locale import gettext as tr
+from locale import gettext as _
+
+import socket
+import fcntl
+import struct
+import threading
 
 from GPU import GPU
 
@@ -25,7 +30,7 @@ class MainWindow:
         self.builder = Gtk.Builder()
 
         # Translate things on glade:
-        self.builder.set_translation_domain(APPNAME)
+        # self.builder.set_translation_domain(APPNAME)
 
         # Import UI file:
         self.builder.add_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade")
@@ -42,7 +47,15 @@ class MainWindow:
 
         self.addTurkishFlag()
 
-        GLib.idle_add(self.readSystemInfo)
+        thread1 = threading.Thread(target=self.add_gpus_to_ui, args=(self.get_gpu(),))
+        thread1.daemon = True
+        thread1.start()
+
+        thread2 = threading.Thread(target=self.add_ip_to_ui, args=(self.get_ips(),))
+        thread2.daemon = True
+        thread2.start()
+
+        self.readSystemInfo()
 
         # Set application:
         self.application = application
@@ -70,10 +83,12 @@ class MainWindow:
         self.lbl_title_gpu = self.builder.get_object("lbl_title_gpu")
         self.lbl_ram = self.builder.get_object("lbl_ram")
         self.lbl_ram_phy = self.builder.get_object("lbl_ram_phy")
+        self.lbl_ip_public = self.builder.get_object("lbl_ip_public")
+        self.lbl_ip_local = self.builder.get_object("lbl_ip_local")
 
         self.box_extra_gpu = self.builder.get_object("box_extra_gpu")
 
-        self.stack_main = self.builder.get_object("stack_main")
+        # self.stack_main = self.builder.get_object("stack_main")
 
         self.bayrak = self.builder.get_object("bayrak")
         self.img_bayrak = self.builder.get_object("img_bayrak")
@@ -116,14 +131,11 @@ class MainWindow:
 
         total_physical_ram, total_ram = self.get_ram_size()
         self.lbl_ram.set_label(self.beauty_size(total_ram))
-        self.lbl_ram_phy.set_markup("<small>( {}:  {} )</small>".format(tr("Physical RAM"), self.beauty_size(total_physical_ram)))
+        self.lbl_ram_phy.set_markup("<small>( {}:  {} )</small>".format(_("Physical RAM"), self.beauty_size(total_physical_ram)))
 
-        default_gpu, extra_gpu, glx_gpu, all_gpu = self.get_gpu()
+    def add_gpus_to_ui(self, gpus):
 
-        print(default_gpu)
-        print(extra_gpu)
-        print(glx_gpu)
-        print(all_gpu)
+        default_gpu, extra_gpu = gpus
 
         self.lbl_gpu.set_markup("{} <small>( {} )</small>".format(default_gpu[0]["name"], default_gpu[0]["driver"]))
 
@@ -147,11 +159,22 @@ class MainWindow:
 
                 self.box_extra_gpu.pack_start(box, False, True, 0)
 
-            self.box_extra_gpu.show_all()
+            # self.box_extra_gpu.show_all()
+            GLib.idle_add(self.box_extra_gpu.show_all)
         else:
             GLib.idle_add(self.box_extra_gpu.set_visible, False)
 
-        GLib.idle_add(self.stack_main.set_visible_child_name, "main")
+
+    def add_ip_to_ui(self, ip):
+
+        local, public = ip
+        self.lbl_ip_public.set_label("{}".format(public.strip()))
+        lan = ""
+        for lip in local:
+            if lip[1] != "lo":
+                lan += "{}: {} | ".format(lip[1], lip[0])
+        lan = lan.rstrip("| ")
+        self.lbl_ip_local.set_label("{}".format(lan))
 
     def beauty_size(self, size):
         if type(size) is int:
@@ -203,7 +226,15 @@ class MainWindow:
     def get_gpu(self):
 
         self.GPU = GPU()
-        return self.GPU.get_gpu()
+
+        default_gpu, extra_gpu, glx_gpu, all_gpu = self.GPU.get_gpu()
+
+        print(default_gpu)
+        print(extra_gpu)
+        print(glx_gpu)
+        print(all_gpu)
+
+        return default_gpu, extra_gpu
 
     def get_cpu(self):
 
@@ -222,6 +253,42 @@ class MainWindow:
         data = file.read()
         file.close()
         return data
+
+    def get_ip(self):
+        try:
+            import requests
+        except Exception:
+            return '0.0.0.0'
+        # Check internet connection from server list
+
+        servers = open(os.path.dirname(os.path.abspath(__file__)) + "/../data/servers.txt", "r").read().split("\n")
+        for server in servers:
+            try:
+                r = requests.get(server)
+                if r.content:
+                    return r.content.decode("utf-8")
+            except:
+                continue
+        return '0.0.0.0'
+
+    # https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-from-a-nic-network-interface-controller-in-python
+    def get_local_ip(self):
+        ret = []
+        for ifname in os.listdir("/sys/class/net"):
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            try:
+                ip = socket.inet_ntoa(fcntl.ioctl(
+                    s.fileno(),
+                    0x8915,  # SIOCGIFADDR
+                    struct.pack('256s', ifname[:15].encode("utf-8"))
+                )[20:24])
+                ret.append((ip, ifname))
+            except Exception as e:
+                print("{}: {}".format(ifname, e))
+        return ret
+
+    def get_ips(self):
+        return self.get_local_ip(), self.get_ip()
 
     # Signals:
     def on_btn_export_report_clicked(self, btn):
