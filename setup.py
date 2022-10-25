@@ -18,6 +18,19 @@ def create_mo_files():
                        ["po/" + po.split(".po")[0] + "/LC_MESSAGES/pardus-about.mo"]))
     return mo
 
+changelog = "debian/changelog"
+version = "0.1.0"
+if os.path.exists(changelog):
+    head = open(changelog).readline()
+    try:
+        version = head.split("(")[1].split(")")[0]
+    except:
+        print("debian/changelog format is wrong for get version")
+        version = ""
+    f = open("src/__version__", "w")
+    f.write(version)
+    f.close()
+
 data_files = [
     ("/usr/share/applications/", ["tr.org.pardus.about.desktop"]),
     ("/usr/share/pardus/pardus-about/", ["pardus-about.svg", "bluebackground.png", "bayrak.gif"]),
@@ -31,13 +44,13 @@ data_files = [
 
 setup(
     name="pardus-about",
-    version="0.2.0",
+    version=version,
     packages=find_packages(),
     scripts=["pardus-about"],
     install_requires=["PyGObject"],
     data_files=data_files,
-    author="Emin Fedar",
-    author_email="emin.fedar@pardus.org.tr",
+    author="Fatih Altun",
+    author_email="fatih.altun@pardus.org.tr",
     description="Get info about your Pardus system.",
     license="GPLv3",
     keywords="about",
