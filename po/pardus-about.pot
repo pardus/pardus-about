@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 10:39+0300\n"
+"POT-Creation-Date: 2022-10-25 14:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,25 +18,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ui/MainWindow.glade:449
-msgid "( Physcial RAM: .. GB )"
+msgid "<b>Public IP:</b>"
 msgstr ""
 
-#: ui/MainWindow.glade:480
+#: ui/MainWindow.glade:491
+msgid "<b>Local IP:</b>"
+msgstr ""
+
+#: ui/MainWindow.glade:531
 msgid "Export System Report..."
 msgstr ""
 
-#: ui/MainWindow.glade:540
+#: ui/MainWindow.glade:585
 msgid "About this computer"
 msgstr ""
 
-#: ui/MainWindow.glade:565 ui/MainWindow.glade:587
+#: ui/MainWindow.glade:610 ui/MainWindow.glade:632
 msgid "Gathering system logs..."
 msgstr ""
 
-#: ui/MainWindow.glade:621
+#: ui/MainWindow.glade:666
 msgid "Your system report has been exported to the desktop."
 msgstr ""
 
-#: ui/MainWindow.glade:622
+#: ui/MainWindow.glade:667
 msgid "~/Desktop/pardus_system_report.tar.gz"
+msgstr ""
+
+#: src/MainWindow.py:134
+msgid "Physical RAM"
 msgstr ""

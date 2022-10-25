@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Emin fedar <emin.fedar@pardus.org.tr>, 2020.
+# Fatih Altun <fatih.altun@pardus.org.tr>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 10:39+0300\n"
-"PO-Revision-Date: 2020-12-17 00:45+0300\n"
-"Last-Translator: Emin fedar <emin.fedar@pardus.org.tr>\n"
-"Language-Team: Turkish <gelistirici@pardus.org.tr>\n"
+"POT-Creation-Date: 2022-10-25 14:11+0300\n"
+"PO-Revision-Date: 2022-10-25 14:12+0300\n"
+"Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
+"Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,25 +21,33 @@ msgstr ""
 "X-Generator: Gtranslator 3.38.0\n"
 
 #: ui/MainWindow.glade:449
-msgid "( Physcial RAM: .. GB )"
-msgstr ""
+msgid "<b>Public IP:</b>"
+msgstr "<b>Dış IP:</b>"
 
-#: ui/MainWindow.glade:480
+#: ui/MainWindow.glade:491
+msgid "<b>Local IP:</b>"
+msgstr "<b>İç IP:</b>"
+
+#: ui/MainWindow.glade:531
 msgid "Export System Report..."
 msgstr "Sistem Raporu Çıkart..."
 
-#: ui/MainWindow.glade:540
+#: ui/MainWindow.glade:585
 msgid "About this computer"
 msgstr "Bu bilgisayar hakkında"
 
-#: ui/MainWindow.glade:565 ui/MainWindow.glade:587
+#: ui/MainWindow.glade:610 ui/MainWindow.glade:632
 msgid "Gathering system logs..."
 msgstr "Sistem logları toplanıyor..."
 
-#: ui/MainWindow.glade:621
+#: ui/MainWindow.glade:666
 msgid "Your system report has been exported to the desktop."
 msgstr "Sistem raporunuz masaüstüne eklenmiştir."
 
-#: ui/MainWindow.glade:622
+#: ui/MainWindow.glade:667
 msgid "~/Desktop/pardus_system_report.tar.gz"
 msgstr "~/Masaüstü/pardus_sistem_raporu.tar.gz"
+
+#: src/MainWindow.py:134
+msgid "Physical RAM"
+msgstr "Fiziksel RAM"
