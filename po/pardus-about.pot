@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 14:11+0300\n"
+"POT-Creation-Date: 2022-10-25 16:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,54 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ui/MainWindow.glade:449
+#: ui/MainWindow.glade:7
+msgid "About Pardus About Application"
+msgstr ""
+
+#: ui/MainWindow.glade:13
+msgid "Get info about your Pardus system."
+msgstr ""
+
+#: ui/MainWindow.glade:15
+msgid "Website"
+msgstr ""
+
+#: ui/MainWindow.glade:85
+msgid "Export System Report"
+msgstr ""
+
+#: ui/MainWindow.glade:141
+msgid "About App"
+msgstr ""
+
+#: ui/MainWindow.glade:607
 msgid "<b>Public IP:</b>"
 msgstr ""
 
-#: ui/MainWindow.glade:491
+#: ui/MainWindow.glade:649
 msgid "<b>Local IP:</b>"
 msgstr ""
 
-#: ui/MainWindow.glade:531
-msgid "Export System Report..."
-msgstr ""
-
-#: ui/MainWindow.glade:585
+#: ui/MainWindow.glade:752
 msgid "About this computer"
 msgstr ""
 
-#: ui/MainWindow.glade:610 ui/MainWindow.glade:632
+#: ui/MainWindow.glade:790 ui/MainWindow.glade:812
 msgid "Gathering system logs..."
 msgstr ""
 
-#: ui/MainWindow.glade:666
+#: ui/MainWindow.glade:846
 msgid "Your system report has been exported to the desktop."
 msgstr ""
 
-#: ui/MainWindow.glade:667
+#: ui/MainWindow.glade:847
 msgid "~/Desktop/pardus_system_report.tar.gz"
 msgstr ""
 
-#: src/MainWindow.py:134
+#: src/MainWindow.py:94
+msgid "Pardus About"
+msgstr ""
+
+#: src/MainWindow.py:145
 msgid "Physical RAM"
 msgstr ""

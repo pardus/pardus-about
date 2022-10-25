@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 14:11+0300\n"
-"PO-Revision-Date: 2022-10-25 14:12+0300\n"
+"POT-Creation-Date: 2022-10-25 16:49+0300\n"
+"PO-Revision-Date: 2022-10-25 16:50+0300\n"
 "Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
@@ -20,34 +20,54 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Gtranslator 3.38.0\n"
 
-#: ui/MainWindow.glade:449
+#: ui/MainWindow.glade:7
+msgid "About Pardus About Application"
+msgstr "Pardus Hakkında Uygulaması Hakkında"
+
+#: ui/MainWindow.glade:13
+msgid "Get info about your Pardus system."
+msgstr "Pardus sisteminiz hakkında bilgi alın."
+
+#: ui/MainWindow.glade:15
+msgid "Website"
+msgstr "Website"
+
+#: ui/MainWindow.glade:85
+msgid "Export System Report"
+msgstr "Sistem Raporu Çıkart"
+
+#: ui/MainWindow.glade:141
+msgid "About App"
+msgstr "Uygulama Hakkında"
+
+#: ui/MainWindow.glade:607
 msgid "<b>Public IP:</b>"
 msgstr "<b>Dış IP:</b>"
 
-#: ui/MainWindow.glade:491
+#: ui/MainWindow.glade:649
 msgid "<b>Local IP:</b>"
 msgstr "<b>İç IP:</b>"
 
-#: ui/MainWindow.glade:531
-msgid "Export System Report..."
-msgstr "Sistem Raporu Çıkart..."
-
-#: ui/MainWindow.glade:585
+#: ui/MainWindow.glade:752
 msgid "About this computer"
 msgstr "Bu bilgisayar hakkında"
 
-#: ui/MainWindow.glade:610 ui/MainWindow.glade:632
+#: ui/MainWindow.glade:790 ui/MainWindow.glade:812
 msgid "Gathering system logs..."
 msgstr "Sistem logları toplanıyor..."
 
-#: ui/MainWindow.glade:666
+#: ui/MainWindow.glade:846
 msgid "Your system report has been exported to the desktop."
 msgstr "Sistem raporunuz masaüstüne eklenmiştir."
 
-#: ui/MainWindow.glade:667
+#: ui/MainWindow.glade:847
 msgid "~/Desktop/pardus_system_report.tar.gz"
 msgstr "~/Masaüstü/pardus_sistem_raporu.tar.gz"
 
-#: src/MainWindow.py:134
+#: src/MainWindow.py:94
+msgid "Pardus About"
+msgstr "Pardus Hakkında"
+
+#: src/MainWindow.py:145
 msgid "Physical RAM"
 msgstr "Fiziksel RAM"
