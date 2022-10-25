@@ -96,6 +96,8 @@ class MainWindow:
         self.bayrak = self.builder.get_object("bayrak")
         self.img_bayrak = self.builder.get_object("img_bayrak")
 
+        self.lbl_distro_codename.grab_focus()
+
         # Set version
         # If not getted from __version__ file then accept version in MainWindow.glade file
         try:
@@ -157,12 +159,14 @@ class MainWindow:
             for extra in extra_gpu:
                 box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 5)
                 gputitle = Gtk.Label.new()
+                gputitle.set_selectable(True)
                 gputitle.set_markup("<b>GPU {}:</b>".format(count))
                 count += 1
                 gpulabel = Gtk.Label.new()
                 gpulabel.set_line_wrap(True)
                 gpulabel.set_line_wrap_mode(Gtk.WrapMode.WORD)
                 gpulabel.set_max_width_chars(55)
+                gpulabel.set_selectable(True)
                 gpulabel.set_markup("{} ( {} )".format(extra["name"], extra["driver"]))
 
                 box.pack_start(gputitle, False, True, 0)
