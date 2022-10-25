@@ -131,13 +131,13 @@ class MainWindow:
 
         total_physical_ram, total_ram = self.get_ram_size()
         self.lbl_ram.set_label(self.beauty_size(total_ram))
-        self.lbl_ram_phy.set_markup("<small>( {}:  {} )</small>".format(_("Physical RAM"), self.beauty_size(total_physical_ram)))
+        self.lbl_ram_phy.set_markup("( {}:  {} )".format(_("Physical RAM"), self.beauty_size(total_physical_ram)))
 
     def add_gpus_to_ui(self, gpus):
 
         default_gpu, extra_gpu = gpus
 
-        self.lbl_gpu.set_markup("{} <small>( {} )</small>".format(default_gpu[0]["name"], default_gpu[0]["driver"]))
+        self.lbl_gpu.set_markup("{} ( {} )".format(default_gpu[0]["name"], default_gpu[0]["driver"]))
 
         if extra_gpu:
             self.lbl_title_gpu.set_markup("<b>GPU 1:</b>")
@@ -152,7 +152,7 @@ class MainWindow:
                 gpulabel.set_line_wrap(True)
                 gpulabel.set_line_wrap_mode(Gtk.WrapMode.WORD)
                 gpulabel.set_max_width_chars(55)
-                gpulabel.set_markup("{} <small>( {} )</small>".format(extra["name"], extra["driver"]))
+                gpulabel.set_markup("{} ( {} )".format(extra["name"], extra["driver"]))
 
                 box.pack_start(gputitle, False, True, 0)
                 box.pack_start(gpulabel, False, True, 0)
@@ -172,8 +172,8 @@ class MainWindow:
         lan = ""
         for lip in local:
             if lip[1] != "lo":
-                lan += "{}<small> ({}) </small> | ".format(lip[0], lip[1])
-        lan = lan.rstrip("| ")
+                lan += "{} ({})\n".format(lip[0], lip[1])
+        lan = lan.rstrip("\n")
         self.lbl_ip_local.set_markup("{}".format(lan))
 
     def beauty_size(self, size):
