@@ -137,6 +137,9 @@ class MainWindow:
                 gputitle.set_markup("<b>GPU {}:</b>".format(count))
                 count += 1
                 gpulabel = Gtk.Label.new()
+                gpulabel.set_line_wrap(True)
+                gpulabel.set_line_wrap_mode(Gtk.WrapMode.WORD)
+                gpulabel.set_max_width_chars(55)
                 gpulabel.set_markup("{} <small>( {} )</small>".format(extra["name"], extra["driver"]))
 
                 box.pack_start(gputitle, False, True, 0)
