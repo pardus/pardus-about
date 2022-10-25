@@ -187,7 +187,7 @@ class GPU:
             default_gpu_vendor, default_gpu_model = self.get_gpu_name(allgpus[0]["vendor"], allgpus[0]["device"])
             default_gpu_name = "{} {}".format(default_gpu_vendor, default_gpu_model)
             default_gpu_driver = allgpus[0]["driver"]
-            gpus = [gpu for gpu in allgpus if gpu["vendor"] != gpus[0]["vendor"]]
+            gpus = [gpu for gpu in allgpus if gpu["vendor"] != allgpus[0]["vendor"]]
 
         elif len(allgpus) > 1:
             for allgpu in allgpus:
@@ -201,7 +201,7 @@ class GPU:
                 default_gpu_vendor, default_gpu_model = self.get_gpu_name(gpus[0]["vendor"], gpus[0]["device"])
                 default_gpu_name = "{} {}".format(default_gpu_vendor, default_gpu_model)
                 default_gpu_driver = gpus[0]["driver"]
-                gpus = [gpu for gpu in allgpus if gpu["vendor"] != gpus[0]["vendor"]]
+                gpus = [gpu for gpu in allgpus if gpu["vendor"] != allgpus[0]["vendor"]]
 
         else:
             print("!!!!!!!!!! GPU NOT FOUND !!!!!!!!!!")
@@ -210,7 +210,7 @@ class GPU:
             default_gpu_name = glx_string
             if len(allgpus) == 1:
                 default_gpu_driver = allgpus[0]["driver"]
-                gpus = [gpu for gpu in allgpus if gpu["vendor"] != gpus[0]["vendor"]]
+                gpus = [gpu for gpu in allgpus if gpu["vendor"] != allgpus[0]["vendor"]]
 
         self.default_gpu.append({"name": "{}".format(default_gpu_name),
                                  "driver": "{}".format(default_gpu_driver)})
