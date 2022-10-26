@@ -1,4 +1,5 @@
 import os, subprocess, time
+import platform
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -11,6 +12,7 @@ import socket
 import fcntl
 import struct
 import threading
+import json
 
 from GPU import GPU
 
@@ -255,10 +257,52 @@ class MainWindow:
 
         file = self.readfile("/proc/cpuinfo")
         name = ""
+        core = 0
         for line in file.splitlines():
             if line.startswith("model name"):
                 name = line.split(":")[1].strip()
-                break
+            if line.startswith("processor"):
+                core += 1
+        if core != 0:
+            core = "x{}".format(core)
+        if name != "":
+            name = "{} {}".format(name, core)
+        else:
+            lscpu_command = json.loads(subprocess.check_output(["lscpu", "-J"]).decode("utf-8"))
+            model = ""
+            vendor = ""
+            core = ""
+            arch = ""
+            mhz = ""
+            for fields in lscpu_command["lscpu"]:
+                if fields["field"] == "Model name:":
+                    model = fields["data"]
+                if fields["field"] == "Vendor ID:":
+                    vendor = fields["data"]
+                if fields["field"] == "CPU(s):":
+                    core = fields["data"]
+                if fields["field"] == "Architecture:":
+                    arch = fields["data"]
+                if fields["field"] == "CPU max MHz:":
+                    mhz = fields["data"]
+            try:
+                if "," in mhz:
+                    if "." in mhz:
+                        mhz = mhz.replace(",","")
+                    else:
+                        mhz = mhz.replace(",",".")
+                mhz = "@ {:.2f} GHz".format(float(mhz) / 1000) if mhz != "" else ""
+            except Exception as e:
+                print("{}".format(e))
+                mhz = ""
+
+            core = "x{}".format(core) if core != "" else ""
+            arch = "({})".format(arch) if arch != "" else ""
+
+            if "ghz" not in model.lower() and mhz != "":
+                name = "{} {} {} {} {}".format(vendor, model, mhz, core, arch)
+            else:
+                name = "{} {} {} {}".format(vendor, model, core, arch)
         return name
 
     def readfile(self, filename):
