@@ -792,7 +792,7 @@ Fatih Altun</property>
   <object class="GtkPopover" id="bayrak">
     <property name="can-focus">False</property>
     <property name="relative-to">btn_pardus_logo</property>
-    <property name="position">bottom</property>
+    <property name="position">right</property>
     <child>
       <object class="GtkImage" id="img_bayrak">
         <property name="visible">True</property>
