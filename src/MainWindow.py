@@ -146,7 +146,10 @@ class MainWindow:
 
         total_physical_ram, total_ram = self.get_ram_size()
         self.lbl_ram.set_label(self.beauty_size(total_ram))
-        self.lbl_ram_phy.set_markup("( {}:  {} )".format(_("Physical RAM"), self.beauty_size(total_physical_ram)))
+        if total_physical_ram != 0:
+            self.lbl_ram_phy.set_markup("( {}:  {} )".format(_("Physical RAM"), self.beauty_size(total_physical_ram)))
+        else:
+            self.lbl_ram_phy.set_label("")
 
     def add_gpus_to_ui(self, gpus):
 
