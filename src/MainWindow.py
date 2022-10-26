@@ -246,10 +246,10 @@ class MainWindow:
 
         default_gpu, extra_gpu, glx_gpu, all_gpu = self.GPU.get_gpu()
 
-        print(default_gpu)
-        print(extra_gpu)
-        print(glx_gpu)
-        print(all_gpu)
+        print("default: {}".format(default_gpu))
+        print("extra: {}".format(extra_gpu))
+        print("glx_gpu: {}".format(glx_gpu))
+        print("all_gpu: {}".format(all_gpu))
 
         return default_gpu, extra_gpu
 
