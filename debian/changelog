@@ -1,3 +1,52 @@
+pardus-about (0.5.0) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update pt.po
+  * Update pt.po
+
+  [ Fatih Altun ]
+  * Update .gitignore
+  * Add async load
+  * Fix ram size and use python for get it
+  * Update some project infos
+
+  [ Hugo Carvalho ]
+  * Update tr.org.pardus.about.desktop
+
+  [ Fatih Altun ]
+  * Add total physical ram to ui and Fix some ui space values
+  * Add pci.ids version 0.0~2022.09.09-1 from sid
+  * Add GPU class for get gpu names better
+  * Update get cpu method using python and Fix Hz
+  * Update and automate translation structure
+  * Update word wrap of labels
+  * Add servers txt for get public ip
+  * Add threading and get ip funcs
+  * Update translations
+  * Fix typo
+  * Add missing depends
+  * Update maintainer
+  * Add missing file
+  * Fix virtual machine gpu control
+  * Update local ip format
+  * Fix multiple gpu shown error
+  * Fix get gpus list
+  * Update ui to centered design
+  * Add popover menu to headerbar
+  * Update translations
+  * Update background width to 600 and optimize
+  * Update labels as selectable
+  * Update x location of pardus button
+  * Update position of bayrak popover to right
+  * Add lscpu command for use undetected cpus
+  * Add get gpu from sys class path if pci not found
+  * Fix physical ram label if value 0
+  * Update default width
+  * Add dynamic version to setup.py
+  * Fix desktop path name
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Wed, 26 Oct 2022 16:57:55 +0300
+
 pardus-about (0.4.0) unstable; urgency=medium
 
   [ Hugo Carvalho ]
