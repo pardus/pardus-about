@@ -15,4 +15,5 @@ Type=Application
 Categories=Settings;
 StartupNotify=true
 Keywords=about;info;system;
+Keywords[pt]=acerca;sobre;informação;sistema;
 Keywords[tr]=hakkında;bilgi;sistem;
