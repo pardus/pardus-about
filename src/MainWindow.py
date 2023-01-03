@@ -88,6 +88,8 @@ class MainWindow:
         self.lbl_ip_public = self.builder.get_object("lbl_ip_public")
         self.lbl_ip_local = self.builder.get_object("lbl_ip_local")
 
+        self.img_publicip = self.builder.get_object("img_publicip")
+
         self.box_extra_gpu = self.builder.get_object("box_extra_gpu")
 
         self.popover_menu = self.builder.get_object("popover_menu")
@@ -99,6 +101,8 @@ class MainWindow:
         self.img_bayrak = self.builder.get_object("img_bayrak")
 
         self.lbl_distro_codename.grab_focus()
+
+        self.public_ip = "0.0.0.0"
 
         # Set version
         # If not getted from __version__ file then accept version in MainWindow.glade file
@@ -188,7 +192,7 @@ class MainWindow:
     def add_ip_to_ui(self, ip):
 
         local, public = ip
-        self.lbl_ip_public.set_label("{}".format(public.strip()))
+        self.lbl_ip_public.set_text("{}".format(len(public.strip()) * "*"))
         lan = ""
         for lip in local:
             if lip[1] != "lo":
@@ -328,6 +332,7 @@ class MainWindow:
             try:
                 r = requests.get(server)
                 if r.content:
+                    self.public_ip = "{}".format(r.content.decode("utf-8").strip())
                     return r.content.decode("utf-8")
             except:
                 continue
@@ -403,4 +408,11 @@ class MainWindow:
             self.click_count = 0
 
             self.bayrak.popup()
-    
+
+    def on_event_publicip_button_press_event(self, widget, event):
+        if self.img_publicip.get_icon_name().icon_name == "view-conceal-symbolic":
+            self.img_publicip.set_from_icon_name("view-reveal-symbolic", Gtk.IconSize.BUTTON)
+            self.lbl_ip_public.set_text("{}".format(len(self.public_ip) * "*"))
+        else:
+            self.img_publicip.set_from_icon_name("view-conceal-symbolic", Gtk.IconSize.BUTTON)
+            self.lbl_ip_public.set_text(self.public_ip)
