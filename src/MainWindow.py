@@ -88,6 +88,8 @@ class MainWindow:
         self.lbl_ip_public = self.builder.get_object("lbl_ip_public")
         self.lbl_ip_local = self.builder.get_object("lbl_ip_local")
 
+        self.img_llvm = self.builder.get_object("img_llvm")
+
         self.img_publicip = self.builder.get_object("img_publicip")
 
         self.box_extra_gpu = self.builder.get_object("box_extra_gpu")
@@ -157,9 +159,20 @@ class MainWindow:
 
     def add_gpus_to_ui(self, gpus):
 
-        default_gpu, extra_gpu = gpus
+        default_gpu, extra_gpu, glx_gpu = gpus
+
+        try:
+            if "llvm" in glx_gpu[0]["name"].lower():
+                llvm = True
+            else:
+                llvm = False
+        except Exception as e:
+            print("llvm detect err: {}".format(e))
+            llvm = False
 
         self.lbl_gpu.set_markup("{} ( {} )".format(default_gpu[0]["name"], default_gpu[0]["driver"]))
+
+        GLib.idle_add(self.img_llvm.set_visible, llvm)
 
         if extra_gpu:
             self.lbl_title_gpu.set_markup("<b>GPU 1:</b>")
@@ -258,7 +271,7 @@ class MainWindow:
         print("glx_gpu: {}".format(glx_gpu))
         print("all_gpu: {}".format(all_gpu))
 
-        return default_gpu, extra_gpu
+        return default_gpu, extra_gpu, glx_gpu
 
     def get_cpu(self):
 
