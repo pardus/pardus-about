@@ -40,6 +40,17 @@ echo $distro_codename;
 echo "$USER@$HOSTNAME";
 echo $kernel;
 echo "$DE $DE_VER";
+nicinfo=$(lshw -C network 2>/dev/null)
+while read -r line; do
+  if echo "$line" | grep -q "product:"; then
+    product=$(echo "$line" | awk -F: '{print $2}' | xargs)
+  elif echo "$line" | grep -q "vendor:"; then
+    vendor=$(echo "$line" | awk -F: '{print $2}' | xargs)
+  elif echo "$line" | grep -q "logical name:"; then
+    logical_name=$(echo "$line" | awk -F: '{print $2}' | xargs)
+    echo "$vendor $product ($logical_name)"
+  fi
+done <<< "$nicinfo"
 #echo "$cpu_model x$cpu_count";
 #echo $cpu_max_hz;
 #echo $gpu;

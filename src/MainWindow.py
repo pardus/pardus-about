@@ -85,6 +85,8 @@ class MainWindow:
         self.lbl_title_gpu = self.builder.get_object("lbl_title_gpu")
         self.lbl_ram = self.builder.get_object("lbl_ram")
         self.lbl_ram_phy = self.builder.get_object("lbl_ram_phy")
+        self.lbl_nic_0 = self.builder.get_object("lbl_nic_0")
+        self.lbl_nic_1 = self.builder.get_object("lbl_nic_1")
         self.lbl_ip_public = self.builder.get_object("lbl_ip_public")
         self.lbl_ip_local = self.builder.get_object("lbl_ip_local")
 
@@ -142,6 +144,14 @@ class MainWindow:
         self.lbl_user_host.set_label(lines[3])
         self.lbl_kernel.set_label(lines[4])
         self.lbl_desktop.set_label(lines[5])
+        try:
+            self.lbl_nic_0.set_label(lines[6])
+        except:
+            pass
+        try:
+            self.lbl_nic_1.set_label(lines[7])
+        except:
+            pass
         # if lines[7] == "0":
         #     self.lbl_cpu.set_label(lines[6])
         # else:
