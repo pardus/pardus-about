@@ -131,13 +131,20 @@ class GPU:
         glx_driver = ""
         pci_bus = True
 
-        lspci_command = subprocess.check_output(["lspci", "-n"]).decode("utf-8").strip().split("\n")
+        try:
+            lspci_command = subprocess.check_output(["lspci", "-n"]).decode("utf-8").strip()
+        except Exception as e:
+            print("{}".format(e))
+            lspci_command = ""
 
         allgpus = []
         gpus_sys_all = []
         gpus_sys = []
-
         pci_numids = []
+
+        if len(lspci_command) > 0:
+            lspci_command = lspci_command.split("\n")
+
         for pci in lspci_command:
             pci_slot = pci.split(" ")[0]
             pci_class = pci.split(" ")[1].strip(":")
