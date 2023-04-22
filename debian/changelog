@@ -1,3 +1,17 @@
+pardus-about (0.5.2) unstable; urgency=medium
+
+  * Add llvmpipe info icon to GPU
+  * Fix lspci subprocess
+  * Fix depends typo
+  * Update bin script and main
+  * Add screenshots
+  * Update README
+  * Add pt to update-translations.sh
+  * Update pot file
+  * Update Turkish translations
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Sat, 22 Apr 2023 14:35:16 +0300
+
 pardus-about (0.5.1) unstable; urgency=medium
 
   [ Hugo Carvalho ]
