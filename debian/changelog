@@ -1,3 +1,9 @@
+pardus-about (0.5.3) unstable; urgency=medium
+
+  * Fix llvmpipe detect typo
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 28 Apr 2023 12:03:43 +0300
+
 pardus-about (0.5.2) unstable; urgency=medium
 
   * Add llvmpipe info icon to GPU
