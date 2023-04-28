@@ -162,12 +162,12 @@ class MainWindow:
         default_gpu, extra_gpu, glx_gpu = gpus
 
         try:
-            if "llvm" in glx_gpu[0]["name"].lower():
+            if "llvmpipe" in glx_gpu[0]["name"].lower():
                 llvm = True
             else:
                 llvm = False
         except Exception as e:
-            print("llvm detect err: {}".format(e))
+            print("llvmpipe detect err: {}".format(e))
             llvm = False
 
         self.lbl_gpu.set_markup("{} ( {} )".format(default_gpu[0]["name"], default_gpu[0]["driver"]))
