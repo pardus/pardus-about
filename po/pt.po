@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pardus-about\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-25 16:49+0300\n"
-"PO-Revision-Date: 2022-11-20 19:06+0000\n"
+"POT-Creation-Date: 2023-04-22 14:33+0300\n"
+"PO-Revision-Date: 2023-05-05 12:39+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Português <hugokarvalho@gotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: ui/MainWindow.glade:7
 msgid "About Pardus About Application"
@@ -39,34 +39,38 @@ msgstr "Exportar relatório do sistema"
 msgid "About App"
 msgstr "Sobre a Aplicação"
 
-#: ui/MainWindow.glade:607
+#: ui/MainWindow.glade:520
+msgid "GPU running as llvmpipe"
+msgstr "GPU a executar como llvmpipe"
+
+#: ui/MainWindow.glade:635
 msgid "<b>Public IP:</b>"
 msgstr "<b>IP Público:</b>"
 
-#: ui/MainWindow.glade:649
+#: ui/MainWindow.glade:698
 msgid "<b>Local IP:</b>"
 msgstr "<b>IP Local:</b>"
 
-#: ui/MainWindow.glade:752
+#: ui/MainWindow.glade:803
 msgid "About this computer"
 msgstr "Sobre este computador"
 
-#: ui/MainWindow.glade:790 ui/MainWindow.glade:812
+#: ui/MainWindow.glade:841 ui/MainWindow.glade:863
 msgid "Gathering system logs..."
 msgstr "A recolher registos do sistema..."
 
-#: ui/MainWindow.glade:846
+#: ui/MainWindow.glade:897
 msgid "Your system report has been exported to the desktop."
 msgstr "O relatório do sistema foi exportado para a área de trabalho."
 
-#: ui/MainWindow.glade:847
+#: ui/MainWindow.glade:898
 msgid "~/Desktop/pardus_system_report.tar.gz"
 msgstr "~/Transferências/relatório_do_sistema_pardus.tar.gz"
 
-#: src/MainWindow.py:94
+#: src/MainWindow.py:100
 msgid "Pardus About"
 msgstr "Sobre o Pardus"
 
-#: src/MainWindow.py:145
+#: src/MainWindow.py:156
 msgid "Physical RAM"
 msgstr "RAM física"
