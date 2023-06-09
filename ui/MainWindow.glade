@@ -201,7 +201,7 @@ Fatih Altun</property>
                     <property name="valign">center</property>
                     <signal name="button-press-event" handler="on_btn_pardus_logo_button_press_event" swapped="no"/>
                     <child>
-                      <object class="GtkImage">
+                      <object class="GtkImage" id="img_distro">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">15</property>
@@ -209,7 +209,7 @@ Fatih Altun</property>
                         <property name="margin-top">15</property>
                         <property name="margin-bottom">15</property>
                         <property name="pixel-size">120</property>
-                        <property name="icon-name">emblem-pardus-symbolic</property>
+                        <property name="icon-name">pardus-about-symbolic</property>
                       </object>
                     </child>
                     <style>

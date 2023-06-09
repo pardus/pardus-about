@@ -103,6 +103,7 @@ class MainWindow:
         self.img_bayrak = self.builder.get_object("img_bayrak")
 
         self.img_background = self.builder.get_object("img_background")
+        self.img_distro = self.builder.get_object("img_distro")
 
         self.lbl_distro_codename.grab_focus()
 
@@ -136,6 +137,26 @@ class MainWindow:
         lines = output.splitlines()
         
         self.lbl_distro.set_label(lines[0])
+
+        if lines[0].lower() != "pardus":
+            try:
+                pixbuf = Gtk.IconTheme.get_default().load_icon("emblem-{}".format(lines[0].lower()), 120,
+                                                               Gtk.IconLookupFlags(16))
+            except Exception as e:
+                print("{}".format(e))
+                try:
+                    pixbuf = Gtk.IconTheme.get_default().load_icon("distributor-logo", 120, Gtk.IconLookupFlags(16))
+                except Exception as e:
+                    print("{}".format(e))
+                    try:
+                        pixbuf = Gtk.IconTheme.get_default().load_icon("image-missing", 120, Gtk.IconLookupFlags(16))
+                    except Exception as e:
+                        print("{}".format(e))
+                        pixbuf = None
+
+            if pixbuf is not None:
+                self.img_distro.set_from_pixbuf(pixbuf)
+
         self.lbl_distro_version.set_label(lines[1])
         if lines[2] == "yirmibir":
             lines[2] =  "Dolunay"

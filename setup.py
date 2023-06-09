@@ -41,7 +41,7 @@ data_files = [
     ("/usr/share/pardus/pardus-about/data", ["data/pci.ids", "data/servers.txt"]),
     ("/usr/share/polkit-1/actions", ["tr.org.pardus.pkexec.pardus-about.policy"]),
     ("/usr/bin/", ["pardus-about"]),
-    ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-about.svg"])
+    ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-about.svg", "pardus-about-symbolic.svg"])
 ] + create_mo_files()
 
 setup(
