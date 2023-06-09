@@ -102,6 +102,8 @@ class MainWindow:
         self.bayrak = self.builder.get_object("bayrak")
         self.img_bayrak = self.builder.get_object("img_bayrak")
 
+        self.img_background = self.builder.get_object("img_background")
+
         self.lbl_distro_codename.grab_focus()
 
         self.public_ip = "0.0.0.0"
@@ -137,6 +139,9 @@ class MainWindow:
         self.lbl_distro_version.set_label(lines[1])
         if lines[2] == "yirmibir":
             lines[2] =  "Dolunay"
+            self.img_background.set_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../bluebackground-21.png")
+        elif lines[2] == "yirmiuc":
+            lines[2] = "Ay Yıldız"
         self.lbl_distro_codename.set_label(lines[2])
 
         self.lbl_user_host.set_label(lines[3])
