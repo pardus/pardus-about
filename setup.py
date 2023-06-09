@@ -32,16 +32,34 @@ if os.path.exists(changelog):
     f.close()
 
 data_files = [
-    ("/usr/share/applications/", ["tr.org.pardus.about.desktop"]),
-    ("/usr/share/pardus/pardus-about/", ["pardus-about.svg", "bluebackground.png", "bayrak.gif"]),
+    ("/usr/share/applications/",
+     ["tr.org.pardus.about.desktop"]),
+    ("/usr/share/pardus/pardus-about/",
+     ["pardus-about.svg",
+      "bluebackground-21.png",
+      "bluebackground-23.png",
+      "bayrak.gif"]),
     ("/usr/share/pardus/pardus-about/src",
-     ["src/Main.py", "src/MainWindow.py", "src/GPU.py", "src/dump_system_info.sh", "src/get_system_info.sh",
-      "src/copy_to_desktop.sh", "src/dump_logs.sh", "src/__version__"]),
-    ("/usr/share/pardus/pardus-about/ui", ["ui/MainWindow.glade"]),
-    ("/usr/share/pardus/pardus-about/data", ["data/pci.ids", "data/servers.txt"]),
-    ("/usr/share/polkit-1/actions", ["tr.org.pardus.pkexec.pardus-about.policy"]),
-    ("/usr/bin/", ["pardus-about"]),
-    ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-about.svg", "pardus-about-symbolic.svg"])
+     ["src/Main.py",
+      "src/MainWindow.py",
+      "src/GPU.py",
+      "src/dump_system_info.sh",
+      "src/get_system_info.sh",
+      "src/copy_to_desktop.sh",
+      "src/dump_logs.sh",
+      "src/__version__"]),
+    ("/usr/share/pardus/pardus-about/ui",
+     ["ui/MainWindow.glade"]),
+    ("/usr/share/pardus/pardus-about/data",
+     ["data/pci.ids",
+      "data/servers.txt"]),
+    ("/usr/share/polkit-1/actions",
+     ["tr.org.pardus.pkexec.pardus-about.policy"]),
+    ("/usr/bin/",
+     ["pardus-about"]),
+    ("/usr/share/icons/hicolor/scalable/apps/",
+     ["pardus-about.svg",
+      "pardus-about-symbolic.svg"])
 ] + create_mo_files()
 
 setup(
