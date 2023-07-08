@@ -4,21 +4,22 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Emin fedar <emin.fedar@pardus.org.tr>, 2020.
 # Fatih Altun <fatih.altun@pardus.org.tr>, 2022-2023.
+# Ercan Ersoy <ercanersoy@ercanersoy.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-22 14:33+0300\n"
-"PO-Revision-Date: 2023-04-22 14:34+0300\n"
-"Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
+"POT-Creation-Date: 2023-06-30 04:25+0300\n"
+"PO-Revision-Date: 2023-06-30 04:32+0300\n"
+"Last-Translator: Ercan Ersoy <ercanersoy@ercanersoy.net>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ui/MainWindow.glade:7
 msgid "About Pardus About Application"
@@ -30,7 +31,7 @@ msgstr "Pardus sisteminiz hakkında bilgi alın."
 
 #: ui/MainWindow.glade:15
 msgid "Website"
-msgstr "Website"
+msgstr "Web Sitesi"
 
 #: ui/MainWindow.glade:85
 msgid "Export System Report"
@@ -40,9 +41,17 @@ msgstr "Sistem Raporu Çıkart"
 msgid "About App"
 msgstr "Uygulama Hakkında"
 
+#: ui/MainWindow.glade:354
+msgid "<b>Kernel:</b>"
+msgstr "<b>Çekirdek:</b>"
+
+#: ui/MainWindow.glade:400
+msgid "<b>Desktop:</b>"
+msgstr "<b>Masaüstü:</b>"
+
 #: ui/MainWindow.glade:520
 msgid "GPU running as llvmpipe"
-msgstr "GPU llvmpipe olarak çalışıyor"
+msgstr "GPU, llvmpipe olarak çalışıyor"
 
 #: ui/MainWindow.glade:635
 msgid "<b>Public IP:</b>"
@@ -72,6 +81,6 @@ msgstr "~/Masaüstü/pardus_sistem_raporu.tar.gz"
 msgid "Pardus About"
 msgstr "Pardus Hakkında"
 
-#: src/MainWindow.py:156
+#: src/MainWindow.py:182
 msgid "Physical RAM"
 msgstr "Fiziksel RAM"

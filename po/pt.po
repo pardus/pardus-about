@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pardus-about\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-22 14:33+0300\n"
-"PO-Revision-Date: 2023-05-05 12:39+0100\n"
+"POT-Creation-Date: 2023-06-30 04:25+0300\n"
+"PO-Revision-Date: 2023-06-30 04:23+0300\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Português <hugokarvalho@gotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: ui/MainWindow.glade:7
 msgid "About Pardus About Application"
@@ -38,6 +38,14 @@ msgstr "Exportar relatório do sistema"
 #: ui/MainWindow.glade:141
 msgid "About App"
 msgstr "Sobre a Aplicação"
+
+#: ui/MainWindow.glade:354
+msgid "<b>Kernel:</b>"
+msgstr ""
+
+#: ui/MainWindow.glade:400
+msgid "<b>Desktop:</b>"
+msgstr ""
 
 #: ui/MainWindow.glade:520
 msgid "GPU running as llvmpipe"
@@ -71,6 +79,6 @@ msgstr "~/Transferências/relatório_do_sistema_pardus.tar.gz"
 msgid "Pardus About"
 msgstr "Sobre o Pardus"
 
-#: src/MainWindow.py:156
+#: src/MainWindow.py:182
 msgid "Physical RAM"
 msgstr "RAM física"
