@@ -442,7 +442,7 @@ Fatih Altun</property>
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label">&lt;b&gt;CPU:&lt;/b&gt;</property>
+                            <property name="label" translatable="yes">&lt;b&gt;CPU:&lt;/b&gt;</property>
                             <property name="use-markup">True</property>
                             <property name="selectable">True</property>
                           </object>
@@ -487,7 +487,7 @@ Fatih Altun</property>
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label">&lt;b&gt;GPU:&lt;/b&gt;</property>
+                            <property name="label" translatable="yes">&lt;b&gt;GPU:&lt;/b&gt;</property>
                             <property name="use-markup">True</property>
                             <property name="selectable">True</property>
                           </object>
@@ -560,7 +560,7 @@ Fatih Altun</property>
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label">&lt;b&gt;RAM:&lt;/b&gt;</property>
+                            <property name="label" translatable="yes">&lt;b&gt;RAM:&lt;/b&gt;</property>
                             <property name="use-markup">True</property>
                             <property name="selectable">True</property>
                           </object>
