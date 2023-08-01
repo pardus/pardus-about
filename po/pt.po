@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: pardus-about\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-30 04:25+0300\n"
-"PO-Revision-Date: 2023-06-30 04:23+0300\n"
+"PO-Revision-Date: 2023-07-28 18:28+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Português <hugokarvalho@gotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: ui/MainWindow.glade:7
 msgid "About Pardus About Application"
@@ -41,11 +41,11 @@ msgstr "Sobre a Aplicação"
 
 #: ui/MainWindow.glade:354
 msgid "<b>Kernel:</b>"
-msgstr ""
+msgstr "<b>Núcleo:</b>"
 
 #: ui/MainWindow.glade:400
 msgid "<b>Desktop:</b>"
-msgstr ""
+msgstr "<b>Ambiente de trabalho:</b>"
 
 #: ui/MainWindow.glade:520
 msgid "GPU running as llvmpipe"
@@ -69,7 +69,7 @@ msgstr "A recolher registos do sistema..."
 
 #: ui/MainWindow.glade:897
 msgid "Your system report has been exported to the desktop."
-msgstr "O relatório do sistema foi exportado para a área de trabalho."
+msgstr "O relatório do sistema foi exportado para a pasta de transferências."
 
 #: ui/MainWindow.glade:898
 msgid "~/Desktop/pardus_system_report.tar.gz"
