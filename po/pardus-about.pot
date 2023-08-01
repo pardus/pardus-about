@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-30 04:25+0300\n"
+"POT-Creation-Date: 2023-07-19 01:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,8 +45,20 @@ msgstr ""
 msgid "<b>Desktop:</b>"
 msgstr ""
 
+#: ui/MainWindow.glade:445
+msgid "<b>CPU:</b>"
+msgstr ""
+
+#: ui/MainWindow.glade:490
+msgid "<b>GPU:</b>"
+msgstr ""
+
 #: ui/MainWindow.glade:520
 msgid "GPU running as llvmpipe"
+msgstr ""
+
+#: ui/MainWindow.glade:563
+msgid "<b>RAM:</b>"
 msgstr ""
 
 #: ui/MainWindow.glade:635
@@ -58,7 +70,7 @@ msgid "<b>Local IP:</b>"
 msgstr ""
 
 #: ui/MainWindow.glade:803
-msgid "About this computer"
+msgid "About This Computer"
 msgstr ""
 
 #: ui/MainWindow.glade:841 ui/MainWindow.glade:863

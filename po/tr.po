@@ -1,25 +1,26 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Turkish transhlation of pardus-about
+# Copyright (C) 2020-2023 pardus-about'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the pardus-about package.
+#
 # Emin fedar <emin.fedar@pardus.org.tr>, 2020.
 # Fatih Altun <fatih.altun@pardus.org.tr>, 2022-2023.
 # Ercan Ersoy <ercanersoy@ercanersoy.net>, 2023.
+# Sabri Ünal <libreajans@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-30 04:25+0300\n"
-"PO-Revision-Date: 2023-06-30 04:32+0300\n"
-"Last-Translator: Ercan Ersoy <ercanersoy@ercanersoy.net>\n"
+"POT-Creation-Date: 2023-07-19 01:46+0300\n"
+"PO-Revision-Date: 2023-07-19 01:48+0300\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: ui/MainWindow.glade:7
 msgid "About Pardus About Application"
@@ -49,9 +50,21 @@ msgstr "<b>Çekirdek:</b>"
 msgid "<b>Desktop:</b>"
 msgstr "<b>Masaüstü:</b>"
 
+#: ui/MainWindow.glade:445
+msgid "<b>CPU:</b>"
+msgstr "<b>İşlemci:</b>"
+
+#: ui/MainWindow.glade:490
+msgid "<b>GPU:</b>"
+msgstr "<b>Ekran Kartı:</b>"
+
 #: ui/MainWindow.glade:520
 msgid "GPU running as llvmpipe"
-msgstr "GPU, llvmpipe olarak çalışıyor"
+msgstr "Ekran kartı, llvmpipe olarak çalışıyor"
+
+#: ui/MainWindow.glade:563
+msgid "<b>RAM:</b>"
+msgstr "<b>Bellek:</b>"
 
 #: ui/MainWindow.glade:635
 msgid "<b>Public IP:</b>"
@@ -62,8 +75,8 @@ msgid "<b>Local IP:</b>"
 msgstr "<b>İç IP:</b>"
 
 #: ui/MainWindow.glade:803
-msgid "About this computer"
-msgstr "Bu bilgisayar hakkında"
+msgid "About This Computer"
+msgstr "Bu Bilgisayar Hakkında"
 
 #: ui/MainWindow.glade:841 ui/MainWindow.glade:863
 msgid "Gathering system logs..."
@@ -83,4 +96,4 @@ msgstr "Pardus Hakkında"
 
 #: src/MainWindow.py:182
 msgid "Physical RAM"
-msgstr "Fiziksel RAM"
+msgstr "Fiziksel Bellek"
