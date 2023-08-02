@@ -3,7 +3,8 @@ import platform
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk, Gdk, GdkPixbuf
+gi.require_version('Soup', '2.4')
+from gi.repository import GLib, Gio, Gtk, Gdk, GdkPixbuf, Soup
 
 import locale
 from locale import gettext as _
@@ -360,22 +361,26 @@ class MainWindow:
         return data
 
     def get_ip(self):
-        try:
-            import requests
-        except Exception:
-            return '0.0.0.0'
-        # Check internet connection from server list
-
         servers = open(os.path.dirname(os.path.abspath(__file__)) + "/../data/servers.txt", "r").read().split("\n")
         for server in servers:
-            try:
-                r = requests.get(server)
-                if r.content:
-                    self.public_ip = "{}".format(r.content.decode("utf-8").strip())
-                    return r.content.decode("utf-8")
-            except:
-                continue
+            self.check_server(server)
+            if self.public_ip != "0.0.0.0":
+                return self.public_ip
         return '0.0.0.0'
+
+    def check_server(self, server):
+        try:
+            session = Soup.Session.new()
+            message = Soup.Message.new("GET", server)
+            session.queue_message(message, self.async_get_ip, None)
+        except Exception as e:
+            print(e)
+
+    def async_get_ip(self, session, message, user_data):
+        ip = message.response_body.flatten().get_data() #? get ip
+        ip = ip.decode("utf-8").strip() #? decode utf-8
+        if ip:
+            self.public_ip = ip
 
     # https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-from-a-nic-network-interface-controller-in-python
     def get_local_ip(self):
