@@ -1,4 +1,5 @@
 import os, subprocess, time
+import queue
 import platform
 
 import gi
@@ -109,7 +110,7 @@ class MainWindow:
         self.lbl_distro_codename.grab_focus()
 
         self.public_ip = "0.0.0.0"
-
+        self.urls = queue.Queue()
         # Set version
         # If not getted from __version__ file then accept version in MainWindow.glade file
         try:
@@ -362,25 +363,29 @@ class MainWindow:
 
     def get_ip(self):
         servers = open(os.path.dirname(os.path.abspath(__file__)) + "/../data/servers.txt", "r").read().split("\n")
-        for server in servers:
-            self.check_server(server)
-            if self.public_ip != "0.0.0.0":
-                return self.public_ip
-        return '0.0.0.0'
+        for server in servers: self.urls.put(server)
+        self.process_next()
+        return self.public_ip
 
-    def check_server(self, server):
-        try:
-            session = Soup.Session.new()
-            message = Soup.Message.new("GET", server)
-            session.queue_message(message, self.async_get_ip, None)
-        except Exception as e:
-            print(e)
+    def process_next(self):
+        if not self.urls.empty():
+            url = self.urls.get()
+            self.get(url)
 
-    def async_get_ip(self, session, message, user_data):
-        ip = message.response_body.flatten().get_data() #? get ip
-        ip = ip.decode("utf-8").strip() #? decode utf-8
-        if ip:
-            self.public_ip = ip
+    def on_message_finished(self, session, message, user_data):
+        response_body = message.response_body.flatten().get_data()
+        if response_body.decode() != "":
+            self.public_ip = response_body.decode("utf-8").strip()
+            #print(response_body)
+        else:
+            self.process_next()  # Proceed to the next download 
+
+    def get(self, url):
+        session = Soup.Session.new()
+        message = Soup.Message.new("GET", url)
+        #print(url)
+        session.queue_message(message, self.on_message_finished, None)
+
 
     # https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-from-a-nic-network-interface-controller-in-python
     def get_local_ip(self):
