@@ -374,8 +374,9 @@ class MainWindow:
 
     def on_message_finished(self, session, message, user_data):
         response_body = message.response_body.flatten().get_data()
-        if response_body.decode() != "":
-            self.public_ip = response_body.decode("utf-8").strip()
+        url = response_body.decode("utf-8").strip()
+        if self.is_valid_ip(url):
+            self.public_ip = url
             #print(response_body)
         else:
             self.process_next()  # Proceed to the next download 
@@ -383,8 +384,21 @@ class MainWindow:
     def get(self, url):
         session = Soup.Session.new()
         message = Soup.Message.new("GET", url)
-        #print(url)
+        print(url)
         session.queue_message(message, self.on_message_finished, None)
+    
+    def is_valid_ip(self, address):
+        parts = address.split('.')
+        if len(parts) != 4:
+            return False
+
+        for part in parts:
+            if not part.isdigit():
+                return False
+            num = int(part)
+            if num < 0 or num > 255:
+                return False
+        return True
 
 
     # https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-from-a-nic-network-interface-controller-in-python
