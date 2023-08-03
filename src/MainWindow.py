@@ -1,9 +1,11 @@
 import os, subprocess, time
+import queue
 import platform
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk, Gdk, GdkPixbuf
+gi.require_version('Soup', '2.4')
+from gi.repository import GLib, Gio, Gtk, Gdk, GdkPixbuf, Soup
 
 import locale
 from locale import gettext as _
@@ -108,7 +110,7 @@ class MainWindow:
         self.lbl_distro_codename.grab_focus()
 
         self.public_ip = "0.0.0.0"
-
+        self.urls = queue.Queue()
         # Set version
         # If not getted from __version__ file then accept version in MainWindow.glade file
         try:
@@ -360,22 +362,44 @@ class MainWindow:
         return data
 
     def get_ip(self):
-        try:
-            import requests
-        except Exception:
-            return '0.0.0.0'
-        # Check internet connection from server list
-
         servers = open(os.path.dirname(os.path.abspath(__file__)) + "/../data/servers.txt", "r").read().split("\n")
-        for server in servers:
-            try:
-                r = requests.get(server)
-                if r.content:
-                    self.public_ip = "{}".format(r.content.decode("utf-8").strip())
-                    return r.content.decode("utf-8")
-            except:
-                continue
-        return '0.0.0.0'
+        for server in servers: self.urls.put(server)
+        self.process_next()
+        return self.public_ip
+
+    def process_next(self):
+        if not self.urls.empty():
+            url = self.urls.get()
+            self.get(url)
+
+    def on_message_finished(self, session, message, user_data):
+        response_body = message.response_body.flatten().get_data()
+        url = response_body.decode("utf-8").strip()
+        if self.is_valid_ip(url):
+            self.public_ip = url
+            #print(response_body)
+        else:
+            self.process_next()  # Proceed to the next download 
+
+    def get(self, url):
+        session = Soup.Session.new()
+        message = Soup.Message.new("GET", url)
+        print(url)
+        session.queue_message(message, self.on_message_finished, None)
+    
+    def is_valid_ip(self, address):
+        parts = address.split('.')
+        if len(parts) != 4:
+            return False
+
+        for part in parts:
+            if not part.isdigit():
+                return False
+            num = int(part)
+            if num < 0 or num > 255:
+                return False
+        return True
+
 
     # https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-from-a-nic-network-interface-controller-in-python
     def get_local_ip(self):
