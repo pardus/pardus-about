@@ -50,8 +50,6 @@ class Get_system_info:
                  "/etc/hosts", "/etc/apt/sources.list"]
         self.get_system_info_file()
 
-        self.write_to_file(f"{self.path}/dmesg",
-                           args_str=self.get_cmd("pkexec dmesg"))
         self.write_to_file(f"{self.path}/journalctl",
                            args_str=self.get_cmd("journalctl -q -n 1000"))
         self.write_to_file(f"{self.path}/lspci",
@@ -87,10 +85,14 @@ class Get_system_info:
                     pkexec bash -c '
                     cp {' '.join(files)} {self.path} && 
                     cd {self.path} &&
-                    chown {self.user}:{self.user} *'
+                    chown {self.user}:{self.user} * &&
+                    clear &&
+                    dmesg'
                     """
                 )
-                subprocess.run(shell_command, shell=True)
+                output = subprocess.run(shell_command, shell=True,stdout=subprocess.PIPE, text=True)
+                self.write_to_file(f"{self.path}/dmesg", args_str=output.stdout)
+
             else:
                 for f in files:
                     p = f.split("/")[-1]
