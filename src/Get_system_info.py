@@ -29,7 +29,6 @@ class Get_system_info:
         self.compress_file()
         GLib.idle_add(self.hide_dialog)
 
-
     def compress_file(self):
         file_name = "pardus_sistem_raporu" if os.environ.get(
             "LANG") == 'tr_TR.UTF-8' else "pardus_system_report" 
