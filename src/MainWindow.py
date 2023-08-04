@@ -430,7 +430,10 @@ class MainWindow:
     def on_menu_btn_export_clicked(self, btn):
         self.popover_menu.popdown()
         self.dialog_gathering_logs.show_all()
-        threading.Thread(target=self.system_info.start_system_report, args=(lambda: self.dialog_gathering_logs.hide(),)).start()
+        self.system_info.hide_dialog=self.dialog_gathering_logs.hide
+        
+        
+        threading.Thread(target=self.system_info.start_system_report).start()
     def on_btn_pardus_logo_button_press_event(self, btn, event):
         timestamp = lambda: int(round(time.time() * 1000)) # milliseconds
 

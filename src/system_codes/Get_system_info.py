@@ -6,7 +6,7 @@ import getpass
 import platform
 import tarfile
 import shutil
-
+from gi.repository import GLib
 
 class Get_system_info:
     def __init__(self):
@@ -18,15 +18,16 @@ class Get_system_info:
         self.host_name = f"{self.user}@{socket.gethostname()}"
         self.kernel = platform.uname().release
         self.desktop_env = os.environ.get("XDG_CURRENT_DESKTOP")
+        self.hide_dialog=None
 
     def get_ui_data(self):
         return [self.distro_name, self.distro_version, self.distro_codename,
                 self.host_name, self.kernel, self.desktop_env]
 
-    def start_system_report(self, hide_dialog):
+    def start_system_report(self):
         self.generate_system_info_file()
         self.compress_file()
-        hide_dialog()
+        GLib.idle_add(self.hide_dialog)
 
     def compress_file(self):
         file_name = "pardus_sistem_raporu" if os.environ.get(
