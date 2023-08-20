@@ -5,13 +5,14 @@
   <object class="GtkAboutDialog" id="dialog_about">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">About Pardus About Application</property>
+    <property name="window-position">center-on-parent</property>
     <property name="icon-name">pardus-about</property>
     <property name="type-hint">dialog</property>
     <property name="program-name">Pardus About</property>
     <property name="version">0.1.0</property>
     <property name="copyright">© 2023 Pardus</property>
     <property name="comments" translatable="yes">Get info about your Pardus system.</property>
-    <property name="website">https://www.pardus.org.tr/</property>
+    <property name="website">https://github.com/pardus/pardus-about</property>
     <property name="website-label" translatable="yes">Website</property>
     <property name="authors">Emin Fedar
 Fatih Altun</property>
@@ -772,12 +773,11 @@ Fatih Altun</property>
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="opacity">0.50196078431372548</property>
                 <property name="margin-top">5</property>
                 <property name="margin-bottom">5</property>
-                <property name="label">©TÜBİTAK ULAKBİM | 2023</property>
+                <property name="label">TÜBİTAK ULAKBİM | 2023</property>
                 <attributes>
-                  <attribute name="size" value="10000"/>
+                  <attribute name="weight" value="thin"/>
                 </attributes>
               </object>
               <packing>
@@ -844,7 +844,7 @@ Fatih Altun</property>
     <property name="window-position">center-on-parent</property>
     <property name="default-width">350</property>
     <property name="default-height">100</property>
-    <property name="icon-name">dialog-information</property>
+    <property name="icon-name">dialog-information-symbolic</property>
     <property name="deletable">False</property>
     <property name="transient-for">window</property>
     <child>
@@ -890,7 +890,7 @@ Fatih Altun</property>
     <property name="can-focus">False</property>
     <property name="modal">True</property>
     <property name="window-position">center-on-parent</property>
-    <property name="icon-name">dialog-information</property>
+    <property name="icon-name">dialog-information-symbolic</property>
     <property name="type-hint">dialog</property>
     <property name="transient-for">window</property>
     <property name="buttons">ok</property>
