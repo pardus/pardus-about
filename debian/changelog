@@ -1,3 +1,42 @@
+pardus-about (0.6.0) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update portuguese translation
+
+  [ Fatih Altun ]
+  * Add new category to desktop file for xfce settings
+  * Add background and prettyname control for yirmiuc
+  * Add pardus-about-symbolic icon
+  * Add distro controls for distro icon
+  * Fix typo
+
+  [ Ercan Ersoy ]
+  * Some updates
+
+  [ Sabri Ünal ]
+  * ui: mark three strings as translatable
+  * ui: Use header capitalization
+  * ui: Update the pot file
+  * Update Turkish translation
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+
+  [ Muhammet ]
+  * converted getting ip address to Soup async method
+  * deleted whitespace
+  * getting ip structure change
+  * validation ip address
+
+  [ Fatih Altun ]
+  * Add X-Pardus-Apps to desktop file categories
+  * Update app icon
+  * Update about labels
+  * Update pci.ids
+  * Update about icons
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 21 Aug 2023 00:08:47 +0300
+
 pardus-about (0.5.3) unstable; urgency=medium
 
   * Fix llvmpipe detect typo
