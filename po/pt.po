@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pardus-about\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-30 04:25+0300\n"
-"PO-Revision-Date: 2023-07-28 18:28+0100\n"
+"POT-Creation-Date: 2023-07-19 01:48+0300\n"
+"PO-Revision-Date: 2023-08-28 23:19+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Português <hugokarvalho@gotmail.com>\n"
 "Language: pt\n"
@@ -47,9 +47,24 @@ msgstr "<b>Núcleo:</b>"
 msgid "<b>Desktop:</b>"
 msgstr "<b>Ambiente de trabalho:</b>"
 
+#: ui/MainWindow.glade:445
+#| msgid "<b>Local IP:</b>"
+msgid "<b>CPU:</b>"
+msgstr "<b>CPU:</b>"
+
+#: ui/MainWindow.glade:490
+#| msgid "<b>Local IP:</b>"
+msgid "<b>GPU:</b>"
+msgstr "<b>GPU:</b>"
+
 #: ui/MainWindow.glade:520
 msgid "GPU running as llvmpipe"
 msgstr "GPU a executar como llvmpipe"
+
+#: ui/MainWindow.glade:563
+#| msgid "<b>Kernel:</b>"
+msgid "<b>RAM:</b>"
+msgstr "<b>RAM:</b>"
 
 #: ui/MainWindow.glade:635
 msgid "<b>Public IP:</b>"
@@ -60,7 +75,7 @@ msgid "<b>Local IP:</b>"
 msgstr "<b>IP Local:</b>"
 
 #: ui/MainWindow.glade:803
-msgid "About this computer"
+msgid "About This Computer"
 msgstr "Sobre este computador"
 
 #: ui/MainWindow.glade:841 ui/MainWindow.glade:863
