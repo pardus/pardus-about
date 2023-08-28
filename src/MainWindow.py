@@ -181,7 +181,7 @@ class MainWindow:
         total_physical_ram, total_ram = self.get_ram_size()
         self.lbl_ram.set_label(self.beauty_size(total_ram))
         if total_physical_ram != 0:
-            self.lbl_ram_phy.set_markup("( {}:  {} )".format(_("Physical RAM"), self.beauty_size(total_physical_ram)))
+            self.lbl_ram_phy.set_markup("({}:  {})".format(_("Physical RAM"), self.beauty_size(total_physical_ram)))
         else:
             self.lbl_ram_phy.set_label("")
 
@@ -198,7 +198,7 @@ class MainWindow:
             print("llvmpipe detect err: {}".format(e))
             llvm = False
 
-        self.lbl_gpu.set_markup("{} ( {} )".format(default_gpu[0]["name"], default_gpu[0]["driver"]))
+        self.lbl_gpu.set_markup("{} ({})".format(default_gpu[0]["name"], default_gpu[0]["driver"]))
 
         GLib.idle_add(self.img_llvm.set_visible, llvm)
 
@@ -217,7 +217,7 @@ class MainWindow:
                 gpulabel.set_line_wrap_mode(Gtk.WrapMode.WORD)
                 gpulabel.set_max_width_chars(55)
                 gpulabel.set_selectable(True)
-                gpulabel.set_markup("{} ( {} )".format(extra["name"], extra["driver"]))
+                gpulabel.set_markup("{} ({})".format(extra["name"], extra["driver"]))
 
                 box.pack_start(gputitle, False, True, 0)
                 box.pack_start(gpulabel, False, True, 0)

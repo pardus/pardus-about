@@ -597,7 +597,7 @@ Fatih Altun</property>
                               <object class="GtkLabel" id="lbl_ram_phy">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="label">( Physcial RAM: .. GB )</property>
+                                <property name="label">(Physcial RAM: .. GB)</property>
                                 <property name="wrap">True</property>
                                 <property name="selectable">True</property>
                                 <property name="max-width-chars">55</property>
