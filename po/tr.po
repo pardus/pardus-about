@@ -72,7 +72,7 @@ msgstr "<b>Dış IP:</b>"
 
 #: ui/MainWindow.glade:698
 msgid "<b>Local IP:</b>"
-msgstr "<b>Yerel IP:</b>"
+msgstr "<b>İç IP:</b>"
 
 #: ui/MainWindow.glade:803
 msgid "About This Computer"
