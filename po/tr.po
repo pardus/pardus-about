@@ -84,7 +84,7 @@ msgstr "Sistem logları toplanıyor..."
 
 #: ui/MainWindow.glade:897
 msgid "Your system report has been exported to the desktop."
-msgstr "Sistem raporunuz masaüstüne eklenmiştir."
+msgstr "Sistem raporunuz masaüstüne aktarılmıştır."
 
 #: ui/MainWindow.glade:898
 msgid "~/Desktop/pardus_system_report.tar.gz"
