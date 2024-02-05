@@ -1,0 +1,94 @@
+# Spanish translation of pardus-about.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Veronica Conesa Gomez <vero.gconesa@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pardus-about\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-19 01:48+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Veronica Conesa <vero.gconesa@gmail.com>\n"
+"Language-Team: Spanish <vero.gconesa@gmail.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ui/MainWindow.glade:7
+msgid "About Pardus About Application"
+msgstr "Acerca de la Aplicación Sobre Pardus"
+
+#: ui/MainWindow.glade:13
+msgid "Get info about your Pardus system."
+msgstr "Obtén información sobre tu sistema Pardus."
+
+#: ui/MainWindow.glade:15
+msgid "Website"
+msgstr "Sitio Web"
+
+#: ui/MainWindow.glade:85
+msgid "Export System Report"
+msgstr "Exportar Informe del Sistema"
+
+#: ui/MainWindow.glade:141
+msgid "About App"
+msgstr "Sobre la Aplicación"
+
+#: ui/MainWindow.glade:354
+msgid "<b>Kernel:</b>"
+msgstr "<b>Kernel:</b>"
+
+#: ui/MainWindow.glade:400
+msgid "<b>Desktop:</b>"
+msgstr "<b>Escritorio:</b>"
+
+#: ui/MainWindow.glade:445
+msgid "<b>CPU:</b>"
+msgstr "<b>CPU:</b>"
+
+#: ui/MainWindow.glade:490
+msgid "<b>GPU:</b>"
+msgstr "<b>GPU:</b>"
+
+#: ui/MainWindow.glade:520
+msgid "GPU running as llvmpipe"
+msgstr "GPU ejecutado como llvmpipe"
+
+#: ui/MainWindow.glade:563
+msgid "<b>RAM:</b>"
+msgstr "<b>RAM:</b>"
+
+#: ui/MainWindow.glade:635
+msgid "<b>Public IP:</b>"
+msgstr "<b>IP Pública:</b>"
+
+#: ui/MainWindow.glade:698
+msgid "<b>Local IP:</b>"
+msgstr "<b>IP Local:</b>"
+
+#: ui/MainWindow.glade:803
+msgid "About This Computer"
+msgstr "Acerca de este ordenador"
+
+#: ui/MainWindow.glade:841 ui/MainWindow.glade:863
+msgid "Gathering system logs..."
+msgstr "Recopilando registros del sistema..."
+
+#: ui/MainWindow.glade:897
+msgid "Your system report has been exported to the desktop."
+msgstr "Tu informe del sistema ha sido exportado al escritorio."
+
+#: ui/MainWindow.glade:898
+msgid "~/Desktop/pardus_system_report.tar.gz"
+msgstr "~/Escritorio/pardus_system_report.tar.gz"
+
+#: src/MainWindow.py:100
+msgid "Pardus About"
+msgstr "Acerca de Pardus"
+
+#: src/MainWindow.py:182
+msgid "Physical RAM"
+msgstr "RAM física"
