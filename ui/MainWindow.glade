@@ -14,10 +14,10 @@
     <property name="comments" translatable="yes">Get info about your Pardus system.</property>
     <property name="website">https://github.com/pardus/pardus-about</property>
     <property name="website-label" translatable="yes">Website</property>
-    <property name="authors">Emin Fedar
-Fatih Altun</property>
-    <property name="translator-credits">Fatih Altun</property>
-    <property name="artists">Yusuf Düzgün</property>
+    <property name="authors">Emin Fedar &lt;emin.fedar@pardus.org.tr&gt;
+Fatih Altun &lt;fatih.altun@pardus.org.tr&gt;</property>
+    <property name="translator-credits" translatable="yes" comments="Name Surname &lt;example@examplemail.com&gt;">translator-credits</property>
+    <property name="artists">Yusuf Düzgün &lt;yusuf.duzgun@pardus.org.tr&gt;</property>
     <property name="logo-icon-name">pardus-about</property>
     <property name="license-type">gpl-3-0</property>
     <child internal-child="vbox">
