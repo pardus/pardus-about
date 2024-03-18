@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-19 01:48+0300\n"
+"POT-Creation-Date: 2024-03-18 14:50+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,51 +21,56 @@ msgstr ""
 msgid "About Pardus About Application"
 msgstr ""
 
-#: ui/MainWindow.glade:13
+#: ui/MainWindow.glade:14
 msgid "Get info about your Pardus system."
 msgstr ""
 
-#: ui/MainWindow.glade:15
+#: ui/MainWindow.glade:16
 msgid "Website"
 msgstr ""
 
-#: ui/MainWindow.glade:85
+#. Name Surname <example@examplemail.com>
+#: ui/MainWindow.glade:19
+msgid "translator-credits"
+msgstr ""
+
+#: ui/MainWindow.glade:86
 msgid "Export System Report"
 msgstr ""
 
-#: ui/MainWindow.glade:141
+#: ui/MainWindow.glade:142
 msgid "About App"
 msgstr ""
 
-#: ui/MainWindow.glade:354
+#: ui/MainWindow.glade:355
 msgid "<b>Kernel:</b>"
 msgstr ""
 
-#: ui/MainWindow.glade:400
+#: ui/MainWindow.glade:401
 msgid "<b>Desktop:</b>"
 msgstr ""
 
-#: ui/MainWindow.glade:445
+#: ui/MainWindow.glade:446
 msgid "<b>CPU:</b>"
 msgstr ""
 
-#: ui/MainWindow.glade:490
+#: ui/MainWindow.glade:491
 msgid "<b>GPU:</b>"
 msgstr ""
 
-#: ui/MainWindow.glade:520
+#: ui/MainWindow.glade:521
 msgid "GPU running as llvmpipe"
 msgstr ""
 
-#: ui/MainWindow.glade:563
+#: ui/MainWindow.glade:564
 msgid "<b>RAM:</b>"
 msgstr ""
 
-#: ui/MainWindow.glade:635
+#: ui/MainWindow.glade:636
 msgid "<b>Public IP:</b>"
 msgstr ""
 
-#: ui/MainWindow.glade:698
+#: ui/MainWindow.glade:699
 msgid "<b>Local IP:</b>"
 msgstr ""
 
@@ -85,10 +90,14 @@ msgstr ""
 msgid "~/Desktop/pardus_system_report.tar.gz"
 msgstr ""
 
-#: src/MainWindow.py:100
+#: src/MainWindow.py:102
 msgid "Pardus About"
 msgstr ""
 
-#: src/MainWindow.py:182
+#: src/MainWindow.py:106
+msgid "About Pardus About"
+msgstr ""
+
+#: src/MainWindow.py:191
 msgid "Physical RAM"
 msgstr ""
