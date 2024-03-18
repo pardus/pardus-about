@@ -17,6 +17,7 @@ Depends: ${misc:Depends},
          gir1.2-gtk-3.0,
          lsb-release,
          python3-requests,
-         gir1.2-glib-2.0
+         gir1.2-glib-2.0,
+         gir1.2-soup-2.4
 Description: About Pardus
  Get info about your Pardus system.
