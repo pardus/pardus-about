@@ -43,6 +43,7 @@ data_files = [
      ["src/Main.py",
       "src/MainWindow.py",
       "src/GPU.py",
+      "src/Get_system_info.py",
       "src/dump_system_info.sh",
       "src/get_system_info.sh",
       "src/copy_to_desktop.sh",
