@@ -1,3 +1,27 @@
+pardus-about (0.6.3) unstable; urgency=medium
+
+  [ Othamae ]
+  * Added Spanish translation
+  * Added "es" in langs variable.
+
+  [ bariscodefx ]
+  * ported xfce about dialog fix from pardus-software
+
+  [ Fatih Altun ]
+  * Add missing gir1.2-soup-2.4 dependency
+  * Fix translators structure
+  * Update pot file
+  * Update Turkish translations
+  * Update transient of about window
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+
+  [ Ali Riza KESKIN ]
+  * fix kde wayland wrong icon issue
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 16 Jul 2024 12:19:03 +0300
+
 pardus-about (0.6.2) unstable; urgency=medium
 
   [ Hugo Carvalho ]
