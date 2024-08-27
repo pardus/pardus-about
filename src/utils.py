@@ -132,7 +132,7 @@ def get_gpu():
                 with open(dev_content_path, "r") as f:
                     cont = f.readline().strip()
                     cont = int(cont, 16)
-                    if cont == gpu_class or cont == dc_class:
+                    if cont == gpu_class or cont == dc_class or cont == sec_gpu_class:
                         is_secondary_gpu = cont == sec_gpu_class
                         vendor_id = None
                         driver = None
@@ -158,11 +158,13 @@ def get_gpu():
                         devices.append(
                             {
                                 "vendor": vendor,
+                                "class": cont,
                                 "device": device,
                                 "driver": driver,
                                 "is_secondary_gpu": is_secondary_gpu,
                             }
                         )
+    devices.sort(key=lambda devices: devices["class"], reverse=True)
     return devices
 
 
