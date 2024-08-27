@@ -3,8 +3,9 @@ import queue
 import platform
 
 import gi
-gi.require_version('Gtk', '3.0')
-gi.require_version('Soup', '2.4')
+
+gi.require_version("Gtk", "3.0")
+gi.require_version("Soup", "2.4")
 from gi.repository import GLib, Gio, Gtk, Gdk, GdkPixbuf, Soup
 
 import locale
@@ -14,9 +15,7 @@ import socket
 import fcntl
 import struct
 import threading
-import json
-
-from GPU import GPU
+import utils
 
 # Translation Constants:
 APPNAME = "pardus-about"
@@ -28,6 +27,9 @@ locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME)
 # locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
 
+print(utils.get_os_info())
+
+
 class MainWindow:
     def __init__(self, application):
         # Gtk Builder
@@ -37,7 +39,9 @@ class MainWindow:
         # self.builder.set_translation_domain(APPNAME)
 
         # Import UI file:
-        self.builder.add_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade")
+        self.builder.add_from_file(
+            os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade"
+        )
         self.builder.connect_signals(self)
 
         # Window
@@ -50,10 +54,7 @@ class MainWindow:
         # self.stack_main.set_visible_child_name("loading")
 
         self.addTurkishFlag()
-
-        thread1 = threading.Thread(target=self.add_gpus_to_ui, args=(self.get_gpu(),))
-        thread1.daemon = True
-        thread1.start()
+        self.add_gpus_to_ui()
 
         thread2 = threading.Thread(target=self.add_ip_to_ui, args=(self.get_ips(),))
         thread2.daemon = True
@@ -70,7 +71,7 @@ class MainWindow:
     # Window methods:
     def onDestroy(self, action):
         self.window.get_application().quit()
-    
+
     def defineComponents(self):
         self.dialog_report_exported = self.builder.get_object("dialog_report_exported")
         self.dialog_gathering_logs = self.builder.get_object("dialog_gathering_logs")
@@ -104,7 +105,9 @@ class MainWindow:
             about_headerbar = Gtk.HeaderBar.new()
             about_headerbar.set_show_close_button(True)
             about_headerbar.set_title(_("About Pardus About"))
-            about_headerbar.pack_start(Gtk.Image.new_from_icon_name("pardus-about", Gtk.IconSize.LARGE_TOOLBAR))
+            about_headerbar.pack_start(
+                Gtk.Image.new_from_icon_name("pardus-about", Gtk.IconSize.LARGE_TOOLBAR)
+            )
             about_headerbar.show_all()
             self.dialog_about.set_titlebar(about_headerbar)
 
@@ -121,7 +124,9 @@ class MainWindow:
         # Set version
         # If not getted from __version__ file then accept version in MainWindow.glade file
         try:
-            version = open(os.path.dirname(os.path.abspath(__file__)) + "/__version__").readline()
+            version = open(
+                os.path.dirname(os.path.abspath(__file__)) + "/__version__"
+            ).readline()
             self.dialog_about.set_version(version)
         except:
             pass
@@ -129,8 +134,10 @@ class MainWindow:
     def addTurkishFlag(self):
         self.click_count = 0
         self.last_click_timestamp = 0
-        
-        pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../bayrak.gif")
+
+        pixbuf = GdkPixbuf.PixbufAnimation.new_from_file(
+            os.path.dirname(os.path.abspath(__file__)) + "/../bayrak.gif"
+        )
 
         def waving_flag(it):
             # it is iterator
@@ -138,29 +145,33 @@ class MainWindow:
             it.advance()
 
             GLib.timeout_add(it.get_delay_time(), waving_flag, it)
-        
+
         GLib.timeout_add(0, waving_flag, pixbuf.get_iter())
 
     def readSystemInfo(self):
-        output = subprocess.check_output([os.path.dirname(os.path.abspath(__file__)) + "/get_system_info.sh"]).decode("utf-8")
+        output = subprocess.check_output(
+            [os.path.dirname(os.path.abspath(__file__)) + "/get_system_info.sh"]
+        ).decode("utf-8")
         lines = output.splitlines()
-        
+
         self.lbl_distro.set_label(lines[0])
 
         if lines[0].lower() != "pardus":
             try:
-                pixbuf = Gtk.IconTheme.get_default().load_icon("emblem-{}".format(lines[0].lower()), 120,
-                                                               Gtk.IconLookupFlags(16))
+                pixbuf = Gtk.IconTheme.get_default().load_icon(
+                    "emblem-{}".format(lines[0].lower()), 120, Gtk.IconLookupFlags(16)
+                )
             except Exception as e:
-                print("{}".format(e))
                 try:
-                    pixbuf = Gtk.IconTheme.get_default().load_icon("distributor-logo", 120, Gtk.IconLookupFlags(16))
+                    pixbuf = Gtk.IconTheme.get_default().load_icon(
+                        "distributor-logo", 120, Gtk.IconLookupFlags(16)
+                    )
                 except Exception as e:
-                    print("{}".format(e))
                     try:
-                        pixbuf = Gtk.IconTheme.get_default().load_icon("image-missing", 120, Gtk.IconLookupFlags(16))
+                        pixbuf = Gtk.IconTheme.get_default().load_icon(
+                            "image-missing", 120, Gtk.IconLookupFlags(16)
+                        )
                     except Exception as e:
-                        print("{}".format(e))
                         pixbuf = None
 
             if pixbuf is not None:
@@ -168,36 +179,48 @@ class MainWindow:
 
         self.lbl_distro_version.set_label(lines[1])
         if lines[2] == "yirmibir":
-            lines[2] =  "Dolunay"
-            self.img_background.set_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../bluebackground-21.png")
+            lines[2] = "Dolunay"
+            self.img_background.set_from_file(
+                os.path.dirname(os.path.abspath(__file__)) + "/../bluebackground-21.png"
+            )
         elif lines[2] == "yirmiuc":
             lines[2] = "Ay Yıldız"
         self.lbl_distro_codename.set_label(lines[2])
 
         self.lbl_user_host.set_label(lines[3])
-        self.lbl_kernel.set_label(lines[4])
-        self.lbl_desktop.set_label(lines[5])
+        kernel, release = utils.get_kernel()
+        self.lbl_kernel.set_label(f"{kernel} {release}")
+        desktop_environment, desktop_environment_version = (
+            utils.get_desktop_environment()
+        )
+
+        self.lbl_desktop.set_label(
+            f"{desktop_environment} {desktop_environment_version}"
+        )
         # if lines[7] == "0":
         #     self.lbl_cpu.set_label(lines[6])
         # else:
         #     ghz = "{:.2f}".format(float(lines[7])/1000000)
         #     self.lbl_cpu.set_label(lines[6] + " (" + ghz  + "GHz)")
+        cpu, cores = utils.get_cpu()
+        self.lbl_cpu.set_label("{} x{}".format(cpu, cores))
 
-        self.lbl_cpu.set_label("{}".format(self.get_cpu()))
-
-        total_physical_ram, total_ram = self.get_ram_size()
+        total_physical_ram, total_ram = utils.get_ram_size()
         self.lbl_ram.set_label(self.beauty_size(total_ram))
         if total_physical_ram != 0:
-            self.lbl_ram_phy.set_markup("({}:  {})".format(_("Physical RAM"), self.beauty_size(total_physical_ram)))
+            self.lbl_ram_phy.set_markup(
+                "({}:  {})".format(
+                    _("Physical RAM"), self.beauty_size(total_physical_ram)
+                )
+            )
         else:
             self.lbl_ram_phy.set_label("")
 
-    def add_gpus_to_ui(self, gpus):
-
-        default_gpu, extra_gpu, glx_gpu = gpus
-
+    def add_gpus_to_ui(self):
+        gpus = utils.get_gpu()
+        self.lbl_gpu.set_markup("{} ({})".format(gpus[0]["device"], gpus[0]["driver"]))
         try:
-            if "llvmpipe" in glx_gpu[0]["name"].lower():
+            if "llvmpipe" in gpus[0]["driver"].lower():
                 llvm = True
             else:
                 llvm = False
@@ -205,15 +228,14 @@ class MainWindow:
             print("llvmpipe detect err: {}".format(e))
             llvm = False
 
-        self.lbl_gpu.set_markup("{} ({})".format(default_gpu[0]["name"], default_gpu[0]["driver"]))
+        self.lbl_gpu.set_markup("{} ({})".format(gpus[0]["device"], gpus[0]["driver"]))
 
         GLib.idle_add(self.img_llvm.set_visible, llvm)
-
-        if extra_gpu:
+        if len(gpus) > 1:
             self.lbl_title_gpu.set_markup("<b>GPU 1:</b>")
             GLib.idle_add(self.box_extra_gpu.set_visible, True)
             count = 2
-            for extra in extra_gpu:
+            for index, extra in enumerate(gpus[1:]):
                 box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 5)
                 gputitle = Gtk.Label.new()
                 gputitle.set_selectable(True)
@@ -224,7 +246,7 @@ class MainWindow:
                 gpulabel.set_line_wrap_mode(Gtk.WrapMode.WORD)
                 gpulabel.set_max_width_chars(55)
                 gpulabel.set_selectable(True)
-                gpulabel.set_markup("{} ({})".format(extra["name"], extra["driver"]))
+                gpulabel.set_markup("{} ({})".format(extra["device"], extra["driver"]))
 
                 box.pack_start(gputitle, False, True, 0)
                 box.pack_start(gpulabel, False, True, 0)
@@ -235,7 +257,6 @@ class MainWindow:
             GLib.idle_add(self.box_extra_gpu.show_all)
         else:
             GLib.idle_add(self.box_extra_gpu.set_visible, False)
-
 
     def add_ip_to_ui(self, ip):
 
@@ -260,106 +281,6 @@ class MainWindow:
             return size
         return "size not found"
 
-    def get_ram_size(self):
-        total_ram = 0
-        total_physical_ram = 0
-
-        # physical ram size
-        try:
-            with open("/sys/devices/system/memory/block_size_bytes") as bsbyte:
-                block_size = int(bsbyte.read().strip(), 16)
-            total_online_mem = 0
-            total_offline_mem = 0
-            m_files = os.listdir("/sys/devices/system/memory/")
-            for file in m_files:
-                if os.path.isdir("/sys/devices/system/memory/" + file) and file.startswith("memory"):
-                    with open("/sys/devices/system/memory/" + file + "/online") as online:
-                        memory_on_off = online.read().strip()
-                    if memory_on_off == "1":
-                        total_online_mem = total_online_mem + block_size
-                    if memory_on_off == "0":
-                        total_offline_mem = total_offline_mem + block_size
-            total_physical_ram = (total_online_mem + total_offline_mem)
-        except Exception as e:
-            print("Exception on /sys/devices/system/memory/block_size_bytes : {}".format(e))
-
-        # total ram size
-        try:
-            with open("/proc/meminfo") as meminfo:
-                meminfo_lines = meminfo.read().split("\n")
-            for line in meminfo_lines:
-                if "MemTotal:" in line:
-                    total_ram = int(line.split()[1]) * 1024
-        except Exception as e:
-            print("Exception on /proc/meminfo : {}".format(e))
-
-        return total_physical_ram, total_ram
-
-    def get_gpu(self):
-
-        self.GPU = GPU()
-
-        default_gpu, extra_gpu, glx_gpu, all_gpu = self.GPU.get_gpu()
-
-        print("default: {}".format(default_gpu))
-        print("extra: {}".format(extra_gpu))
-        print("glx_gpu: {}".format(glx_gpu))
-        print("all_gpu: {}".format(all_gpu))
-
-        return default_gpu, extra_gpu, glx_gpu
-
-    def get_cpu(self):
-
-        file = self.readfile("/proc/cpuinfo")
-        name = ""
-        core = 0
-        for line in file.splitlines():
-            if line.startswith("model name"):
-                name = line.split(":")[1].strip()
-            if line.startswith("processor"):
-                core += 1
-        if core != 0:
-            core = "x{}".format(core)
-        if name != "":
-            name = "{} {}".format(name, core)
-        else:
-            lscpu_command = json.loads(subprocess.check_output(["lscpu", "-J"]).decode("utf-8"))
-            model = ""
-            vendor = ""
-            core = ""
-            arch = ""
-            mhz = ""
-            for fields in lscpu_command["lscpu"]:
-                if fields["field"] == "Model name:":
-                    model = fields["data"]
-                if fields["field"] == "Vendor ID:":
-                    vendor = fields["data"]
-                if fields["field"] == "CPU(s):":
-                    core = fields["data"]
-                if fields["field"] == "Architecture:":
-                    arch = fields["data"]
-                if fields["field"] == "CPU max MHz:":
-                    mhz = fields["data"]
-            try:
-                if "," in mhz:
-                    if "." in mhz:
-                        mhz = mhz.replace(",","")
-                    else:
-                        mhz = mhz.replace(",",".")
-                mhz = "@ {:.2f} GHz".format(float(mhz) / 1000) if mhz != "" else ""
-            except Exception as e:
-                print("{}".format(e))
-                mhz = ""
-
-            core = "x{}".format(core) if core != "" else ""
-            arch = "({})".format(arch) if arch != "" else ""
-
-            if "ghz" not in model.lower() and mhz != "":
-                name = "{} {} {} {} {}".format(vendor, model, mhz, core, arch)
-            else:
-                name = "{} {} {} {}".format(vendor, model, core, arch)
-        return name
-
     def readfile(self, filename):
         if not os.path.exists(filename):
             return ""
@@ -369,8 +290,15 @@ class MainWindow:
         return data
 
     def get_ip(self):
-        servers = open(os.path.dirname(os.path.abspath(__file__)) + "/../data/servers.txt", "r").read().split("\n")
-        for server in servers: self.urls.put(server)
+        servers = (
+            open(
+                os.path.dirname(os.path.abspath(__file__)) + "/../data/servers.txt", "r"
+            )
+            .read()
+            .split("\n")
+        )
+        for server in servers:
+            self.urls.put(server)
         self.process_next()
         return self.public_ip
 
@@ -384,18 +312,17 @@ class MainWindow:
         url = response_body.decode("utf-8").strip()
         if self.is_valid_ip(url):
             self.public_ip = url
-            #print(response_body)
+            # print(response_body)
         else:
-            self.process_next()  # Proceed to the next download 
+            self.process_next()  # Proceed to the next download
 
     def get(self, url):
         session = Soup.Session.new()
         message = Soup.Message.new("GET", url)
-        print(url)
         session.queue_message(message, self.on_message_finished, None)
-    
+
     def is_valid_ip(self, address):
-        parts = address.split('.')
+        parts = address.split(".")
         if len(parts) != 4:
             return False
 
@@ -407,18 +334,19 @@ class MainWindow:
                 return False
         return True
 
-
     # https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-from-a-nic-network-interface-controller-in-python
     def get_local_ip(self):
         ret = []
         for ifname in os.listdir("/sys/class/net"):
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             try:
-                ip = socket.inet_ntoa(fcntl.ioctl(
-                    s.fileno(),
-                    0x8915,  # SIOCGIFADDR
-                    struct.pack('256s', ifname[:15].encode("utf-8"))
-                )[20:24])
+                ip = socket.inet_ntoa(
+                    fcntl.ioctl(
+                        s.fileno(),
+                        0x8915,  # SIOCGIFADDR
+                        struct.pack("256s", ifname[:15].encode("utf-8")),
+                    )[20:24]
+                )
                 ret.append((ip, ifname))
             except Exception as e:
                 print("{}: {}".format(ifname, e))
@@ -449,21 +377,29 @@ class MainWindow:
             if condition != 0:
                 self.dialog_gathering_logs.hide()
                 return
-            pid3, _, _, _ = GLib.spawn_async([currentPath + "/copy_to_desktop.sh"],
-                                    flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
+            pid3, _, _, _ = GLib.spawn_async(
+                [currentPath + "/copy_to_desktop.sh"],
+                flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD,
+            )
             GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid3, onFinished)
-        
+
         def onSystemInfoDumped(source, condition):
-            pid2, _, _, _ = GLib.spawn_async(["pkexec", currentPath + "/dump_logs.sh"],
-                                    flags=GLib.SPAWN_SEARCH_PATH | GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
+            pid2, _, _, _ = GLib.spawn_async(
+                ["pkexec", currentPath + "/dump_logs.sh"],
+                flags=GLib.SPAWN_SEARCH_PATH
+                | GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN
+                | GLib.SPAWN_DO_NOT_REAP_CHILD,
+            )
             GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid2, onLogsDumped)
 
-        pid1, _, _, _ = GLib.spawn_async([currentPath + "/dump_system_info.sh"],
-                                    flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
+        pid1, _, _, _ = GLib.spawn_async(
+            [currentPath + "/dump_system_info.sh"],
+            flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD,
+        )
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid1, onSystemInfoDumped)
-    
+
     def on_btn_pardus_logo_button_press_event(self, btn, event):
-        timestamp = lambda: int(round(time.time() * 1000)) # milliseconds
+        timestamp = lambda: int(round(time.time() * 1000))  # milliseconds
 
         if event.type == Gdk.EventType._2BUTTON_PRESS:
 
@@ -471,9 +407,9 @@ class MainWindow:
                 self.click_count += 1
             else:
                 self.click_count = 1
-            
+
             self.last_click_timestamp = timestamp()
-        
+
         if self.click_count >= 2:
             self.click_count = 0
 
@@ -481,8 +417,12 @@ class MainWindow:
 
     def on_event_publicip_button_press_event(self, widget, event):
         if self.img_publicip.get_icon_name().icon_name == "view-conceal-symbolic":
-            self.img_publicip.set_from_icon_name("view-reveal-symbolic", Gtk.IconSize.BUTTON)
+            self.img_publicip.set_from_icon_name(
+                "view-reveal-symbolic", Gtk.IconSize.BUTTON
+            )
             self.lbl_ip_public.set_text("{}".format(len(self.public_ip) * "*"))
         else:
-            self.img_publicip.set_from_icon_name("view-conceal-symbolic", Gtk.IconSize.BUTTON)
+            self.img_publicip.set_from_icon_name(
+                "view-conceal-symbolic", Gtk.IconSize.BUTTON
+            )
             self.lbl_ip_public.set_text(self.public_ip)
