@@ -1,6 +1,11 @@
 import os
 import apt
 import json
+import gi
+
+gi.require_version("GLib", "2.0")
+from gi.repository import GLib, Gio
+
 
 cpuinfo_path = "/proc/cpuinfo"
 gpu_class = 0x030000
@@ -36,7 +41,8 @@ def get_desktop_environment():
     """
 
     desktop_session = os.environ.get("XDG_CURRENT_DESKTOP")
-    desktop_version = None
+    desktop_session = "Unknown" if desktop_session is None else desktop_session
+    desktop_version = "Unknown"
     cache = apt.Cache()
     if desktop_session == "GNOME":
         gnome = cache["gnome-shell"]
@@ -62,9 +68,6 @@ def get_cpu():
                 thread_no = line_split(line)
 
         return model, thread_no
-
-
-import os
 
 
 def parse_pci_ids():
@@ -172,14 +175,11 @@ def get_os_info():
     """
     Get OS information
     """
-    cpu_model, thread_no = get_cpu()
-    print("CPU Model: ", cpu_model)
-    print("Thread Number: ", thread_no)
     kernel = os.uname().sysname
     release = os.uname().release
-    print(get_desktop_environment())
-
-    return kernel, release
+    os_fullname = GLib.get_os_info("PRETTY_NAME")
+    os_arch = os.uname().machine
+    return kernel, release, os_fullname + " " + os_arch
 
 
 def get_kernel():
@@ -227,3 +227,141 @@ def get_ram_size():
     except Exception as e:
         print("Exception on /proc/meminfo : {}".format(e))
     return total_physical_ram, total_ram
+
+
+def get_credentials():
+    """
+    Get the current user and the hostname
+    """
+    return os.environ.get("USER"), os.uname().nodename
+
+
+def get_uptime():
+    """
+    Get the system uptime in pretty format.
+    """
+    with open("/proc/uptime", "r") as f:
+        uptime_seconds = float(f.readline().split()[0])
+        uptime = uptime_seconds
+        uptime_str = ""
+        if uptime > 86400:
+            uptime_str += f"{int(uptime // 86400)} days, "
+            uptime %= 86400
+        if uptime > 3600:
+            uptime_str += f"{int(uptime // 3600)} hours, "
+            uptime %= 3600
+        if uptime > 60:
+            uptime_str += f"{int(uptime // 60)} minutes, "
+            uptime %= 60
+        uptime_str += f"{int(uptime)} seconds"
+        return uptime_str
+
+
+def get_total_installed_packages():
+    """
+    Get the total number of installed packages.
+    """
+    cache = apt.Cache()
+    return len([pkg for pkg in cache if pkg.is_installed])
+
+
+def get_shell():
+    """
+    Get the current shell name and version
+    """
+    shell = os.environ.get("SHELL").split("/")[-1]
+    if shell:
+        return shell
+    return "Unknown"
+
+
+def get_window_manager():
+    """
+    Get the current window manager depend on the desktop environment
+    """
+    desktop_env = os.environ.get("XDG_CURRENT_DESKTOP")
+    if desktop_env == "GNOME":
+        return "Mutter"
+    elif desktop_env == "KDE":
+        return "KWin"
+    elif desktop_env == "XFCE":
+        return "Xfwm4"
+    elif desktop_env == "LXDE":
+        return "Openbox"
+    elif desktop_env == "MATE":
+        return "Marco"
+    elif desktop_env == "Cinnamon":
+        return "Muffin"
+    elif desktop_env == "Pantheon":
+        return "Gala"
+    elif desktop_env == "Budgie:GNOME":
+        return "Mutter"
+    elif desktop_env == "Budgie:Pantheon":
+        return "Gala"
+    elif desktop_env == "Budgie:XFCE":
+        return "Xfwm4"
+    elif desktop_env == "Budgie:KDE":
+        return "KWin"
+    elif desktop_env == "Budgie:LXDE":
+        return "Openbox"
+    elif desktop_env == "Budgie:MATE":
+        return "Marco"
+    elif desktop_env == "Budgie:Cinnamon":
+        return "Muffin"
+    elif desktop_env == "Budgie:Deepin":
+        return "KWin"
+    elif desktop_env == "Deepin":
+        return "KWin"
+    elif desktop_env == "Enlightenment":
+        return "Enlightenment"
+    elif desktop_env == "i3":
+        return "i3"
+    elif desktop_env == "Liri":
+        return "KWin"
+    elif desktop_env == "Liri:GNOME":
+        return "Mutter"
+    elif desktop_env == "Liri:Pantheon":
+        return "Gala"
+    elif desktop_env == "Liri:XFCE":
+        return "Xfwm4"
+    elif desktop_env == "Liri:LXDE":
+        return "Openbox"
+    elif desktop_env == "Liri:MATE":
+        return "Marco"
+    elif desktop_env == "Liri:Cinnamon":
+        return "Muffin"
+    elif desktop_env == "Liri:Deepin":
+        return "KWin"
+    elif desktop_env == "Liri:Enlightenment":
+        return "Enlightenment"
+    elif desktop_env == "Liri:i3":
+        return "i3"
+    return "Unknown"
+
+
+def get_wm_theme():
+    """
+    Get the current window manager theme depends on the window manager
+    """
+    desktop_env = os.environ.get("XDG_CURRENT_DESKTOP")
+    settings = Gio.Settings.new("org.gnome.desktop.interface")
+    if desktop_env == "GNOME":
+        return settings.get_value("gtk-theme").unpack()
+    elif desktop_env == "KDE":
+        return "Breeze"
+    elif desktop_env == "XFCE":
+        return "Xfce"
+    return "Unknown"
+
+
+def beauty_size(size):
+    if type(size) is int:
+        size = size / 1024
+        if size > 1048576:
+            size = "{:.1f} GiB".format(float(size / 1048576))
+        elif size > 1024:
+            size = "{:.1f} MiB".format(float(size / 1024))
+        else:
+            size = "{:.1f} KiB".format(float(size))
+        return size
+    return "size not found"

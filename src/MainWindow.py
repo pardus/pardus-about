@@ -27,8 +27,6 @@ locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME)
 # locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
 
-print(utils.get_os_info())
-
 
 class MainWindow:
     def __init__(self, application):
@@ -312,7 +310,7 @@ class MainWindow:
         url = response_body.decode("utf-8").strip()
         if self.is_valid_ip(url):
             self.public_ip = url
-            # print(response_body)
+
         else:
             self.process_next()  # Proceed to the next download
 
