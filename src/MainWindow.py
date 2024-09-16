@@ -15,6 +15,8 @@ import fcntl
 import struct
 import threading
 import json
+from Get_system_info import Get_system_info
+import asyncio
 
 from GPU import GPU
 
@@ -118,6 +120,7 @@ class MainWindow:
 
         self.public_ip = "0.0.0.0"
         self.urls = queue.Queue()
+        self.system_info = Get_system_info()
         # Set version
         # If not getted from __version__ file then accept version in MainWindow.glade file
         try:
@@ -142,14 +145,14 @@ class MainWindow:
         GLib.timeout_add(0, waving_flag, pixbuf.get_iter())
 
     def readSystemInfo(self):
-        output = subprocess.check_output([os.path.dirname(os.path.abspath(__file__)) + "/get_system_info.sh"]).decode("utf-8")
-        lines = output.splitlines()
+        infos = self.system_info.get_ui_data()
+        print(infos)
         
-        self.lbl_distro.set_label(lines[0])
+        self.lbl_distro.set_label(infos[0])
 
-        if lines[0].lower() != "pardus":
+        if infos[0].split()[0].lower() != "pardus":
             try:
-                pixbuf = Gtk.IconTheme.get_default().load_icon("emblem-{}".format(lines[0].lower()), 120,
+                pixbuf = Gtk.IconTheme.get_default().load_icon("emblem-{}".format(infos[0].split()[0].lower()), 120,
                                                                Gtk.IconLookupFlags(16))
             except Exception as e:
                 print("{}".format(e))
@@ -166,17 +169,17 @@ class MainWindow:
             if pixbuf is not None:
                 self.img_distro.set_from_pixbuf(pixbuf)
 
-        self.lbl_distro_version.set_label(lines[1])
-        if lines[2] == "yirmibir":
-            lines[2] =  "Dolunay"
+        self.lbl_distro_version.set_label(infos[1])
+        if infos[2] == "yirmibir":
+            infos[2] =  "Dolunay"
             self.img_background.set_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../bluebackground-21.png")
-        elif lines[2] == "yirmiuc":
-            lines[2] = "Ay Yıldız"
-        self.lbl_distro_codename.set_label(lines[2])
+        elif infos[2] == "yirmiuc":
+            infos[2] = "Ay Yıldız"
+        self.lbl_distro_codename.set_label(infos[2])
 
-        self.lbl_user_host.set_label(lines[3])
-        self.lbl_kernel.set_label(lines[4])
-        self.lbl_desktop.set_label(lines[5])
+        self.lbl_user_host.set_label(infos[3])
+        self.lbl_kernel.set_label(infos[4])
+        self.lbl_desktop.set_label(infos[5])
         # if lines[7] == "0":
         #     self.lbl_cpu.set_label(lines[6])
         # else:
@@ -292,7 +295,6 @@ class MainWindow:
                     total_ram = int(line.split()[1]) * 1024
         except Exception as e:
             print("Exception on /proc/meminfo : {}".format(e))
-
         return total_physical_ram, total_ram
 
     def get_gpu(self):
@@ -436,32 +438,11 @@ class MainWindow:
     def on_menu_btn_export_clicked(self, btn):
         self.popover_menu.popdown()
         self.dialog_gathering_logs.show_all()
-        currentPath = os.path.dirname(os.path.abspath(__file__))
-
-        self.finishedProcesses = 0
-
-        def onFinished(source, condition):
-            self.dialog_gathering_logs.hide()
-            self.dialog_report_exported.run()
-            self.dialog_report_exported.hide()
-
-        def onLogsDumped(source, condition):
-            if condition != 0:
-                self.dialog_gathering_logs.hide()
-                return
-            pid3, _, _, _ = GLib.spawn_async([currentPath + "/copy_to_desktop.sh"],
-                                    flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
-            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid3, onFinished)
         
-        def onSystemInfoDumped(source, condition):
-            pid2, _, _, _ = GLib.spawn_async(["pkexec", currentPath + "/dump_logs.sh"],
-                                    flags=GLib.SPAWN_SEARCH_PATH | GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
-            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid2, onLogsDumped)
+        
+        self.system_info.hide_dialog=self.dialog_gathering_logs.hide
+        threading.Thread(target=self.system_info.start_system_report).start()
 
-        pid1, _, _, _ = GLib.spawn_async([currentPath + "/dump_system_info.sh"],
-                                    flags=GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD)
-        GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid1, onSystemInfoDumped)
-    
     def on_btn_pardus_logo_button_press_event(self, btn, event):
         timestamp = lambda: int(round(time.time() * 1000)) # milliseconds
 
