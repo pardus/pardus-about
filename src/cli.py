@@ -103,14 +103,24 @@ class CLI(object):
         info.append(self.colored_info("Window Manager", window_manager))
         info.append(self.colored_info("Theme", window_manager_theme))
         info.append(self.colored_info("CPU", f"{cpu_model} x{cpu_thread}"))
+        ip_with_interfaces = utils.local_ip_with_interfaces()
+        max_interface_length = max(len(interface) for interface in ip_with_interfaces.keys())
+        max_ip_length = max(len(details["local_ip"]) for details in ip_with_interfaces.values())
+        for interface,details in ip_with_interfaces.items():
+            formatted_interface = interface.ljust(max_interface_length)
+            formatted_ip = details["local_ip"].ljust(max_ip_length)
+            net_info = f"Interface: {formatted_interface}, IP: {formatted_ip}"
+            if details["is_real"]:
+                net_info += f", Real IP: {details['real_ip']}"
+            info.append(self.colored_info("NET", net_info))
+
+
         info.append(
             self.colored_info(
                 "RAM",
                 f"{utils.beauty_size(total_ram)} (Physical RAM:{utils.beauty_size(total_physical_ram)})",
             )
         )
-        for gpu in gpus:
-            print(gpu)
         for index, gpu in enumerate(gpus):
             info.append(self.colored_info(f"GPU{index} Vendor", gpu["vendor"]))
             info.append(self.colored_info(f"GPU{index} Device", gpu["device"]))

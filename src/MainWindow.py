@@ -41,7 +41,6 @@ class MainWindow:
             os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade"
         )
         self.builder.connect_signals(self)
-
         # Window
         self.window = self.builder.get_object("window")
         self.window.set_position(Gtk.WindowPosition.CENTER)

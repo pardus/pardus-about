@@ -2,7 +2,8 @@ import os
 import apt
 import json
 import gi
-
+import socket
+import psutil
 gi.require_version("GLib", "2.0")
 from gi.repository import GLib, Gio
 
@@ -375,3 +376,38 @@ def beauty_size(size):
         return size
     return "size not found"
 
+
+def local_ip_with_interfaces():
+    ip_with_interfaces = {}
+    ignore_prefixes = ["lo", "docker", "veth", "br", "virbr"]
+
+    for iface,addrs in psutil.net_if_addrs().items():
+        local_ip = None
+        real_ip = None
+        is_real = False
+
+        if not any(iface.startswith(prefix) for prefix in ignore_prefixes):
+            is_real = True
+
+        for addr in addrs:
+            if addr.family == socket.AF_INET:
+                local_ip = addr.address
+    
+
+        if local_ip and is_real:
+            try:
+                with socket.socket(socket.AF_INET,socket.SOCK_DGRAM)as s:
+                    s.connect(("8.8.8.8",80))
+                    real_ip = s.getsockname()[0]
+
+            except OSError:
+                real_ip = None
+    
+        if local_ip:
+            ip_with_interfaces[iface] = {
+                "local_ip":local_ip,
+                "real_ip":real_ip,
+                "is_real":is_real
+            }
+
+    return ip_with_interfaces
