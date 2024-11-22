@@ -157,10 +157,19 @@ def get_gpu():
                             gpu_drv_p = os.readlink(drv_content_path)
                             driver = os.path.basename(gpu_drv_p)
                         vendor = parsed_pci_ids[vendor_id]["vendor_name"]
+                        vendor_short = ""
+                        if "INTEL" in vendor.upper():
+                            vendor_short = "INTEL"
+                        elif "AMD" in vendor.upper():
+                            vendor_short = "AMD"
+                        elif "NVIDIA" in vendor.upper():
+                            vendor_short = "NVIDIA"
+                            
                         device = get_device_name(vendor_id, device_id)
                         devices.append(
                             {
                                 "vendor": vendor,
+                                "vendor_short":vendor_short,
                                 "class": cont,
                                 "device": device,
                                 "driver": driver,
@@ -365,3 +374,4 @@ def beauty_size(size):
             size = "{:.1f} KiB".format(float(size))
         return size
     return "size not found"
+

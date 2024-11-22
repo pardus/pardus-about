@@ -109,6 +109,8 @@ class CLI(object):
                 f"{utils.beauty_size(total_ram)} (Physical RAM:{utils.beauty_size(total_physical_ram)})",
             )
         )
+        for gpu in gpus:
+            print(gpu)
         for index, gpu in enumerate(gpus):
             info.append(self.colored_info(f"GPU{index} Vendor", gpu["vendor"]))
             info.append(self.colored_info(f"GPU{index} Device", gpu["device"]))

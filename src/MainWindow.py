@@ -216,7 +216,7 @@ class MainWindow:
 
     def add_gpus_to_ui(self):
         gpus = utils.get_gpu()
-        self.lbl_gpu.set_markup("{} ({})".format(gpus[0]["device"], gpus[0]["driver"]))
+        self.lbl_gpu.set_markup("{} {} ({})".format(gpus[0]["vendor_short"], gpus[0]["device"], gpus[0]["driver"]))
         try:
             if "llvmpipe" in gpus[0]["driver"].lower():
                 llvm = True
@@ -226,14 +226,14 @@ class MainWindow:
             print("llvmpipe detect err: {}".format(e))
             llvm = False
 
-        self.lbl_gpu.set_markup("{} ({})".format(gpus[0]["device"], gpus[0]["driver"]))
+        self.lbl_gpu.set_markup("{} {} ({})".format(gpus[0]["vendor_short"], gpus[0]["device"], gpus[0]["driver"]))
 
         GLib.idle_add(self.img_llvm.set_visible, llvm)
         if len(gpus) > 1:
             self.lbl_title_gpu.set_markup("<b>GPU 1:</b>")
             GLib.idle_add(self.box_extra_gpu.set_visible, True)
             count = 2
-            for index, extra in enumerate(gpus[1:]):
+            for index, gpu in enumerate(gpus[1:]):
                 box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 5)
                 gputitle = Gtk.Label.new()
                 gputitle.set_selectable(True)
@@ -244,8 +244,7 @@ class MainWindow:
                 gpulabel.set_line_wrap_mode(Gtk.WrapMode.WORD)
                 gpulabel.set_max_width_chars(55)
                 gpulabel.set_selectable(True)
-                gpulabel.set_markup("{} ({})".format(extra["device"], extra["driver"]))
-
+                gpulabel.set_markup("{} {} ({})".format(gpu["vendor_short"], gpu["device"], gpu["driver"]))
                 box.pack_start(gputitle, False, True, 0)
                 box.pack_start(gpulabel, False, True, 0)
 
