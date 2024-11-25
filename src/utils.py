@@ -382,6 +382,8 @@ def local_ip_with_interfaces():
     ignore_prefixes = ["lo", "docker", "veth", "br", "virbr"]
 
     for iface,addrs in psutil.net_if_addrs().items():
+        if iface == "lo":
+            continue
         local_ip = None
         real_ip = None
         is_real = False
