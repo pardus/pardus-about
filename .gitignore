@@ -134,3 +134,7 @@ dmypy.json
 __pycache__
 
 test/
+
+debian/.debhelper
+debian/debhelper-build-stamp
+debian/pardus-about*
