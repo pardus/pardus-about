@@ -169,9 +169,10 @@ class MainWindow:
         self.lbl_distro_version.set_label(lines[1])
         if lines[2] == "yirmibir":
             lines[2] =  "Dolunay"
-            self.img_background.set_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../bluebackground-21.png")
+            self.img_background.set_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../banner-21.png")
         elif lines[2] == "yirmiuc":
             lines[2] = "Ay Yıldız"
+            self.img_background.set_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../banner-23.png")
         elif lines[2] == "yirmibes":
             lines[2] = "Bilge"
         self.lbl_distro_codename.set_label(lines[2])
