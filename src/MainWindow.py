@@ -172,6 +172,8 @@ class MainWindow:
             self.img_background.set_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../bluebackground-21.png")
         elif lines[2] == "yirmiuc":
             lines[2] = "Ay Yıldız"
+        elif lines[2] == "yirmibes":
+            lines[2] = "Bilge"
         self.lbl_distro_codename.set_label(lines[2])
 
         self.lbl_user_host.set_label(lines[3])
