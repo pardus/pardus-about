@@ -22,12 +22,24 @@ def get_local_ip():
     return ret
 
 def get_wan_ip():
-    """ Get WAN Ip adrerr. Uses http request."""
+    """ Get WAN IP address. Uses http request."""
     with open(os.path.dirname(os.path.abspath(__file__)) + "/../../data/servers.txt", "r") as f:
         for server in f.read().strip().split("\n"):
-            res = requests.get(server)
-            if res.status_code == 200:
-                return res.text.strip()
+            try:
+                # Add timeout to prevent indefinite blocking
+                # requests library will handle redirects and raise TooManyRedirects if needed
+                res = requests.get(server, timeout=5)
+                if res.status_code == 200:
+                    return res.text.strip()
+            except requests.exceptions.TooManyRedirects:
+                print(f"TooManyRedirects for server: {server}, trying next...")
+                continue
+            except requests.exceptions.Timeout:
+                print(f"Timeout for server: {server}, trying next...")
+                continue
+            except requests.exceptions.RequestException as e:
+                print(f"Error fetching from {server}: {e}, trying next...")
+                continue
     return "0.0.0.0"
 
 if __name__ == "__main__":
