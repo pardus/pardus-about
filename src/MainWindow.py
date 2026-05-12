@@ -156,6 +156,7 @@ class MainWindow:
             "delete-event", lambda w, e: w.hide() or True
         )
         self.ui_gathering_logs_stack = UI("ui_gathering_logs_stack")
+        self.ui_gathering_logs_filename = UI("ui_gathering_logs_filename")
 
     def define_variables(self):
         self.computer_manager = None
@@ -770,7 +771,13 @@ class MainWindow:
             SystemReportManager.pkexec_user = os.environ["USER"]
             SystemReportManager.generate_user_report()
 
-            p2 = SystemReportManager.archive_and_copy_to_desktop(desktop_path)
+            archive_name = (
+                f"pardus_system_report_{SystemReportManager.pkexec_user}.tar.gz"
+            )
+            p2 = SystemReportManager.archive_and_copy_to_desktop(
+                desktop_path, archive_name
+            )
+            self.ui_gathering_logs_filename.set_label(archive_name)
             if p2.returncode == 0:
                 task.return_boolean(True)
                 return

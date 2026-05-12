@@ -7,6 +7,7 @@ import subprocess
 
 ARCHIVE_DIR = "/tmp/pardus_system_report"
 
+
 def detect_pkexec_user():
     uid = "0"
     if "PKEXEC_UID" in os.environ:
@@ -14,10 +15,12 @@ def detect_pkexec_user():
     with open("/etc/passwd", "r") as f:
         for line in f.read().strip().split("\n"):
             if uid == line.split(":")[2]:
-                return line.split(":")[0];
+                return line.split(":")[0]
     return "root"
 
+
 pkexec_user = detect_pkexec_user()
+
 
 def run_and_save(command, command_name=None):
     """Usage: run_and_save(["journalctl", "-q", "-n", 1000]), it will be saved in /tmp/pardus_system_report/journalctl"""
@@ -64,9 +67,14 @@ def generate_report():
     os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}", exist_ok=True)
 
     # Program outputs
-    run_and_save(["env", "-i", "/bin/bash", "-c", "source /etc/profile ; env"], command_name="env_root")
+    run_and_save(
+        ["env", "-i", "/bin/bash", "-c", "source /etc/profile ; env"],
+        command_name="env_root",
+    )
     run_and_save(["dmesg"])
-    run_and_save(["journalctl", "-q", "--since", "7 day ago"], command_name="journal_system")
+    run_and_save(
+        ["journalctl", "-q", "--since", "7 day ago"], command_name="journal_system"
+    )
     run_and_save(["timedatectl"])
     run_and_save(["lsblk", "-J", "-f"])
     run_and_save(["df", "-al", "-x", "autofs"])
@@ -76,7 +84,7 @@ def generate_report():
     run_and_save(["dpkg", "-l"])
     run_and_save(["ip", "-o", "addr"])
     run_and_save(["ip", "route", "show", "table", "all"])
-    run_and_save(["lsb_release"])
+    run_and_save(["lsb_release", "-a"])
     run_and_save(["lsusb"])
     run_and_save(["top", "-b", "-n", "1"])
     run_and_save(["lsmod"])
@@ -133,11 +141,14 @@ def generate_user_report():
     # Program outputs
     run_and_save(["env"], command_name="env_user")
     run_and_save(["dconf", "dump", "/"])
-    run_and_save(["journalctl", "--user", "-q", "--since", "7 day ago"], command_name="journal_user")
+    run_and_save(
+        ["journalctl", "--user", "-q", "--since", "7 day ago"],
+        command_name="journal_user",
+    )
     run_and_save(["flatpak", "list"])
 
-def archive_and_copy_to_desktop(desktop_path):
-    archive_name = f"pardus_system_report_{pkexec_user}.tar.gz"
+
+def archive_and_copy_to_desktop(desktop_path, archive_name):
     return subprocess.run(
         [
             "tar",
