@@ -132,14 +132,14 @@ class ComputerManager:
         self.computer_info["is_acpi_supported"] = p.returncode == 0
 
         # Dual boot oses
-
+        self.computer_info["dualboot"] = {}
         p = Actions.run("dualboot", capture_output=True)
-        try:
-            self.computer_info["dualboot"] = json.loads(p.stdout.decode("utf-8"))
-        except Exception as e:
-            print(e)
-            print(p.stdout)
-            self.computer_info["dualboot"] = {}
+        if p.returncode == 0:
+            try:
+                self.computer_info["dualboot"] = json.loads(p.stdout.decode("utf-8"))
+            except Exception as e:
+                print(e)
+                print(p.stdout)
 
         # Boot mode (Uefi or legacy)
         self.computer_info["boot"] = "legacy"

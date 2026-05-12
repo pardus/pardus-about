@@ -765,16 +765,16 @@ class MainWindow:
         desktop_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
 
         p = Actions.run("report")
-        SystemReportManager.pkexec_user = os.environ["USER"]
-        SystemReportManager.generate_user_report()
-
         if p.returncode == 0:
+            SystemReportManager.pkexec_user = os.environ["USER"]
+            SystemReportManager.generate_user_report()
+
             p2 = SystemReportManager.archive_and_copy_to_desktop(desktop_path)
             if p2.returncode == 0:
-                task.return_value(True)
+                task.return_boolean(True)
                 return
 
-        task.return_value(False)
+        task.return_boolean(False)
 
     def export_system_report_completed(self, source, task):
         result = task.propagate_boolean()
