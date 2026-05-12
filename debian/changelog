@@ -2,8 +2,9 @@ pardus-about (1.2.4) yirmibes; urgency=medium
 
   * fix: ask for user password
   * fix: system report when polkit password request cancelled
+  * fix: auth_self -> auth_admin
 
- -- Emin Fedar <emin.fedar@pardus.org.tr>  Tue, 12 May 2026 11:21:55 +0300
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Tue, 12 May 2026 14:04:31 +0300
 
 pardus-about (1.2.3) yirmibes; urgency=medium
 
