@@ -22,7 +22,8 @@ from util import (
 )
 from widget.HardwareDetailRow import HardwareDetailRow
 from widget.HardwareGridCell import HardwareGridCell
-import Actions
+
+import ActionsAsk
 
 # Translation Constants:
 APPNAME = "pardus-about"
@@ -764,7 +765,7 @@ class MainWindow:
     def export_system_report(self, task, source_object, task_data, cancellable):
         desktop_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
 
-        p = Actions.run("report")
+        p = ActionsAsk.run("report")
         if p.returncode == 0:
             SystemReportManager.pkexec_user = os.environ["USER"]
             SystemReportManager.generate_user_report()

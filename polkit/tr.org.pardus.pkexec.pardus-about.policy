@@ -8,7 +8,7 @@
   <vendor>Pardus Developers</vendor>
   <vendor_url>http://www.pardus.org.tr/</vendor_url>
 
-  <action id="tr.org.pardus.pkexec.pardus-about">
+  <action id="tr.org.pardus.pkexec.pardus-about.export_report">
     <description>Run system report creator.</description>
     <message>Authentication is required to create system report</message>
     <message xml:lang="tr">Sistem raporu oluşturmak için yetkilendirme gerekiyor</message>
@@ -16,6 +16,19 @@
       <allow_any>auth_admin_keep</allow_any>
       <allow_inactive>auth_admin_keep</allow_inactive>
       <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/share/pardus/pardus-about/src/ActionsAsk.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+
+    <action id="tr.org.pardus.pkexec.pardus-about.system_info">
+    <description>Run system report creator.</description>
+    <message>Authentication is required to create system report</message>
+    <message xml:lang="tr">Sistem raporu oluşturmak için yetkilendirme gerekiyor</message>
+    <defaults>
+      <allow_any>yes</allow_any>
+      <allow_inactive>yes</allow_inactive>
+      <allow_active>yes</allow_active>
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">/usr/share/pardus/pardus-about/src/Actions.py</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
