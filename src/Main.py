@@ -11,6 +11,11 @@ from MainWindow import MainWindow
 from util import ComputerManager
 
 
+if "--json" in sys.argv or "-j" in sys.argv:
+    manager = ComputerManager.ComputerManager()
+    print(json.dumps(manager.get_all_device_info(), indent=2))
+    sys.exit(0)
+
 class Application(Gtk.Application):
     def __init__(self, *args, **kwargs):
         super().__init__(
@@ -66,14 +71,6 @@ class Application(Gtk.Application):
         options = command_line.get_options_dict()
         options = options.end().unpack()
         self.args = options
-
-        if "json" in options.keys():
-            manager = ComputerManager.ComputerManager()
-
-            print(json.dumps(manager.get_all_device_info(), indent=2))
-
-            self.quit()
-            return 0
 
         self.activate()
         return 0
