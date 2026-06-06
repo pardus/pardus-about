@@ -450,7 +450,10 @@ class MainWindow:
                 memory_info_table.append([i, _("Empty"), "", "", ""])
             else:
                 # Size formatting (16 -> "16 GB")
-                size_text = f"{int(size)} GB"
+                if size % 1 == 0:
+                    size_text = f"{int(size)} GB"
+                else:
+                    size_text = f"{round(size, 1)} GB"
 
                 mem_type = slot.get("type", _("Unknown"))
                 vendor = slot.get("vendor", _("Unknown"))

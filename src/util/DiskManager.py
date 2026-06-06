@@ -25,16 +25,19 @@ def get_disks():
             if d["rm"]:
                 continue
 
-            size = int(d["size"]) / 1000 / 1000 / 1000
+            size = int(d["size"]) / 1024 / 1024 / 1024
             size_name = "GB"
-            if size > 1000:
-                size = size / 1000
+            if size > 1024:
+                size = size / 1024
                 size_name = "TB"
-                if size > 1000:
-                    size = size / 1000
+                if size > 1024:
+                    size = size / 1024
                     size_name = "PB"
 
-            size = int(size)
+            if size < 10:
+                size = round(size, 2)
+            else:
+                size = round(size, 1)
 
             disk = {
                 "model": d["model"],

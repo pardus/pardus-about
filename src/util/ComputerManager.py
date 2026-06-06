@@ -259,6 +259,11 @@ class ComputerManager:
         for mem in self.memory_info:
             size += mem["size"]
 
+        if size % 1 > 0.9 or size % 1 < 0.1:
+            size = int(round(size))
+        else:
+            size = round(size, 1)
+
         summary = f"{size} GB"
         info = self.memory_info[0]
         # Add type if exists (DDR5)
