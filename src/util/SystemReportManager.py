@@ -1,9 +1,10 @@
-from util import ComputerManager
-from pathlib import Path
 import json
 import os
 import shutil
 import subprocess
+from pathlib import Path
+
+from util import ComputerManager
 
 ARCHIVE_DIR = "/tmp/pardus_system_report"
 
@@ -134,6 +135,9 @@ def generate_user_report():
     hardware_info = json.dumps(
         ComputerManager.ComputerManager().get_all_device_info(), indent=2
     )
+
+    # Make dir
+    os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}", exist_ok=True)
 
     with open(f"{ARCHIVE_DIR}/{pkexec_user}/system_info.json", "w") as f:
         f.write(hardware_info)
