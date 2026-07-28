@@ -777,6 +777,9 @@ class MainWindow:
             p2 = SystemReportManager.archive_and_copy_to_desktop(
                 desktop_path, archive_name
             )
+            # The tree under /tmp has served its purpose once the archive is
+            # written; do not leave the collected data lying around.
+            SystemReportManager.cleanup()
             self.ui_gathering_logs_filename.set_label(archive_name)
             if p2.returncode == 0:
                 task.return_boolean(True)

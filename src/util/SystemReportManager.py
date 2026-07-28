@@ -2,6 +2,7 @@ from util import ComputerManager
 from pathlib import Path
 import json
 import os
+import pwd
 import shutil
 import subprocess
 
@@ -20,6 +21,46 @@ def detect_pkexec_user():
 
 
 pkexec_user = detect_pkexec_user()
+
+
+def restrict_to_owner():
+    """Hand the report tree to the requesting user and to nobody else.
+
+    generate_report() runs as root and collects data the user cannot normally
+    read: the full system journal, dmidecode output, network state and the
+    system logs. The tree lives under /tmp, so leaving it group/world readable
+    exposes that data to every local account until the next report is written.
+    Directories become 0700 and files 0600, both owned by the requesting user.
+    """
+    try:
+        entry = pwd.getpwnam(pkexec_user)
+    except KeyError:
+        return
+
+    uid, gid = entry.pw_uid, entry.pw_gid
+
+    def apply(path, mode):
+        try:
+            os.chown(path, uid, gid)
+            os.chmod(path, mode)
+        except OSError:
+            pass
+
+    apply(ARCHIVE_DIR, 0o700)
+    for root, dirs, files in os.walk(ARCHIVE_DIR):
+        for name in dirs:
+            apply(os.path.join(root, name), 0o700)
+        for name in files:
+            apply(os.path.join(root, name), 0o600)
+
+
+def cleanup():
+    """Remove the report tree once it has been archived.
+
+    Without this the collected data stays in /tmp until the next report run or
+    a reboot, long after the user is done with it.
+    """
+    shutil.rmtree(ARCHIVE_DIR, ignore_errors=True)
 
 
 def run_and_save(command, command_name=None):
@@ -124,9 +165,7 @@ def generate_report():
     copy("/etc/apt/sources.list")
     copy("/etc/apt/sources.list.d")
 
-    # set permission and owner
-    subprocess.run(["chown", pkexec_user, "-R", ARCHIVE_DIR])
-    subprocess.run(["chmod", "755", "-R", ARCHIVE_DIR])
+    restrict_to_owner()
 
 
 def generate_user_report():
@@ -146,6 +185,10 @@ def generate_user_report():
         command_name="journal_user",
     )
     run_and_save(["flatpak", "list"])
+
+    # This runs as the user and adds files after generate_report() has already
+    # tightened the tree, so apply the same modes to the new files.
+    restrict_to_owner()
 
 
 def archive_and_copy_to_desktop(desktop_path, archive_name):
