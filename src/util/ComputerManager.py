@@ -252,10 +252,28 @@ class ComputerManager:
     def get_memory_info(self):
         return self.memory_info
 
+    @staticmethod
+    def get_total_memory_from_proc():
+        """Total installed memory as reported by the kernel, in GB.
+
+        DMI does not expose per-module memory information on every machine
+        (virtual machines in particular report zero modules), but MemTotal is
+        always available. Returns None if it cannot be read.
+        """
+        try:
+            with open("/proc/meminfo", "r") as f:
+                for line in f:
+                    if line.startswith("MemTotal:"):
+                        return int(line.split()[1]) / (1024 * 1024)
+        except (OSError, ValueError, IndexError):
+            pass
+        return None
+
     def get_memory_summary(self):
         size = 0
         if len(self.memory_info) == 0:
-            return "Unknown"
+            total = self.get_total_memory_from_proc()
+            return "Unknown" if total is None else f"{total:.1f} GB"
         for mem in self.memory_info:
             size += mem["size"]
 
