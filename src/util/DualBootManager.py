@@ -51,33 +51,43 @@ def get_windows_version():
 
 def get_dualboot_oses():
     dualboot = {}
-    os.makedirs("/run/winroot", exist_ok=True)
+    winroot_dir = "/run/winroot"
+    if os.path.islink(winroot_dir):
+        os.unlink(winroot_dir)
+    os.makedirs(winroot_dir, mode=0o700, exist_ok=True)
+    try:
+        os.chmod(winroot_dir, 0o700)
+    except OSError:
+        pass
     root_part = get_root_part()
     for part in list_parts():
         if f"/dev/{part}" == root_part:
             continue
         sp = subprocess.run(
-            ["mount", "-o", "defaults,ro", f"/dev/{part}", "/run/winroot"],
+            ["mount", "-o", "ro,nosuid,nodev,noexec", f"/dev/{part}", winroot_dir],
             capture_output=True,
         )
         if 0 == sp.returncode:
             # Windows
-            if os.path.exists("/run/winroot/Windows/System32/ntoskrnl.exe"):
+            if os.path.exists(f"{winroot_dir}/Windows/System32/ntoskrnl.exe"):
                 dualboot[part] = "Windows " + get_windows_version()
             # Mac OS X
             if os.path.exists(
-                "/run/winroot/System/Library/CoreServices/SystemVersion.plist"
+                f"{winroot_dir}/System/Library/CoreServices/SystemVersion.plist"
             ):
                 dualboot[part] = "Mac OS X"
             # Linux
-            if os.path.exists("/run/winroot/etc/os-release"):
-                with open("/run/winroot/etc/os-release", "r") as f:
+            if os.path.exists(f"{winroot_dir}/etc/os-release"):
+                with open(f"{winroot_dir}/etc/os-release", "r") as f:
                     for line in f.read().split("\n"):
                         if line.startswith("NAME="):
                             dualboot[part] = line[6:-1]
-            os.system("umount -lf /run/winroot")
+            subprocess.run(["umount", "-lf", winroot_dir], check=False)
 
-    os.rmdir("/run/winroot")
+    try:
+        os.rmdir(winroot_dir)
+    except OSError:
+        pass
     return json.dumps(dualboot)
 
 

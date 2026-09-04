@@ -64,8 +64,13 @@ def generate_report():
         os.unlink(ARCHIVE_DIR)
     elif os.path.isdir(ARCHIVE_DIR):
         shutil.rmtree(ARCHIVE_DIR)
-    # Make dir
-    os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}", exist_ok=True)
+    # Make dir with secure 0700 permissions
+    os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}", mode=0o700, exist_ok=True)
+    try:
+        os.chmod(ARCHIVE_DIR, 0o700)
+        os.chmod(f"{ARCHIVE_DIR}/{pkexec_user}", 0o700)
+    except OSError:
+        pass
 
     # Program outputs
     run_and_save(
@@ -125,9 +130,9 @@ def generate_report():
     copy("/etc/apt/sources.list")
     copy("/etc/apt/sources.list.d")
 
-    # set permission and owner
+    # set permission and owner (0700: strictly restricted to pkexec_user)
     subprocess.run(["chown", pkexec_user, "-R", ARCHIVE_DIR])
-    subprocess.run(["chmod", "755", "-R", ARCHIVE_DIR])
+    subprocess.run(["chmod", "700", "-R", ARCHIVE_DIR])
 
 
 def generate_user_report():
@@ -136,8 +141,13 @@ def generate_user_report():
         ComputerManager.ComputerManager().get_all_device_info(), indent=2
     )
 
-    # Make dir
-    os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}", exist_ok=True)
+    # Make dir with secure 0700 permissions
+    os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}", mode=0o700, exist_ok=True)
+    try:
+        os.chmod(ARCHIVE_DIR, 0o700)
+        os.chmod(f"{ARCHIVE_DIR}/{pkexec_user}", 0o700)
+    except OSError:
+        pass
 
     with open(f"{ARCHIVE_DIR}/{pkexec_user}/system_info.json", "w") as f:
         f.write(hardware_info)
