@@ -6,7 +6,7 @@ from pathlib import Path
 
 from util import ComputerManager
 
-ARCHIVE_DIR = "/tmp/pardus_system_report"
+ARCHIVE_DIR = "/run/pardus-about-report"
 
 
 def detect_pkexec_user():
@@ -24,7 +24,7 @@ pkexec_user = detect_pkexec_user()
 
 
 def run_and_save(command, command_name=None):
-    """Usage: run_and_save(["journalctl", "-q", "-n", 1000]), it will be saved in /tmp/pardus_system_report/journalctl"""
+    """Usage: run_and_save(["journalctl", "-q", "-n", 1000]), it will be saved under ARCHIVE_DIR."""
 
     if not command:
         return
