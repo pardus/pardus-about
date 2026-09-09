@@ -52,6 +52,8 @@ def get_windows_version():
 def get_dualboot_oses():
     dualboot = {}
     os.makedirs("/run/winroot", exist_ok=True)
+    os.chown("/run/winroot", 0, 0)
+    os.chmod("/run/winroot", 0o700)
     root_part = get_root_part()
     for part in list_parts():
         if f"/dev/{part}" == root_part:
