@@ -1,3 +1,21 @@
+pardus-about (1.2.5) yirmibes; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+
+  [ Ali Riza KESKIN ]
+  * --json parameter X11 requirement issue fixed.
+  * set /run/winroot directory permission: prevent read files from non-root users
+  * winroot: mount nodev noexec nosuid
+
+  [ Emin Fedar ]
+  * fix: makedir on user report
+
+  [ ehlinazgumus ]
+  * fix: fall back to /proc/meminfo when DMI reports no memory modules
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 10 Sep 2026 14:47:00 +0300
+
 pardus-about (1.2.4) yirmibes; urgency=medium
 
   * fix: ask for user password
