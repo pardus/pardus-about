@@ -59,7 +59,7 @@ def get_dualboot_oses():
         if f"/dev/{part}" == root_part:
             continue
         sp = subprocess.run(
-            ["mount", "-o", "defaults,ro", f"/dev/{part}", "/run/winroot"],
+            ["mount", "-o", "ro,nosuid,nodev,noexec", f"/dev/{part}", "/run/winroot"],
             capture_output=True,
         )
         if 0 == sp.returncode:
