@@ -12,57 +12,49 @@ de_version_command = {
 
 
 def get_desktop_version(desktop):
-    version = ""
-    desktop = next(
-        (item for item in str(desktop).lower().split(":")
+    desktop_key = next(
+        (item for item in str(desktop).lower().split(":") 
          if item in de_version_command),
-        "",
+        None,
     )
+
+    if not desktop_key:
+        return ""
+
     try:
-        if desktop in de_version_command:
-            output = (
-                (
-                    subprocess.run(
-                        de_version_command[desktop],
-                        shell=False,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE,
-                    )
-                )
-                .stdout.decode()
-                .strip()
-            )
-        else:
+        result = subprocess.run(
+            de_version_command[desktop_key],
+            capture_output=True,
+            text=True,
+            check=False
+        )
+        
+        output = result.stdout.strip()
+        if not output:
             return ""
-        # print(output, desktop)
-        if "xfce" in desktop:
-            for line in output.split("\n"):
+
+        if desktop_key == "xfce":
+            for line in output.splitlines():
                 if line.startswith("xfce4-session "):
-                    version = line.split(" ")[-1].strip("()")
-                    break
+                    return line.split()[-1].strip("()")
 
-        elif "gnome" in desktop:
-            for line in output.split("\n"):
+        elif desktop_key == "gnome":
+            for line in output.splitlines():
                 if "GNOME Shell" in line:
-                    version = line.split(" ")[-1]
+                    return line.split()[-1]
 
-        elif "cinnamon" in desktop:
-            version = output.split(" ")[-1]
+        elif desktop_key in ("cinnamon", "mate", "kde"):
+            return output.split()[-1]
 
-        elif "mate" in desktop:
-            version = output.split(" ")[-1]
-
-        elif "kde" in desktop:
-            version = output.split(" ")[-1]
-
-        elif "lxqt" in desktop:
-            for line in output:
+        elif desktop_key == "lxqt":
+            for line in output.splitlines():
                 if "liblxqt" in line:
-                    version = line.split()[1].strip()
+                    return line.split()[1].strip()
 
-        elif "budgie" in desktop:
-            version = output.split("\n")[0].strip().split(" ")[-1]
-    except Exception as e:
-        version = ""
+        elif desktop_key == "budgie":
+            return output.splitlines()[0].strip().split()[-1]
 
-    return version
+    except Exception:
+        pass
+
+    return ""
