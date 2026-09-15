@@ -13,7 +13,11 @@ de_version_command = {
 
 def get_desktop_version(desktop):
     version = ""
-    desktop = "{}".format(desktop.lower())
+    desktop = next(
+        (item for item in str(desktop).lower().split(":")
+         if item in de_version_command),
+        "",
+    )
     try:
         if desktop in de_version_command:
             output = (
