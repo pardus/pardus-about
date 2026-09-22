@@ -145,8 +145,6 @@ class MainWindow:
 
         # Submit
         self.ui_submit_window = UI("ui_submit_window")
-        # prevent destroying the window on close clicked
-        self.ui_submit_window.connect("delete-event", lambda w, e: w.hide() or True)
         self.ui_submit_lbl = UI("ui_submit_lbl")
         self.ui_submit_stack = UI("ui_submit_stack")
 
@@ -1042,3 +1040,8 @@ class MainWindow:
 
     def on_ui_edit_hostname_cancel_btn_clicked(self, btn):
         self.ui_edit_hostname_popover.popdown()
+
+    # prevent destroying the window on close clicked
+    def on_ui_submit_window_delete_event(self, window, event):
+        window.hide()
+        return True
