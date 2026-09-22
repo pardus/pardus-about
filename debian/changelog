@@ -1,3 +1,18 @@
+pardus-about (1.2.6) yirmibes; urgency=medium
+
+  [ Özcan ]
+  * fix: resolve desktop version from composite XDG values
+
+  [ Fatih Altun ]
+  * Improve desktop version detection
+  * Update submit window delete event signal
+  * Add glib_idle to copy report notification popover
+  * Add revealer instead of copy notification popover for fix freeze bug
+  * Fix process name
+  * Add copy report button sensitive controls
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 22 Sep 2026 14:19:29 +0300
+
 pardus-about (1.2.5) yirmibes; urgency=medium
 
   [ Hugo Carvalho ]
