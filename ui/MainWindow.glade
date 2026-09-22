@@ -1171,6 +1171,25 @@ Hardware information is not shared with third parties and is only sent once duri
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRevealer" id="ui_copy_notification_revealer">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="transition-type">slide-up</property>
+                <child>
+                  <object class="GtkLabel" id="ui_copy_notification_label">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">System Report has been copied to your clipboard!</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
                 <property name="position">5</property>
               </packing>
             </child>
@@ -1206,24 +1225,6 @@ Hardware information is not shared with third parties and is only sent once duri
             <property name="position">1</property>
           </packing>
         </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkPopover" id="ui_notification_popover">
-    <property name="can-focus">False</property>
-    <property name="relative-to">ui_copy_report_btn</property>
-    <child>
-      <object class="GtkLabel">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="margin-left">7</property>
-        <property name="margin-right">7</property>
-        <property name="margin-start">7</property>
-        <property name="margin-end">7</property>
-        <property name="margin-top">7</property>
-        <property name="margin-bottom">7</property>
-        <property name="label" translatable="yes">System Report has been copied to your clipboard!</property>
-        <property name="use-markup">True</property>
       </object>
     </child>
   </object>

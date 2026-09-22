@@ -134,7 +134,6 @@ class MainWindow:
 
         self.ui_about_dialog = UI("ui_about_dialog")
         self.ui_popover_menu = UI("ui_popover_menu")
-        self.ui_notification_popover = UI("ui_notification_popover")
 
         self.ui_distro_id_label = UI("ui_distro_id_label")
         self.ui_distro_version_label = UI("ui_distro_version_label")
@@ -156,8 +155,11 @@ class MainWindow:
         self.ui_gathering_logs_stack = UI("ui_gathering_logs_stack")
         self.ui_gathering_logs_filename = UI("ui_gathering_logs_filename")
 
+        self.ui_copy_notification_revealer = UI("ui_copy_notification_revealer")
+
     def define_variables(self):
         self.computer_manager = None
+        self.copy_notification_revealer_id = None
 
     def control_args(self):
         if "hardware" in self.application.args.keys():
@@ -859,7 +861,15 @@ class MainWindow:
     def on_copy_report_btn_clicked(self, btn):
         clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default())
         clipboard.set_text(self.ui_submit_lbl.get_text(), -1)
-        GLib.idle_add(self.ui_notification_popover.popup)
+        self.ui_copy_notification_revealer.set_reveal_child(True)
+        self.copy_notification_revealer_id = GLib.timeout_add_seconds(5, self.close_copy_notification_revealer)
+
+    def close_copy_notification_revealer(self):
+        if self.ui_copy_notification_revealer.get_reveal_child():
+            self.ui_copy_notification_revealer.set_reveal_child(False)
+        if self.copy_notification_revealer_id is not None:
+            GLib.source_remove(self.copy_notification_revealer_id)
+            self.copy_notification_revealer_id = None
 
     def on_submit_report_btn_clicked(self, btn):
         self.ui_submit_stack.set_visible_child_name("spinner")
