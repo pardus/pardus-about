@@ -859,7 +859,7 @@ class MainWindow:
     def on_copy_report_btn_clicked(self, btn):
         clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default())
         clipboard.set_text(self.ui_submit_lbl.get_text(), -1)
-        self.ui_notification_popover.popup()
+        GLib.idle_add(self.ui_notification_popover.popup)
 
     def on_submit_report_btn_clicked(self, btn):
         self.ui_submit_stack.set_visible_child_name("spinner")
