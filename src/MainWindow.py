@@ -862,14 +862,15 @@ class MainWindow:
         clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default())
         clipboard.set_text(self.ui_submit_lbl.get_text(), -1)
         self.ui_copy_notification_revealer.set_reveal_child(True)
+        btn.set_sensitive(False)
         self.copy_notification_revealer_id = GLib.timeout_add_seconds(5, self.close_copy_notification_revealer)
 
     def close_copy_notification_revealer(self):
-        if self.ui_copy_notification_revealer.get_reveal_child():
-            self.ui_copy_notification_revealer.set_reveal_child(False)
-        if self.copy_notification_revealer_id is not None:
-            GLib.source_remove(self.copy_notification_revealer_id)
-            self.copy_notification_revealer_id = None
+        self.ui_copy_notification_revealer.set_reveal_child(False)
+        self.ui_copy_report_btn.set_sensitive(True)
+
+        self.copy_notification_revealer_id = None
+        return GLib.SOURCE_REMOVE
 
     def on_submit_report_btn_clicked(self, btn):
         self.ui_submit_stack.set_visible_child_name("spinner")
@@ -1053,5 +1054,12 @@ class MainWindow:
 
     # prevent destroying the window on close clicked
     def on_ui_submit_window_delete_event(self, window, event):
+        if self.copy_notification_revealer_id is not None:
+            GLib.source_remove(self.copy_notification_revealer_id)
+            self.copy_notification_revealer_id = None
+
+        self.ui_copy_notification_revealer.set_reveal_child(False)
+        self.ui_copy_report_btn.set_sensitive(True)
+
         window.hide()
         return True
