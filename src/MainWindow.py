@@ -766,8 +766,9 @@ class MainWindow:
     def export_system_report(self, task, source_object, task_data, cancellable):
         desktop_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
 
-        p = ActionsAsk.run("report")
+        p = ActionsAsk.run("report", capture_output=True)
         if p.returncode == 0:
+            SystemReportManager.ARCHIVE_DIR = p.stdout.decode().strip().split("\n")[-1]
             SystemReportManager.pkexec_user = os.environ["USER"]
             SystemReportManager.generate_user_report()
 

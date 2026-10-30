@@ -1,30 +1,30 @@
 import json
 import os
+import pwd
 import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 
 from util import ComputerManager
 
-ARCHIVE_DIR = "/tmp/pardus_system_report"
+# Private dir of the current report, generate_report() creates it
+ARCHIVE_DIR = None
 
 
 def detect_pkexec_user():
-    uid = "0"
-    if "PKEXEC_UID" in os.environ:
-        uid = os.environ["PKEXEC_UID"]
-    with open("/etc/passwd", "r") as f:
-        for line in f.read().strip().split("\n"):
-            if uid == line.split(":")[2]:
-                return line.split(":")[0]
-    return "root"
+    # pwd goes through nss, domain users are not in /etc/passwd
+    try:
+        return pwd.getpwuid(int(os.environ.get("PKEXEC_UID", "0"))).pw_name
+    except (KeyError, ValueError):
+        return "root"
 
 
 pkexec_user = detect_pkexec_user()
 
 
 def run_and_save(command, command_name=None):
-    """Usage: run_and_save(["journalctl", "-q", "-n", 1000]), it will be saved in /tmp/pardus_system_report/journalctl"""
+    """Usage: run_and_save(["journalctl", "-q", "-n", 1000]), it will be saved in ARCHIVE_DIR/journalctl"""
 
     if not command:
         return
@@ -59,12 +59,10 @@ def copy(path):
 
 
 def generate_report():
-    # Erase dir
-    if os.path.islink(ARCHIVE_DIR):
-        os.unlink(ARCHIVE_DIR)
-    elif os.path.isdir(ARCHIVE_DIR):
-        shutil.rmtree(ARCHIVE_DIR)
-    # Make dir
+    global ARCHIVE_DIR
+    # This runs as root: a fixed name in /tmp can be created by another user
+    # first. mkdtemp makes a new 0700 dir with a random name.
+    ARCHIVE_DIR = tempfile.mkdtemp(prefix="pardus_system_report_")
     os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}", exist_ok=True)
 
     # Program outputs
@@ -125,9 +123,11 @@ def generate_report():
     copy("/etc/apt/sources.list")
     copy("/etc/apt/sources.list.d")
 
-    # set permission and owner
+    # set permission and owner, the logs here are not for other users
     subprocess.run(["chown", pkexec_user, "-R", ARCHIVE_DIR])
-    subprocess.run(["chmod", "755", "-R", ARCHIVE_DIR])
+    subprocess.run(["chmod", "go-rwx", "-R", ARCHIVE_DIR])
+
+    return ARCHIVE_DIR
 
 
 def generate_user_report():
@@ -153,13 +153,18 @@ def generate_user_report():
 
 
 def archive_and_copy_to_desktop(desktop_path, archive_name):
-    return subprocess.run(
+    archive_path = f"{desktop_path}/{archive_name}"
+    process = subprocess.run(
         [
             "tar",
             "-czf",
-            f"{desktop_path}/{archive_name}",
+            archive_path,
             "--ignore-failed-read",
             f"--directory={ARCHIVE_DIR}",
             ".",
         ]
     )
+    if os.path.exists(archive_path):
+        os.chmod(archive_path, 0o600)
+    shutil.rmtree(ARCHIVE_DIR, ignore_errors=True)
+    return process
