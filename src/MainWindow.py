@@ -5,6 +5,7 @@ import re
 import requests
 import pwd
 import grp
+import stat
 
 gi.require_version("Gtk", "3.0")
 import locale
@@ -766,23 +767,47 @@ class MainWindow:
     def export_system_report(self, task, source_object, task_data, cancellable):
         desktop_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
 
-        p = ActionsAsk.run("report")
+        p = ActionsAsk.run("report", capture_output=True)
         if p.returncode == 0:
-            SystemReportManager.pkexec_user = os.environ["USER"]
-            SystemReportManager.generate_user_report()
-
-            archive_name = (
-                f"pardus_system_report_{SystemReportManager.pkexec_user}.tar.gz"
-            )
-            p2 = SystemReportManager.archive_and_copy_to_desktop(
-                desktop_path, archive_name
-            )
-            self.ui_gathering_logs_filename.set_label(archive_name)
-            if p2.returncode == 0:
-                task.return_boolean(True)
+            lines = p.stdout.decode().strip().splitlines()
+            archive_dir = lines[-1] if lines else ""
+            if not self.is_valid_report_dir(archive_dir):
+                task.return_boolean(False)
                 return
 
+            SystemReportManager.ARCHIVE_DIR = archive_dir
+            try:
+                SystemReportManager.pkexec_user = os.environ["USER"]
+                SystemReportManager.generate_user_report()
+
+                archive_name = (
+                    f"pardus_system_report_{SystemReportManager.pkexec_user}.tar.gz"
+                )
+                p2 = SystemReportManager.archive_and_copy_to_desktop(
+                    desktop_path, archive_name
+                )
+                self.ui_gathering_logs_filename.set_label(archive_name)
+                if p2.returncode == 0:
+                    task.return_boolean(True)
+                    return
+            finally:
+                # Report is on the desktop now, the temporary copy is not needed
+                SystemReportManager.remove_archive_dir()
+                SystemReportManager.ARCHIVE_DIR = None
+
         task.return_boolean(False)
+
+    def is_valid_report_dir(self, path):
+        # Must be the private directory created by ActionsAsk.py and owned by us
+        if os.path.dirname(path) != "/tmp":
+            return False
+        if not os.path.basename(path).startswith("pardus_system_report_"):
+            return False
+        try:
+            st = os.lstat(path)
+        except OSError:
+            return False
+        return stat.S_ISDIR(st.st_mode) and st.st_uid == os.getuid()
 
     def export_system_report_completed(self, source, task):
         result = task.propagate_boolean()
