@@ -1,3 +1,9 @@
+pardus-about (1.2.7) yirmibes; urgency=medium
+
+  * fix: toctou attack
+
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Mon, 02 Nov 2026 11:20:15 +0300
+
 pardus-about (1.2.6) yirmibes; urgency=medium
 
   [ Özcan ]

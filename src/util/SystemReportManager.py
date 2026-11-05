@@ -3,12 +3,13 @@ import os
 import pwd
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
 from util import ComputerManager
 
-# Private dir of the current report, generate_report() creates it
+# Set per run: a private directory created by tempfile.mkdtemp() in generate_report()
 ARCHIVE_DIR = None
 
 
@@ -24,7 +25,7 @@ pkexec_user = detect_pkexec_user()
 
 
 def run_and_save(command, command_name=None):
-    """Usage: run_and_save(["journalctl", "-q", "-n", 1000]), it will be saved in ARCHIVE_DIR/journalctl"""
+    """Usage: run_and_save(["journalctl", "-q", "-n", 1000]), it will be saved in {ARCHIVE_DIR}/{pkexec_user}/journalctl"""
 
     if not command:
         return
@@ -55,15 +56,28 @@ def copy(path):
         new_path.mkdir(parents=True, exist_ok=True)
         shutil.copytree(path, new_path, symlinks=False, dirs_exist_ok=True)
     else:
-        print("Not a file, nor a directory:", path)
+        print("Not a file, nor a directory:", path, file=sys.stderr)
 
 
 def generate_report():
     global ARCHIVE_DIR
-    # This runs as root: a fixed name in /tmp can be created by another user
-    # first. mkdtemp makes a new 0700 dir with a random name.
-    ARCHIVE_DIR = tempfile.mkdtemp(prefix="pardus_system_report_")
-    os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}", exist_ok=True)
+
+    # Unique directory, mode 0700, owned by root. Other local users can not
+    # pre-create it or place symlinks in it (no TOCTOU / symlink attack).
+    ARCHIVE_DIR = tempfile.mkdtemp(prefix="pardus_system_report_", dir="/tmp")
+    try:
+        _generate_report()
+    except BaseException:
+        shutil.rmtree(ARCHIVE_DIR, ignore_errors=True)
+        raise
+
+    # Caller reads the directory path from stdout
+    print(ARCHIVE_DIR)
+
+
+def _generate_report():
+    # Make dir
+    os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}")
 
     # Program outputs
     run_and_save(
@@ -123,11 +137,9 @@ def generate_report():
     copy("/etc/apt/sources.list")
     copy("/etc/apt/sources.list.d")
 
-    # set permission and owner, the logs here are not for other users
-    subprocess.run(["chown", pkexec_user, "-R", ARCHIVE_DIR])
-    subprocess.run(["chmod", "go-rwx", "-R", ARCHIVE_DIR])
-
-    return ARCHIVE_DIR
+    # Give the report to the requesting user. ARCHIVE_DIR stays 0700,
+    # so other users can not read the logs.
+    subprocess.run(["chown", "-R", "-P", pkexec_user, ARCHIVE_DIR], check=True)
 
 
 def generate_user_report():
@@ -135,9 +147,6 @@ def generate_user_report():
     hardware_info = json.dumps(
         ComputerManager.ComputerManager().get_all_device_info(), indent=2
     )
-
-    # Make dir
-    os.makedirs(f"{ARCHIVE_DIR}/{pkexec_user}", exist_ok=True)
 
     with open(f"{ARCHIVE_DIR}/{pkexec_user}/system_info.json", "w") as f:
         f.write(hardware_info)
@@ -153,18 +162,18 @@ def generate_user_report():
 
 
 def archive_and_copy_to_desktop(desktop_path, archive_name):
-    archive_path = f"{desktop_path}/{archive_name}"
-    process = subprocess.run(
+    return subprocess.run(
         [
             "tar",
             "-czf",
-            archive_path,
+            f"{desktop_path}/{archive_name}",
             "--ignore-failed-read",
             f"--directory={ARCHIVE_DIR}",
             ".",
         ]
     )
-    if os.path.exists(archive_path):
-        os.chmod(archive_path, 0o600)
-    shutil.rmtree(ARCHIVE_DIR, ignore_errors=True)
-    return process
+
+
+def remove_archive_dir():
+    if ARCHIVE_DIR and os.path.isdir(ARCHIVE_DIR) and not os.path.islink(ARCHIVE_DIR):
+        shutil.rmtree(ARCHIVE_DIR, ignore_errors=True)

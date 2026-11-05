@@ -19,5 +19,4 @@ if __name__ == "__main__":
         cmd = sys.argv[1]
 
         if cmd == "report":
-            # the gui reads the path of the report from the last line
-            print(SystemReportManager.generate_report())
+            SystemReportManager.generate_report()
