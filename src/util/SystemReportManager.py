@@ -1,5 +1,6 @@
 import json
 import os
+import pwd
 import shutil
 import subprocess
 import sys
@@ -13,14 +14,11 @@ ARCHIVE_DIR = None
 
 
 def detect_pkexec_user():
-    uid = "0"
-    if "PKEXEC_UID" in os.environ:
-        uid = os.environ["PKEXEC_UID"]
-    with open("/etc/passwd", "r") as f:
-        for line in f.read().strip().split("\n"):
-            if uid == line.split(":")[2]:
-                return line.split(":")[0]
-    return "root"
+    # pwd goes through nss, domain users are not in /etc/passwd
+    try:
+        return pwd.getpwuid(int(os.environ.get("PKEXEC_UID", "0"))).pw_name
+    except (KeyError, ValueError):
+        return "root"
 
 
 pkexec_user = detect_pkexec_user()
